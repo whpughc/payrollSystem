@@ -74,6 +74,10 @@ public class RedirectController {
         return "department_view";
     }
 
+    @GetMapping("/depart")
+    public String toDepart() {
+        return "depart_view";
+    }
 
     @GetMapping("/auth")
     public String toAuth() {

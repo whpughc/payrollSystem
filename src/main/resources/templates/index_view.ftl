@@ -16,7 +16,7 @@
         <div style="padding-left: 5px; width: 600px; height: 60px">
             <!-- 在这里替换具体的LOGO和标语 -->
             <img width="120px" src="static/images/logos/diandian-logo.png" style="float: left; margin-top: 7px">
-            <div style="margin-left:20px;float:left;width:300px;height:100%;line-height:60px;text-align:left;color:#009688;font-size:16px;">SpringBoot+LayUI后台管理系统</div>
+            <div style="margin-left:20px;float:left;width:300px;height:100%;line-height:60px;text-align:left;color:#009688;font-size:16px;">工资管理系统</div>
         </div>
 
         <ul class="layui-nav layui-layout-right">
@@ -40,6 +40,7 @@
             <ul class="layui-nav layui-nav-tree"  lay-filter="test">
                 <li class="layui-nav-item layui-this"><a href="/auth" target="admin-list">权限管理</a></li>
                 <li class="layui-nav-item"><a href="/department" target="admin-list">部门管理</a></li>
+                <li class="layui-nav-item"><a href="/depart" target="admin-list">部门管理2</a></li>
                 <li class="layui-nav-item"><a href="/position" target="admin-list">职位管理</a></li>
                 <li class="layui-nav-item"><a href="/employee" target="admin-list">员工管理</a></li>
                 <li class="layui-nav-item"><a href="/post" target="admin-list">公告管理</a></li>
