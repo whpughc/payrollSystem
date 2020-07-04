@@ -81,7 +81,7 @@
                 <!-- 在这里替换具体的LOGO和标语 -->
                 <img width="120px" src="static/images/logos/diandian-logo.png" style="float: left; margin-top: 5px">
                 <!-- color:#009688-->
-                <div style="color: #E6E6E6; margin-left:20px;float:left;width:300px;height:100%;line-height:60px;text-align:left;font-size:16px;">SpringBoot+LayUI后台管理系统</div>
+                <div style="color: #E6E6E6; margin-left:20px;float:left;width:300px;height:100%;line-height:60px;text-align:left;font-size:16px;">工资管理系统</div>
             </div>
 
             <ul class="layui-nav layui-layout-right" style="background-color: #2066CE">

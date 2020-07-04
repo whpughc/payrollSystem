@@ -1,7 +1,7 @@
 package cn.geek51.test.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.time.LocalDateTime;
 import java.io.Serializable;
 
@@ -56,7 +56,7 @@ public class Depart implements Serializable {
       /**
      * 状态：0：无效 1：有效
      */
-      private Integer status;
+      private Boolean status;
 
       /**
      * 创建时间
@@ -65,10 +65,11 @@ public class Depart implements Serializable {
       private LocalDateTime createAt;
 
       /**
-     * 删除时间
-     */
-      @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
-      private LocalDateTime deleteAt;
+       * 状态：0：无效 1：有效
+       */
+      @TableLogic
+      @TableField(select = false)
+      private Integer deleted;
 
 
 }

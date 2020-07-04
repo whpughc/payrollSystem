@@ -6,6 +6,8 @@ import cn.geek51.domain.UserAuth;
 import cn.geek51.service.IDepartmentService;
 import cn.geek51.service.IEmployeeService;
 import cn.geek51.service.IPositionService;
+import cn.geek51.test.entity.Depart;
+import cn.geek51.test.service.DepartService;
 import cn.geek51.util.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +29,9 @@ public class RedirectController {
     @Autowired
     IDepartmentService departmentService;
 
+    @Autowired
+    DepartService departService;
+
     @GetMapping("/login")
     public String toLogin() {
         return "user/login";
@@ -44,6 +49,15 @@ public class RedirectController {
         model.addAttribute("positionList", positionList);
         model.addAttribute("departmentList", departmentList);
         return "employee_view";
+    }
+
+    @GetMapping("/newEmployee")
+    public String toNewEmployee(Model model) {
+        List<Position> positionList = positionService.listAll();
+        List<Depart> departList = departService.list();
+        model.addAttribute("positionList", positionList);
+        model.addAttribute("departList", departList);
+        return "new_employee_view";
     }
 
     @GetMapping("/layers/employee/insert")

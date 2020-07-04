@@ -16,15 +16,25 @@
                 <input id="dept-name" type="text" name="name" required  lay-verify="required" placeholder="请输入部门名称, 如: 人事部" autocomplete="off" class="layui-input">
             </div>
         </div>
+        <div class="layui-form-item" style="padding-right: 50px">
+            <label class="layui-form-label">部门经理</label>
+            <div class="layui-input-block">
+                <input id="dept-manager" type="text" name="name" required  lay-verify="required" placeholder="请输入部门经理, 如: 张三" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item" style="padding-right: 50px">
+            <label class="layui-form-label">电话</label>
+            <div class="layui-input-block">
+                <input id="phone" type="text" name="name" required  lay-verify="required|phone|number" placeholder="请输入11位电话号" autocomplete="off" class="layui-input">
+            </div>
+        </div>
         <div class="layui-form-item layui-form-text" style="padding-right: 50px">
             <label class="layui-form-label">部门描述</label>
             <div class="layui-input-block">
                 <textarea id="dept-description" name="description" placeholder="请输入部门描述..." class="layui-textarea"></textarea>
             </div>
         </div>
-
     </form>
-
 </script>
 
 <table class="layui-hide" id="dept-table" lay-filter="dept-table"></table>
@@ -40,13 +50,15 @@
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 <script>
-    layui.use('table', function(){
+    layui.use(['table', 'form'], function(){
         var table = layui.table;
-
+        var form = layui.form;
         table.render({
             elem: '#dept-table',
             url:'/departs',
             toolbar: '#toolbar',
+            title:'部门信息表',
+            totalRow: true,
             parseData: function (res) {
                 console.log(res);
                 return {
@@ -57,26 +69,34 @@
                 }
             }
             ,cols: [[
-                {field:'id', width:80, title: 'ID'},
+                {type: 'checkbox', fixed: 'left'},
+                {field:'id', width:80, title: 'ID',hide : true},
+                {field:'departUuid', width:80, title: '唯一标识',hide : true},
                 {field:'departName', width:150, title: '部门名称', edit: true},
                 {field:'departManager', width:150, title: '部门经理', edit: true},
                 {field:'phone', width:150, title: '电话', edit: true},
                 {field:'remark', width:120, title:'部门描述', edit: true},
+                {field:'status', width:130, title: '状态', templet:function (row) {
+                        return [
+                            '<input type="checkbox" lay-filter="admin_switch" lay-skin="switch" lay-text="有效|无效" ',
+                            row.status == true ? "checked />" : " />"
+                        ].join('');
+                        /*return [
+                            '<input type="checkbox" name="admin_switch" id="admin_switch" lay-skin="switch" lay-text="是|否"/>'
+                        ].join('');*/
+                    }},
                 {field:'createAt', width:180, title: '创建时间', sort: true},
-                {field:'status', width:180, title: '状态', edit: true,
-                    templet: function(data) {
-                        if(data.status == '0') {
-                            return '无效';
-                        } else {
-                            return '有效';
-                        }
-                    }
-                },
                 {fixed: 'right', width:150, align:'center', toolbar: '#barTpl'}
             ]]
             ,page: true
         });
 
+        var temp;
+        form.on('switch(admin_switch)', function (obj) {
+            temp = obj.elem.checked;
+        });
+
+        //监听工具条(上方)
         table.on('toolbar(dept-table)', function (obj) {
             var data = obj.data; //获得当前行数据
             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
@@ -92,6 +112,8 @@
                         yes: function () {
                             var name = $("#dept-name").val();
                             var description = $("#dept-description").val();
+                            var departManager= $("#dept-manager").val();
+                            var phone = $("#phone").val();
                             if (name.length <= 0  || description.length <= 0) {
                                 if (name.length <= 0) {
                                     layer.tips('部门名称不能为空', '#dept-name',  {
@@ -107,12 +129,14 @@
                                 // 调用新建API
                                 var nowDate = new Date();
                                 $.ajax({
-                                    url: '/depts',
+                                    url: '/departs',
                                     method: 'post',
                                     data: {
-                                        name: name,
-                                        description: description,
-                                        createdTime: nowDate
+                                        departName: name,
+                                        departManager: departManager,
+                                        phone : phone,
+                                        remark: description,
+                                        status: 1
                                     },
                                     success: function (res) {
                                         console.log(res);
@@ -124,9 +148,12 @@
                                                 dataBak.push(tableBak[i]);      //将之前的数组备份
                                             }
                                             dataBak.push({
-                                                name: $("#dept-name"),
-                                                description: $("#dept-description"),
-                                                createdTime: nowDate
+                                                departName: $("#dept-name"),
+                                                departManager: $("#dept-manager"),
+                                                phone : $("#phone"),
+                                                remark: $("#depart-description"),
+                                                createdAt: nowDate,
+                                                status: 1
                                             });
                                             //console.log(dataBak);
                                             table.reload("dept-table",{
@@ -139,7 +166,7 @@
                                     }
                                 });
                             }
-                        }
+                        },
                     });
             }
         });
@@ -154,12 +181,15 @@
             if(layEvent === 'edit'){ //编辑
                 // 发送更新请求
                 $.ajax({
-                    url: '/depts',
+                    url: '/departs',
                     method: 'put',
                     data: JSON.stringify({
                         id: data.id,
-                        name: data.name,
-                        description: data.description
+                        departName: data.departName,
+                        departManager: data.departManager,
+                        phone:data.phone,
+                        remark:data.remark,
+                        status: temp == null ? data.status : temp
                     }),
                     contentType: "application/json",
 
@@ -168,8 +198,11 @@
                         if (res.code == 200) {
                             layer.msg('更改部门信息成功', {icon: 1});
                             obj.update({
-                                name: data.name,
-                                description: data.description
+                                id: data.id,
+                                departName: data.departName,
+                                departManager: data.departManager,
+                                phone:data.phone,
+                                remark:data.remark,
                             });
                         } else {
                             layer.msg('更改部门信息失败', {icon: 2});
@@ -177,12 +210,12 @@
                     }
                 });
             } else if (layEvent == 'del') {
-                layer.confirm('删除部门' + data.name + '?', {skin: 'layui-layer-molv',offset:'c', icon:'0'},function(index){
+                layer.confirm('删除部门' + data.departName + '?', {skin: 'layui-layer-molv',offset:'c', icon:'0'},function(index){
                     obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
                     layer.close(index);
                     //向服务端发送删除指令
                     $.ajax({
-                        url: '/depts/' + data.id,
+                        url: '/departs/' + data.id,
                         type: 'delete',
                         success: function (res) {
                             console.log(res);

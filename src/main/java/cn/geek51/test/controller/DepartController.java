@@ -1,21 +1,16 @@
 package cn.geek51.test.controller;
 
 
-import cn.geek51.domain.Department;
-import cn.geek51.domain.PageHelper;
 import cn.geek51.test.entity.Depart;
 import cn.geek51.test.service.DepartService;
 import cn.geek51.util.ResponseUtil;
+import cn.geek51.util.UuidUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RestController;
-
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * <p>
@@ -31,13 +26,38 @@ public class DepartController {
     @Autowired
     private DepartService departService;
 
+    //查询
     @GetMapping("/departs")
-    public Object list(PageHelper pageHelper){
-        List<Depart> list = departService.list();
+    public Object list(Integer page,Integer limit){
+        List<Depart> list = departService.findList(page, limit);
         HashMap<Object, Object> map = new HashMap<>();
         map.put("size",list.size());
         return ResponseUtil.general_response(list,map);
     }
 
+    // 新建
+    @PostMapping("/departs")
+    public Object insertDepart(Depart depart) {
+        depart.setDepartUuid(UuidUtil.getUuid());
+        depart.setCreateAt(LocalDateTime.now());
+        System.out.println(depart);
+        boolean save = departService.save(depart);
+        return ResponseUtil.general_response(save);
+    }
+
+    // 更改
+    @PutMapping("/departs")
+    public Object updateDepart(@RequestBody Depart depart) {
+        System.out.println(depart);
+        departService.updateById(depart);
+        return ResponseUtil.general_response("success update department!");
+    }
+
+    // 删除
+    @DeleteMapping("/departs/{id}")
+    public Object deleteDepart(@PathVariable("id") Integer id) {
+        departService.removeById(id);
+        return ResponseUtil.general_response("success delete department!");
+    }
 }
 
