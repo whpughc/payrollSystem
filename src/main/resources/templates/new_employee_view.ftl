@@ -72,11 +72,11 @@
 </script>
 
 <script type="text/html" id="departTpl">
-    <select id="depart-select" name="depart" lay-verify="required">
+    <select id="department-select" name="department" lay-verify="required">
         <#if departList?? && departList?size gt 0>
             <#list departList as depart>
-                <option value=${depart.departUuid}
-                        {{#if (d.departUuid == ${depart.departUuid}) { }}
+                <option value=${depart.id}
+                        {{#if (d.departId == ${depart.id}) { }}
                         selected
                         {{# }}}
                 >
@@ -145,14 +145,12 @@
 
                 {field:'idCard', width: 160, title:'身份证', edit: true},
                 <!--{field:'address', width: 140, title:'地址', edit: true},-->
-                {field:'positionId', width: 150, title:'职位', templet: '#positionTpl'
-
-                },
+                {field:'positionId', width: 150, title:'职位', templet: '#positionTpl'},
                 /*{field:'position.name', width: 110, title:'职位', templet: function (d) {
                     if (d.position == null) return "未分配";
                     return d.position.name
                 }},*/
-                {field:'departUuid', width: 120, title:'部门', templet: '#departTpl'},
+                {field:'departId', width: 120, title:'部门', templet: '#departTpl'},
                 /*templet: function (d) {
                     if (d.department == null) return "未分配";
                     return d.department.name
@@ -241,10 +239,10 @@
             });
         });
 
-        var temp;
+        /*var temp;
         form.on('switch(admin_switch)', function (obj) {
             temp = obj.elem.checked;
-        });
+        });*/
 
         table.on('toolbar(employee-table)', function (obj) {
             // 回调函数

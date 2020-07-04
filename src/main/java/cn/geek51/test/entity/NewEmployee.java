@@ -40,10 +40,11 @@ public class NewEmployee implements Serializable {
      */
     private String departUuid;
 
+    private Integer departId;
     /**
      * 职位唯一标识
      */
-    private String positionId;
+    private Integer positionId;
 
     /**
      * 员工码
