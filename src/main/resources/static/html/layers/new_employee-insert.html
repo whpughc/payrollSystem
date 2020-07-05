@@ -15,6 +15,12 @@
             <input id="employee-name" type="text" name="name" required  lay-verify="required" placeholder="请输入姓名, 如: 张三" autocomplete="off" class="layui-input">
         </div>
     </div>
+    <div class="layui-form-item" style="padding-right: 50px;">
+        <label class="layui-form-label">员工工号</label>
+        <div class="layui-input-block">
+            <input id="employee-number" type="text" name="name" required  lay-verify="required" placeholder="请输入员工工号" autocomplete="off" class="layui-input">
+        </div>
+    </div>
     <div class="layui-form-item" style="padding-right: 50px">
         <label class="layui-form-label">性别</label>
         <div class="layui-input-block">
@@ -29,31 +35,9 @@
         </div>
     </div>
     <div class="layui-form-item" style="padding-right: 50px">
-        <label class="layui-form-label">邮箱</label>
-        <div class="layui-input-block">
-            <input id="employee-email" type="text" name="name" required  lay-verify="required|email" placeholder="请输入邮箱" autocomplete="off" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item"  style="padding-right: 50px">
-        <label class="layui-form-label">学历</label>
-        <div class="layui-input-block">
-            <select id="employee-education" lay-filter="employee-education">
-                <option value="0" selected>本科</option>
-                <option value="1">硕士</option>
-                <option value="2">博士</option>
-            </select>
-        </div>
-    </div>
-    <div class="layui-form-item" style="padding-right: 50px">
         <label class="layui-form-label">身份证</label>
         <div class="layui-input-block">
             <input id="employee-idcard" type="text" name="name" required  lay-verify="required|identity" placeholder="请输入身份证号" autocomplete="off" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item" style="padding-right: 50px">
-        <label class="layui-form-label">地址</label>
-        <div class="layui-input-block">
-            <input id="employee-address" type="text" name="name" required  lay-verify="required" placeholder="请输入地址" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item" style="padding-right: 50px">
@@ -86,11 +70,11 @@
     var layerCallback;  // 子页面回调函数
     // 父页面传过来的信息
     var positionsIdAndName = [];
-    var departmentsIdAndName = [];
+    var departsIdAndName = [];
     // 全局函数, 父页面向子页面传值
     function child(data) {
         positionsIdAndName = data.positions;
-        departmentsIdAndName = data.departments;
+        departsIdAndName = data.departs;
         // 完成后, 回调, 进行渲染
         selectorAppend();
         /*for (var i = 0; i < data.positions.length; i++) {
@@ -106,39 +90,33 @@
         for (var i = 0; i < positionsIdAndName.length; i++) {
             $("#position-select").append('<option value=' + positionsIdAndName[i].id + '>' + positionsIdAndName[i].name + '</option>');
         }
-        for (var i = 0; i < departmentsIdAndName.length; i++) {
-            $("#department-select").append('<option value=' + departmentsIdAndName[i].id + '>' + departmentsIdAndName[i].name + '</option>');
+        for (var i = 0; i < departsIdAndName.length; i++) {
+            $("#department-select").append('<option value=' + departsIdAndName[i].id + '>' + departsIdAndName[i].name + '</option>');
         }
 
 
         layui.use('form', function(){
             //监听提交
             $("#submit-btn").click(function () {
-                var nowDate = new Date();
                 var name = $("#employee-name").val();
+                var number = $("#employee-number").val();
                 var sex = $('input[name="employee-sex"]:checked').val();
                 var phone = $("#employee-phone").val();
-                var email = $("#employee-email").val();
-                var education = $("#employee-education").find("option:selected").text();
                 var idcard = $("#employee-idcard").val();
-                var address = $("#employee-address").val();
                 var positionId = $("#position-select").val();
-                var departmentId = $("#department-select").val();
+                var departId = $("#department-select").val();
                 var ajaxData = {
-                    name: name,
+                    employeeName: name,
+                    employeeNumber:number,
                     sex: sex,
                     phone: phone,
-                    email: email,
-                    education: education,
-                    idcard: idcard,
-                    address: address,
-                    createdTime: nowDate,
+                    idCard: idcard,
                     positionId: positionId,
-                    departmentId: departmentId
+                    departId: departId
                 };
 
                 $.ajax({
-                    url: '/employees',
+                    url: '/newEmployees',
                     async: false,
                     method: 'post',
                     data: ajaxData,

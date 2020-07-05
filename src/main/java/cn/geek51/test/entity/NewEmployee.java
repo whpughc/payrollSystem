@@ -74,7 +74,7 @@ public class NewEmployee implements Serializable {
     /**
      * 状态：0：无效 1：有效
      */
-    private Integer status;
+    private Boolean status;
 
     /**
      * 创建时间

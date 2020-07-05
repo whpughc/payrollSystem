@@ -87,18 +87,21 @@
 
 </script>
 
-<script type="text/html" id="educationTpl">
-    <select id="education-select" name="city" lay-verify="required">
-        <#list ["本科", "硕士", "博士"] as education>
-            <option value=${education_index}
-                    {{#if (d.education == ${education_index?c}) { }}    <#-- 这里需要类型转换?c-->
-                    selected
-                    {{# }}}
-            >
-                ${education}</option>
-        </#list>
+<#--<script type="text/html" id="departTpl2">
+    <select id="department-select" name="department" lay-verify="required">
+        <#if departList?? && departList?size gt 0>
+            <#list departList as depart>
+                <option value=${depart.departUuid}
+                        {{#if (d.departUuid == ${depart.departUuid?string}) { }}
+                        selected
+                        {{# }}}
+                >
+                    ${depart.departName}</option>
+            </#list>
+        </#if>
     </select>
-</script>
+
+</script>-->
 
 <style type="text/css">
     .layui-table-cell{
@@ -113,7 +116,7 @@
 
     var tableContent = [];
     layui.use(['table', 'form'], function(){
-
+        var form = layui.form;
         var table = layui.table;
         table.render({
             elem: '#employee-table',
@@ -132,8 +135,8 @@
             ,cols: [[
                 {field:'id', width:30, title: 'ID',hide:true},
                 {field:'employeeUuid', width:30, title: '唯一标识',hide:true},
-                {field:'employeeName', width:120, title: '姓名'},
-                {field:'employeeNumber', width:120, title: '员工码'},
+                {field:'employeeName', width:120, title: '姓名', edit: true},
+                {field:'employeeNumber', width:120, title: '员工码',edit: true},
                 {field:'sex', width:50, title: '性别', templet:function (row) {
                         return [
                             '<div>',
@@ -239,10 +242,10 @@
             });
         });
 
-        /*var temp;
+        var temp;
         form.on('switch(admin_switch)', function (obj) {
             temp = obj.elem.checked;
-        });*/
+        });
 
         table.on('toolbar(employee-table)', function (obj) {
             // 回调函数
@@ -267,7 +270,7 @@
                 case 'addEmployee':
                     layer.open({
                         title: '新建员工',
-                        content: 'static/html/layers/employee-insert.html',
+                        content: 'static/html/layers/new_employee-insert.html',
                         type: 2,
                         offset: 't',
                         area: ["500px", "600px"],
@@ -307,17 +310,17 @@
                 console.log($("#department-select").val());
                 // 发送更新请求
                 $.ajax({
-                    url: '/employees',
+                    url: '/newEmployees',
                     method: 'put',
                     data: JSON.stringify({
                         id: data.id,
+                        employeeName: data.employeeName,
+                        employeeNumber:data.employeeNumber,
                         phone: data.phone,
-                        email: data.email,
-                        education: $("#education-select").val(),
-                        idcard: data.idcard,
-                        address: data.address,
+                        idCard: data.idCard,
                         positionId: $("#position-select").val(),
-                        departmentId: $("#department-select").val()
+                        departId: $("#department-select").val(),
+                        status: temp == null ? data.status : temp
                     }),
                     contentType: "application/json",
 
@@ -326,10 +329,11 @@
                         if (res.code == 200) {
                             layer.msg('更改员工信息成功', {icon: 1});
                             obj.update({
+                                id: data.id,
+                                employeeName: data.employeeName,
+                                employeeNumber:data.employeeNumber,
                                 phone: data.phone,
-                                email: data.email,
-                                idcard: data.idcard,
-                                address: data.address
+                                idCard: data.idCard,
                             });
                         } else {
                             layer.msg('更改员工信息失败', {icon: 2});
@@ -337,12 +341,12 @@
                     }
                 });
             } else if (layEvent == 'del') {
-                layer.confirm('删除员工' + data.name + '?', {skin: 'layui-layer-molv',offset:'c', icon:'0'},function(index){
+                layer.confirm('删除员工' + data.employeeName + '?', {skin: 'layui-layer-molv',offset:'c', icon:'0'},function(index){
                     obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
                     layer.close(index);
                     //向服务端发送删除指令
                     $.ajax({
-                        url: '/employees/' + data.id,
+                        url: '/newEmployees/' + data.id,
                         type: 'delete',
                         success: function (res) {
                             console.log(res);
