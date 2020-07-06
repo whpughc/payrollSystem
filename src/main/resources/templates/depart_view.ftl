@@ -108,7 +108,7 @@
                         title: '添加新部门',
                         content: $("#dept-insert").text(),
                         offset: 'c',
-                        area: ["500px", "300px"],
+                        area: ["500px", "500px"],
                         yes: function () {
                             var name = $("#dept-name").val();
                             var description = $("#dept-description").val();

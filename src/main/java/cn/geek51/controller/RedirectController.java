@@ -93,6 +93,11 @@ public class RedirectController {
         return "depart_view";
     }
 
+    @GetMapping("/product")
+    public String toProduct() {
+        return "product_view";
+    }
+
     @GetMapping("/auth")
     public String toAuth() {
         return "auth_view";

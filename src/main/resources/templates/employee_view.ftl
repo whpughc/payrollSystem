@@ -144,9 +144,7 @@
                 {field:'education', width: 100, title:'学历', templet: '#educationTpl'},
                 {field:'idcard', width: 160, title:'身份证', edit: true},
                 <!--{field:'address', width: 140, title:'地址', edit: true},-->
-                {field:'position.name', width: 150, title:'职位', templet: '#positionTpl'
-
-                },
+                {field:'position.name', width: 150, title:'职位', templet: '#positionTpl'},
                 /*{field:'position.name', width: 110, title:'职位', templet: function (d) {
                     if (d.position == null) return "未分配";
                     return d.position.name

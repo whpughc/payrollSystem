@@ -42,7 +42,6 @@
 <script>
     layui.use('table', function(){
         var table = layui.table;
-
         table.render({
             elem: '#dept-table',
             url:'/depts',
