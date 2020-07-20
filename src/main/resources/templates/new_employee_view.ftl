@@ -168,7 +168,7 @@
                         ].join('');*/
                     }},
                 {field:'createAt', width: 120, title: '创建时间', sort: true},
-                {fixed: 'right', title: '操作', align:'center', toolbar: '#barTpl'}
+                {fixed: 'right', width:150,title: '操作', align:'center', toolbar: '#barTpl'}
             ]]
             ,page: true
             ,done: function (res, curr, count) {

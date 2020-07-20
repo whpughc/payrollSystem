@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>用户管理插入子页面</title>
-    <script src="../../js/jquery-3.4.1.min.js"></script>
-    <script src="../../layui/layui.js"></script>
-    <link rel="stylesheet" href="../../layui/css/layui.css">
+    <script src="/static/js/jquery-3.4.1.min.js"></script>
+    <script src="/static/layui/layui.js"></script>
+    <link rel="stylesheet" href="/static/layui/css/layui.css">
 </head>
 <body>
 <form class="layui-form" method="post" style="margin-top: 20px">
@@ -50,6 +50,7 @@
         var nowDate = new Date();
         //监听提交
         form.on('submit(formDemo)', function(data){
+            alert(1);
             $.ajax({
                 url: '/auths',
                 method: 'post',

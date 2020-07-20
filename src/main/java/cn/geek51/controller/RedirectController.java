@@ -7,7 +7,9 @@ import cn.geek51.service.IDepartmentService;
 import cn.geek51.service.IEmployeeService;
 import cn.geek51.service.IPositionService;
 import cn.geek51.test.entity.Depart;
+import cn.geek51.test.entity.Product;
 import cn.geek51.test.service.DepartService;
+import cn.geek51.test.service.ProductService;
 import cn.geek51.util.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,6 +33,9 @@ public class RedirectController {
 
     @Autowired
     DepartService departService;
+
+    @Autowired
+    ProductService productService;
 
     @GetMapping("/login")
     public String toLogin() {
@@ -96,6 +101,15 @@ public class RedirectController {
     @GetMapping("/product")
     public String toProduct() {
         return "product_view";
+    }
+
+    @GetMapping("/process")
+    public String toProcess(Model model) {
+        List<Depart> departList = departService.list();
+        List<Product> productList = productService.list();
+        model.addAttribute("departList",departList);
+        model.addAttribute("productList",productList);
+        return "process_view";
     }
 
     @GetMapping("/auth")

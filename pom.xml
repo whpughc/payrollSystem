@@ -60,6 +60,13 @@
             <artifactId>lombok</artifactId>
         </dependency>
 
+        <!--json-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.67</version>
+        </dependency>
+
         <!-- MyBatis集成
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
@@ -106,6 +113,21 @@
     </dependencies>
 
     <build>
+
+        <resources>
+            <resource>
+                <!-- xml放在java目录下-->
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+            <!--指定资源的位置（xml放在resources下，可以不用指定）-->
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
+
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

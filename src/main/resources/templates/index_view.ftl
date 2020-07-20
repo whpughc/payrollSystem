@@ -45,6 +45,7 @@
                 <li class="layui-nav-item"><a href="/employee" target="admin-list">员工管理</a></li>
                 <li class="layui-nav-item"><a href="/newEmployee" target="admin-list">员工管理2</a></li>
                 <li class="layui-nav-item"><a href="/product" target="admin-list">产品管理</a></li>
+                <li class="layui-nav-item"><a href="/process" target="admin-list">工序管理</a></li>
                 <li class="layui-nav-item"><a href="/post" target="admin-list">公告管理</a></li>
                 <li class="layui-nav-item"><a href="/download" target="admin-list">下载中心</a></li>
             </ul>
