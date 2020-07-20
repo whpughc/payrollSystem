@@ -21,4 +21,5 @@ public class ProcessDDto implements Serializable {
     private String departId;
     private String productId;
     private List<ProcessDto> processDtoList;
+
 }
