@@ -34,6 +34,7 @@ public class Application extends WebMvcConfigurationSupport {
     public LoginInterceptor loginInterceptor() {
         return new LoginInterceptor();
     }
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**", "/favicon.ico").addResourceLocations("classpath:/static/");

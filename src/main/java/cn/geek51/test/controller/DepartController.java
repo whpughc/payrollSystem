@@ -1,6 +1,7 @@
 package cn.geek51.test.controller;
 
 
+import cn.geek51.domain.PageHelper;
 import cn.geek51.test.entity.Depart;
 import cn.geek51.test.service.DepartService;
 import cn.geek51.util.ResponseUtil;
@@ -28,10 +29,12 @@ public class DepartController {
 
     //查询
     @GetMapping("/departs")
-    public Object list(Integer page,Integer limit){
+    public Object list(PageHelper pageHelper){
+        Integer page = pageHelper.getPage();
+        Integer limit = pageHelper.getLimit();
         List<Depart> list = departService.findList(page, limit);
         HashMap<Object, Object> map = new HashMap<>();
-        map.put("size",list.size());
+        map.put("size",departService.count());
         return ResponseUtil.general_response(list,map);
     }
 

@@ -44,7 +44,7 @@ public class ProductController {
 
         List<Product> list = productService.findList(page, limit,queryMap);
         HashMap<Object, Object> map = new HashMap<>();
-        map.put("size",list.size());
+        map.put("size",productService.count());
         return ResponseUtil.general_response(list,map);
     }
 

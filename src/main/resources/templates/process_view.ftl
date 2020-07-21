@@ -10,9 +10,8 @@
 </head>
 <body>
 
-
 <!-- 卡片搜索面板-->
-<div style="padding: 20px; background-color: #F2F2F2;">
+<div style="padding: 10px; background-color: #F2F2F2;height: 180px">
     <div class="layui-row layui-col-space15">
         <div class="layui-col-md6">
             <div class="layui-card">
@@ -22,7 +21,7 @@
                     <div class="layui-form-item" style="margin-bottom: 10px;">
                         <label class="layui-form-label">部门</label>
                         <div class="layui-input-block" style="width: 200px">
-                            <select id="depart-select" name="department" lay-verify="required" style="width:200px;">
+                            <select id="depart-select" name="department" style="width:200px;">
                                 <option style="" value="">请选择部门</option>
                             </select>
                         </div>
@@ -31,20 +30,17 @@
                     <div class="layui-form-item" style="margin-bottom: 10px">
                         <label class="layui-form-label">产品</label>
                         <div class="layui-input-block" style="width: 200px">
-                            <select id="product-select" name="position" lay-verify="required">
+                            <select id="product-select" name="position"  style="width:200px;">
                                 <option value="">请选择产品</option>
                             </select>
                         </div>
                     </div>
-
-
                     <div style="margin-bottom: 10px">
                         <label class="layui-form-label">工序名称</label>
                         <div class="layui-input-block" style="width: 200px">
-                            <input id="search-input-name" type="text" name="title" required  lay-verify="required" placeholder="请输入工序名称" autocomplete="off" class="layui-input">
+                            <input id="search-input-name" type="text" name="title"  placeholder="请输入工序名称" autocomplete="off" class="layui-input">
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

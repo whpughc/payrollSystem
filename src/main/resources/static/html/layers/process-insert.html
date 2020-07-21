@@ -10,7 +10,7 @@
 <body>
 
 <form class="layui-form" style="margin-top: 20px">
-    
+
     <div class="layui-form-item layui-form-text" style="padding-right: 50px;width:500px">
         <label class="layui-form-label">部门</label>
         <div class="layui-input-block">
@@ -33,24 +33,24 @@
         <div class="layui-inline">
             <label class="layui-form-label">工序号</label>
             <div class="layui-input-inline">
-                <input  type="text" name="number"  placeholder="请输入工序号" autocomplete="off" class="layui-input">
+                <input  type="text" name="number" placeholder="请输入工序号" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-inline">
             <label class="layui-form-label">名称</label>
             <div class="layui-input-inline">
-                <input  type="text" name="name"   placeholder="请输入工序名称" autocomplete="off" class="layui-input">
+                <input  type="text" name="name" placeholder="请输入工序名称" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-inline">
             <label class="layui-form-label">价格</label>
             <div class="layui-input-inline">
-                <input type="text" name="price"  placeholder="请输入工序价格" autocomplete="off" class="layui-input">
+                <input type="text" name="price" placeholder="请输入工序价格" autocomplete="off" class="layui-input">
             </div>
         </div>
     </div>
 
-    <button type="button" class="layui-btn" id="q">新增输入框</button>
+    <button type="button" class="layui-btn" id="add">新增输入框</button>
     <div class="layui-form-item" style="padding-right: 30px; width: 300px; margin: 0 auto; margin-top: 15px">
         <div class="layui-input-block">
             <button class="layui-btn" lay-submit lay-filter="formDemo" id="submit-btn">提交</button>
@@ -98,35 +98,46 @@
                     // var box = {};
 					let obj = {}
                     // box['processNumber'] = $(this).find("input[name='number']").val();
-					obj.processNumber = $(this).find("input[name='number']").val();
-                    // box['processName'] = $(this).find("input[name='name']").val();
-					obj.processName = $(this).find("input[name='name']").val();
-                    // box['price'] = $(this).find("input[name='price']").val();
-					obj.price = $(this).find("input[name='price']").val();
-                    // console.dir(box);
-                    // data.push(box);
-					fromData.push(obj)
-                });
-				
-                // var productId = $("#product-select").val();
-                // var departId = $("#department-select").val();
-                // var ajaxData = {
-                //     list:data,
-                //     positionId: productId,
-                //     departId: departId
-                // };
-				// fromData.push(obj)
+                    var processNumber=$(this).find("input[name='number']").val();
+                    var processName=$(this).find("input[name='name']").val();
+                    var price=$(this).find("input[name='price']").val();
 
+                    if (processNumber != null && processNumber != ""){
+                        obj.processNumber = processNumber;
+                    }
+					if (processName != null && processName!= ""){
+					 obj.processName = processName;
+                    }
+
+					if (price != null && price != ""){
+					    obj.price = price;
+                    }
+                    if (!$.isEmptyObject(obj)){
+                        fromData.push(obj)
+                    }
+                });
+
+
+				if (fromData == null || fromData == ""){
+                    layer.alert('未添加工序，无法提交');
+                            return false;
+                }
+
+				if ($("#department-select").val() == "" || $("#product-select").val() == ""){
+                    layer.alert('产品或部门不能为空');
+                    return false;
+                }
+                var ajaxData = {
+                    processDtoList:fromData,
+                    departUuid: $("#department-select").val(),
+                    productUuid: $("#product-select").val()
+                };
 
                 $.ajax({
                     url: '/processs',
                     async: false,
                     method: 'post',
-                    data: JSON.stringify({
-                        processDtoList:fromData,
-                        departUuid: $("#department-select").val(),
-                        productUuid: $("#product-select").val()
-                    }),   //ajaxData,
+                    data: JSON.stringify(ajaxData),   //ajaxData,
                     contentType: "application/json",
                     success: function (res) {
                         if (res.code == 200) {
@@ -150,14 +161,14 @@
 
 <script>
 
-    for (var i=0;i<1;i++){
-        var html="<div class=\"layui-form-item\" name=\"1\">\n        <div class=\"layui-inline\">\n            <label class=\"layui-form-label\">工序号</label>\n            <div class=\"layui-input-inline\">\n                <input  type=\"text\" name=\"number\" required  lay-verify=\"required\" placeholder=\"请输入工序号\" autocomplete=\"off\" class=\"layui-input\">\n            </div>\n        </div>\n        <div class=\"layui-inline\">\n            <label class=\"layui-form-label\">名称</label>\n            <div class=\"layui-input-inline\">\n                <input  type=\"text\" name=\"name\" required  lay-verify=\"required\" placeholder=\"请输入工序名称\" autocomplete=\"off\" class=\"layui-input\">\n            </div>\n        </div>\n        <div class=\"layui-inline\">\n            <label class=\"layui-form-label\">价格</label>\n            <div class=\"layui-input-inline\">\n                <input type=\"text\" name=\"price\" required  lay-verify=\"required\" placeholder=\"请输入工序价格\" autocomplete=\"off\" class=\"layui-input\">\n            </div>\n        </div>\n    </div>";
+    for (var i=0;i<39;i++){
+        var html="<div class=\"layui-form-item\" name=\"1\">\n        <div class=\"layui-inline\">\n            <label class=\"layui-form-label\">工序号</label>\n            <div class=\"layui-input-inline\">\n                <input  type=\"text\" name=\"number\" placeholder=\"请输入工序号\" autocomplete=\"off\" class=\"layui-input\">\n            </div>\n        </div>\n        <div class=\"layui-inline\">\n            <label class=\"layui-form-label\">名称</label>\n            <div class=\"layui-input-inline\">\n                <input  type=\"text\" name=\"name\" placeholder=\"请输入工序名称\" autocomplete=\"off\" class=\"layui-input\">\n            </div>\n        </div>\n        <div class=\"layui-inline\">\n            <label class=\"layui-form-label\">价格</label>\n            <div class=\"layui-input-inline\">\n                <input type=\"text\" name=\"price\" placeholder=\"请输入工序价格\" autocomplete=\"off\" class=\"layui-input\">\n            </div>\n        </div>\n    </div>";
         $('#mydiv').after(html);
     }
 
-    $('#q').click(function () {
-        var html="<div class=\"layui-form-item\" name=\"1\">\n        <div class=\"layui-inline\">\n            <label class=\"layui-form-label\">工序号</label>\n            <div class=\"layui-input-inline\">\n                <input  type=\"text\" name=\"number\" required  lay-verify=\"required\" placeholder=\"请输入工序号\" autocomplete=\"off\" class=\"layui-input\">\n            </div>\n        </div>\n        <div class=\"layui-inline\">\n            <label class=\"layui-form-label\">名称</label>\n            <div class=\"layui-input-inline\">\n                <input  type=\"text\" name=\"name\" required  lay-verify=\"required\" placeholder=\"请输入工序名称\" autocomplete=\"off\" class=\"layui-input\">\n            </div>\n        </div>\n        <div class=\"layui-inline\">\n            <label class=\"layui-form-label\">价格</label>\n            <div class=\"layui-input-inline\">\n                <input type=\"text\" name=\"price\" required  lay-verify=\"required\" placeholder=\"请输入工序价格\" autocomplete=\"off\" class=\"layui-input\">\n            </div>\n        </div>\n    </div>";
-        $('#q').before(html);
+    $('#add').click(function () {
+        var html="<div class=\"layui-form-item\" name=\"1\">\n        <div class=\"layui-inline\">\n            <label class=\"layui-form-label\">工序号</label>\n            <div class=\"layui-input-inline\">\n                <input  type=\"text\" name=\"number\" placeholder=\"请输入工序号\" autocomplete=\"off\" class=\"layui-input\">\n            </div>\n        </div>\n        <div class=\"layui-inline\">\n            <label class=\"layui-form-label\">名称</label>\n            <div class=\"layui-input-inline\">\n                <input  type=\"text\" name=\"name\" placeholder=\"请输入工序名称\" autocomplete=\"off\" class=\"layui-input\">\n            </div>\n        </div>\n        <div class=\"layui-inline\">\n            <label class=\"layui-form-label\">价格</label>\n            <div class=\"layui-input-inline\">\n                <input type=\"text\" name=\"price\" placeholder=\"请输入工序价格\" autocomplete=\"off\" class=\"layui-input\">\n            </div>\n        </div>\n    </div>";
+        $('#add').before(html);
     });
 </script>
 </body>

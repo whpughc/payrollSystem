@@ -47,7 +47,7 @@ public class ProcessController {
 
         List<Process> list = processService.findList(page, limit,queryMap);
         HashMap<Object, Object> map = new HashMap<>();
-        map.put("size",list.size());
+        map.put("size",processService.count());
         return ResponseUtil.general_response(list,map);
     }
 
