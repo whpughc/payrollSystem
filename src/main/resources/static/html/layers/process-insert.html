@@ -20,7 +20,7 @@
         </div>
     </div>
     
-    <div class="layui-form-item" style="padding-right: 50px;width:500px" id="mydiv">
+    <div class="layui-form-item" style="padding-right: 50px;width:500px" id="product">
         <label class="layui-form-label">产品</label>
         <div class="layui-input-block">
             <select id="product-select" name="position" lay-verify="required">
@@ -161,9 +161,9 @@
 
 <script>
 
-    for (var i=0;i<39;i++){
+    for (var i=0;i<1;i++){
         var html="<div class=\"layui-form-item\" name=\"1\">\n        <div class=\"layui-inline\">\n            <label class=\"layui-form-label\">工序号</label>\n            <div class=\"layui-input-inline\">\n                <input  type=\"text\" name=\"number\" placeholder=\"请输入工序号\" autocomplete=\"off\" class=\"layui-input\">\n            </div>\n        </div>\n        <div class=\"layui-inline\">\n            <label class=\"layui-form-label\">名称</label>\n            <div class=\"layui-input-inline\">\n                <input  type=\"text\" name=\"name\" placeholder=\"请输入工序名称\" autocomplete=\"off\" class=\"layui-input\">\n            </div>\n        </div>\n        <div class=\"layui-inline\">\n            <label class=\"layui-form-label\">价格</label>\n            <div class=\"layui-input-inline\">\n                <input type=\"text\" name=\"price\" placeholder=\"请输入工序价格\" autocomplete=\"off\" class=\"layui-input\">\n            </div>\n        </div>\n    </div>";
-        $('#mydiv').after(html);
+        $('#add').before(html);
     }
 
     $('#add').click(function () {

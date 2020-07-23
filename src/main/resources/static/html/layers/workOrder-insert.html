@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>新增计件单子页面</title>
+    <script src="../../js/jquery-3.4.1.min.js"></script>
+    <script src="../../layui/layui.js"></script>
+    <link rel="stylesheet" href="../../layui/css/layui.css">
+</head>
+<body>
+<span style="display:block;width:150px;margin:0px auto;font-size:25px;font-weight:900;font-color:blue;"><font
+        color="blue">计件单录入</font></span>
+<form class="layui-form" style="margin-top: 20px">
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">订单号</label>
+            <div class="layui-input-inline">
+                <input id="order-number" type="text" name="orderNumber" required lay-verify="required"
+                       placeholder="请输入计件单号" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label">部门</label>
+            <div class="layui-input-inline">
+                <select id="department-select" name="department" lay-verify="required">
+                    <option value="">请选择部门</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label">产品</label>
+            <div class="layui-input-inline">
+                <select id="product-select" name="product" lay-verify="required">
+                    <option value="">请选择产品</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">颜色</label>
+            <div class="layui-input-inline">
+                <input id="color" type="text" name="color" lay-verify="title" autocomplete="off" placeholder="请输入颜色"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">尺码</label>
+            <div class="layui-input-inline">
+                <input id="sku-name" type="text" name="skuName" lay-verify="title" autocomplete="off" placeholder="请输入尺码"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">数量</label>
+            <div class="layui-input-inline">
+                <input id="number" type="text" name="number" lay-verify="title" autocomplete="off" placeholder="请输入数量"
+                       class="layui-input">
+            </div>
+        </div>
+    </div>
+
+
+    <div class="layui-form-item" name="number">
+        <div class="layui-inline">
+            <label id="processNumber1" class="layui-form-label">1</label>
+            <div class="layui-input-inline">
+                <input id="employeeNumber1" type="text" name="employeeNumber1" lay-verify="title" autocomplete="off" placeholder="请输入员工工号"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label id="processNumber2" class="layui-form-label">2</label>
+            <div class="layui-input-inline">
+                <input id="employeeNumber2" type="text" name="employeeNumber2" lay-verify="title" autocomplete="off" placeholder="请输入员工工号"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label id="processNumber3" class="layui-form-label">3</label>
+            <div class="layui-input-inline">
+                <input id="employeeNumber3" type="text" name="employeeNumber3" lay-verify="title" autocomplete="off" placeholder="请输入员工工号"
+                       class="layui-input">
+            </div>
+        </div>
+    </div>
+
+    <button type="button" class="layui-btn" id="add">新增输入框</button>
+    <div class="layui-form-item" style="padding-right: 30px; width: 300px; margin: 0 auto; margin-top: 15px">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo" id="submit-btn">提交</button>
+            <button id="reset" type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+
+<script>
+    var layerCallback;  // 子页面回调函数
+    // 父页面传过来的信息
+    var productsIdAndName = [];
+    var departsIdAndName = [];
+
+    // 全局函数, 父页面向子页面传值
+    function child(data) {
+        productsIdAndName = data.products;
+        departsIdAndName = data.departs;
+        // 完成后, 回调, 进行渲染
+        selectorAppend();
+        /*for (var i = 0; i < data.products.length; i++) {
+            console.log(data.products[i]);
+        }
+        for (var i = 0; i < data.departments.length; i++) {
+            console.log(data.departments[i]);
+        }*/
+    }
+
+    function selectorAppend() {
+        /*进行下拉框动态拼接*/
+        console.log(productsIdAndName);
+        for (var i = 0; i < productsIdAndName.length; i++) {
+            $("#product-select").append('<option value=' + productsIdAndName[i].id + '>' + productsIdAndName[i].name + '</option>');
+        }
+        for (var i = 0; i < departsIdAndName.length; i++) {
+            $("#department-select").append('<option value=' + departsIdAndName[i].id + '>' + departsIdAndName[i].name + '</option>');
+        }
+
+
+        layui.use('form', function () {
+            //监听提交
+            $("#submit-btn").click(function () {
+
+                let fromData = [];
+                var length = $("div[name='number']").length;
+                for (var i=1;i<(3 * length+1);i++){
+                    let obj = {};
+                    var processNumber = $("#processNumber"+i+"").text();
+                    var employeeNumber = $("#employeeNumber"+i+"").val();
+                    if (processNumber != null && processNumber !== "") {
+                        obj.processNumber = processNumber;
+                    }
+                    if (employeeNumber != null && employeeNumber !== "") {
+                        obj.employeeNumber = employeeNumber;
+                        fromData.push(obj);
+                    }
+                }
+
+
+
+                /*$("div[name='1']").each(function () {    //循环，类似map循环。每次循环一组输入的用户信息，创建一个空对象，然后把对应的值赋予属性，再push进提交的数组数据fromDa，所有循环完得到[{"number":1,"name":"张三","price":12},{"number":2,"name":"李四","price":18}]这种结构的数据
+                    let obj = {};
+
+                    var processNumber = $(this).find("input[name='number']").val();
+                    var processName = $(this).find("input[name='name']").val();
+                    var price = $(this).find("input[name='price']").val();
+
+                    if (processNumber != null && processNumber !== "") {
+                        obj.processNumber = processNumber;
+                    }
+                    if (processName != null && processName !== "") {
+                        obj.processName = processName;
+                    }
+                    if (price != null && price !== "") {
+                        obj.price = price;
+                    }
+
+                    if (!$.isEmptyObject(obj)) {
+                        fromData.push(obj)
+                    }
+                });*/
+
+                if (fromData == null || fromData == "") {
+                    layer.alert('未添加订单，无法提交');
+                    return false;
+                }
+
+                /*if ($("#department-select").val() == "" || $("#product-select").val() == "") {
+                    layer.alert('产品或部门不能为空');
+                    return false;
+                }*/
+                var ajaxData = {
+                    orderList: fromData,
+                    departUuid: $("#department-select").val(),
+                    productUuid: $("#product-select").val(),
+                    orderNumber: $("#order-number").val(),
+                    color: $("#color").val(),
+                    skuName: $("#sku-name").val(),
+                    number: $("#number").val()
+                };
+
+                $.ajax({
+                    url: '/workOrders',
+                    async: false,
+                    method: 'post',
+                    data: JSON.stringify(ajaxData),   //ajaxData,
+                    contentType: "application/json",
+                    success: function (res) {
+                        if (res.code == 200) {
+                            // 回调主界面
+                            parent.layerCallback();
+                            parent.layer.msg('添加工序成功', {icon: 1});
+                            var index = parent.layer.getFrameIndex(window.name);
+                            parent.layer.close(index);
+                        } else {
+                            parent.layer.msg('添加工序失败', {icon: 2});
+                        }
+                        return false;
+                    }
+                });
+            });
+        });
+    }
+
+
+</script>
+
+<script>
+    for (var i = 0; i < 20; i++) {
+        var number=(i+1)*3;
+        var html = '<div class="layui-form-item" name="number">\n        <div class="layui-inline">\n            <label id="processNumber'+(number+1)+'" class="layui-form-label">'+(number+1)+'</label>\n            <div class="layui-input-inline">\n                <input id="employeeNumber'+(number+1)+'" type="text" name="employeeNumber'+(number+1)+'" lay-verify="title" autocomplete="off" placeholder="请输入员工工号"\n                       class="layui-input">\n            </div>\n        </div>\n        <div class="layui-inline">\n            <label id="processNumber'+(number+2)+'" class="layui-form-label">'+(number+2)+'</label>\n            <div class="layui-input-inline">\n                <input id="employeeNumber'+(number+2)+'" type="text" name="employeeNumber'+(number+2)+'" lay-verify="title" autocomplete="off" placeholder="请输入员工工号"\n                       class="layui-input">\n            </div>\n        </div>\n        <div class="layui-inline">\n            <label id="processNumber'+(number+3)+'" class="layui-form-label">'+(number+3)+'</label>\n            <div class="layui-input-inline">\n                <input id="employeeNumber'+(number+3)+'" type="text" name="employeeNumber'+(number+3)+'" lay-verify="title" autocomplete="off" placeholder="请输入员工工号"\n                       class="layui-input">\n            </div>\n        </div>\n    </div>';
+        $('#add').before(html);
+    }
+
+    $('#add').click(function () {
+        var length = $("div[name='number']").length;
+        var html ='<div class="layui-form-item" name="number">\n        <div class="layui-inline">\n            <label id="processNumber'+(3*length+1)+'" class="layui-form-label">'+(3*length+1)+'</label>\n            <div class="layui-input-inline">\n                <input id="employeeNumber'+(3*length+1)+'" type="text" name="employeeNumber'+(3*length+1)+'" lay-verify="title" autocomplete="off" placeholder="请输入员工工号"\n                       class="layui-input">\n            </div>\n        </div>\n        <div class="layui-inline">\n            <label id="processNumber'+(3*length+2)+'" class="layui-form-label">'+(3*length+2)+'</label>\n            <div class="layui-input-inline">\n                <input id="employeeNumber'+(3*length+2)+'" type="text" name="employeeNumber'+(3*length+2)+'" lay-verify="title" autocomplete="off" placeholder="请输入员工工号"\n                       class="layui-input">\n            </div>\n        </div>\n        <div class="layui-inline">\n            <label id="processNumber'+(3*length+3)+'" class="layui-form-label">'+(3*length+3)+'</label>\n            <div class="layui-input-inline">\n                <input id="employeeNumber'+(3*length+3)+'" type="text" name="employeeNumber'+(3*length+3)+'" lay-verify="title" autocomplete="off" placeholder="请输入员工工号"\n                       class="layui-input">\n            </div>\n        </div>\n    </div>';
+        $('#add').before(html);
+    });
+</script>
+</body>
+</html>

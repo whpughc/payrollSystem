@@ -8,18 +8,14 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * @description:
+ * @description: 计件单插入类
  * @author: kun
- * @create: 2020-07-16 20:59
+ * @create: 2020-07-22 16:09
  **/
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class ProcessDDto implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class WorkOrderDto extends WorkOrder implements Serializable {
 
-    private String departId;
-    private String productId;
-    private List<ProcessDto> processDtoList;
-
+    private List<Order> orderList;
 }

@@ -1,52 +1,54 @@
 <!-- 员工管理-->
 <!DOCTYPE html>
 <html lang="en">
+<title>计件</title>
 <head>
     <script src="static/js/jquery-3.4.1.min.js"></script>
     <script src="static/layui/layui.js"></script>
     <link rel="stylesheet" href="static/layui/css/layui.css">
+
 </head>
 <body>
 
 <!-- 卡片搜索面板-->
 <div style="padding: 20px; background-color: #F2F2F2;">
-    <div class="layui-row layui-col-space15">
-        <div class="layui-col-md6">
             <div class="layui-card">
                 <div class="layui-card-header"><span style="margin-right: 10px; margin-bottom: 2px" class="layui-badge-dot"></span>快速搜索</div>
-                <div class="layui-card-body">
-                    <div style="margin-bottom: 10px">
+                <div class="layui-card-body layui-input-item" style="height: 60px">
+                    <div class="layui-col-md4" style="margin-bottom: 10px">
                         <label class="layui-form-label">姓名</label>
                         <div class="layui-input-block" style="width: 200px">
                             <input id="search-input-name" type="text" name="title" required  lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
                         </div>
                     </div>
 
-                    <div style="margin-bottom: 10px">
+                    <div class="layui-col-md4" style="margin-bottom: 10px">
                         <label class="layui-form-label">手机</label>
                         <div class="layui-input-block" style="width: 200px">
                             <input id="search-input-phone" type="text" name="title" required  lay-verify="required" placeholder="请输入手机号" autocomplete="off" class="layui-input">
                         </div>
                     </div>
 
-                    <div style="margin-bottom: 10px">
+                    <div class="layui-col-md4" style="margin-bottom: 10px">
                         <label class="layui-form-label">身份证</label>
                         <div class="layui-input-block" style="width: 200px">
                             <input id="search-input-idcard" type="text" name="title" required  lay-verify="required" placeholder="请输入身份证" autocomplete="off" class="layui-input">
                         </div>
                     </div>
+
+
                 </div>
             </div>
-        </div>
-    </div>
+
 </div>
+
 
 
 <table class="layui-hide" id="employee-table" lay-filter="employee-table"></table>
 
 <script type="text/html" id="toolbar">
     <div class="layui-btn-container">
-        <button class="layui-btn layui-btn-sm" lay-event="addEmployee">添加员工</button>
+        <button class="layui-btn layui-btn-sm" lay-event="addEmployee">添加计件单</button>
     </div>
 </script>
 
@@ -57,7 +59,7 @@
 
 
 <script type="text/html" id="positionTpl">
-    <select id="position-select" name="position" lay-verify="required" lay-search>
+    <select id="position-select" name="position" lay-verify="required">
         <#if positionList?? && positionList?size gt 0>
             <#list positionList as position>
                 <option value=${position.id}
@@ -72,7 +74,7 @@
 </script>
 
 <script type="text/html" id="departTpl">
-    <select id="department-select" name="department" lay-verify="required" lay-search>
+    <select id="department-select" name="department" lay-verify="required">
         <#if departList?? && departList?size gt 0>
             <#list departList as depart>
                 <option value=${depart.id}
@@ -135,29 +137,14 @@
             ,cols: [[
                 {field:'id', width:30, title: 'ID',hide:true},
                 {field:'employeeUuid', width:30, title: '唯一标识',hide:true},
-                {field:'employeeName', width:120, title: '姓名', edit: true},
-                {field:'employeeNumber', width:120, title: '员工码',edit: true},
-                {field:'sex', width:50, title: '性别', templet:function (row) {
-                        return [
-                            '<div>',
-                            row.sex == 0 ? '男' : '女',
-                            '</div>'
-                        ].join('');
-                    }},
-                {field:'phone', width: 120, title:'电话', edit: true},
+                {field:'employeeName', width:120, title: '工序标识', edit: true},
+                {field:'employeeNumber', width:120, title: '产品标识',edit: true},
+                {field:'employeeNumber', width:120, title: '部门标识',edit: true},
+                {field:'employeeNumber', width:120, title: '工序序号',edit: true},
+                {field:'employeeNumber', width:120, title: '工序价格',edit: true},
+                {field:'employeeNumber', width:120, title: '描述',edit: true},
 
-                {field:'idCard', width: 160, title:'身份证', edit: true},
-                <!--{field:'address', width: 140, title:'地址', edit: true},-->
-                {field:'positionId', width: 150, title:'职位', templet: '#positionTpl'},
-                /*{field:'position.name', width: 110, title:'职位', templet: function (d) {
-                    if (d.position == null) return "未分配";
-                    return d.position.name
-                }},*/
-                {field:'departId', width: 120, title:'部门', templet: '#departTpl'},
-                /*templet: function (d) {
-                    if (d.department == null) return "未分配";
-                    return d.department.name
-                }},*/
+
                 {field:'status', width:130, title: '状态', templet:function (row) {
                         return [
                             '<input type="checkbox" lay-filter="admin_switch" lay-skin="switch" lay-text="有效|无效" ',
@@ -167,8 +154,8 @@
                             '<input type="checkbox" name="admin_switch" id="admin_switch" lay-skin="switch" lay-text="是|否"/>'
                         ].join('');*/
                     }},
-                {field:'createAt', width: 120, title: '创建时间', sort: true},
-                {fixed: 'right', width:150,title: '操作', align:'center', toolbar: '#barTpl'}
+                {field:'createAt', width: 180, title: '创建时间', sort: true},
+                {fixed: 'right', title: '操作', align:'center', toolbar: '#barTpl'}
             ]]
             ,page: true
             ,done: function (res, curr, count) {
@@ -269,11 +256,11 @@
             switch(obj.event){
                 case 'addEmployee':
                     layer.open({
-                        title: '新建员工',
-                        content: 'static/html/layers/new_employee-insert.html',
+                        title: '员工工作量输入',
+                        content: 'static/html/layers/new_process-insert.html',
                         type: 2,
                         offset: 't',
-                        area: ["500px", "600px"],
+                        area: ["1000px", "550px"],
                         success: function (layero, index) {
                             var iframe = window['layui-layer-iframe' + index];
                             var departs = [];

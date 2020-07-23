@@ -11,36 +11,40 @@
 <body>
 
 <!-- 卡片搜索面板-->
-<div style="padding: 10px; background-color: #F2F2F2;height: 180px">
+
+<div style="padding: 10px; background-color: #F2F2F2;/*height: 180px;*/">
     <div class="layui-row layui-col-space15">
-        <div class="layui-col-md6">
+        <div>
             <div class="layui-card">
                 <div class="layui-card-header"><span style="margin-right: 10px; margin-bottom: 2px" class="layui-badge-dot"></span>快速搜索</div>
                 <div class="layui-card-body layui-form-item">
 
-                    <div class="layui-form-item" style="margin-bottom: 10px;">
+                    <div class=" layui-col-md4" style="margin-bottom: 10px;">
                         <label class="layui-form-label">部门</label>
                         <div class="layui-input-block" style="width: 200px">
-                            <select id="depart-select" name="department" style="width:200px;">
+                            <select id="depart-select" name="department"  style="width:200px;height:38px;border-color: #e6e6e6" >
                                 <option style="" value="">请选择部门</option>
                             </select>
                         </div>
                     </div>
 
-                    <div class="layui-form-item" style="margin-bottom: 10px">
+
+                    <div class="layui-col-md4" style="margin-bottom: 10px">
                         <label class="layui-form-label">产品</label>
                         <div class="layui-input-block" style="width: 200px">
-                            <select id="product-select" name="position"  style="width:200px;">
+                            <select id="product-select" name="position" lay-verify="required" style="width:200px;height:38px;border-color: #e6e6e6">
                                 <option value="">请选择产品</option>
                             </select>
                         </div>
                     </div>
-                    <div style="margin-bottom: 10px">
+
+                    <div class="layui-col-md4" style="margin-bottom: 10px">
                         <label class="layui-form-label">工序名称</label>
                         <div class="layui-input-block" style="width: 200px">
                             <input id="search-input-name" type="text" name="title"  placeholder="请输入工序名称" autocomplete="off" class="layui-input">
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -51,8 +55,8 @@
 <table class="layui-hide" id="process-table" lay-filter="process-table"></table>
 
 <script type="text/html" id="toolbar">
-    <div class="layui-btn-container">
-        <button class="layui-btn layui-btn-sm" lay-event="addProcess">添加工序</button>
+    <div class="layui-btn-container" style="float: left;">
+        <button class="layui-btn layui-btn-sm" lay-event="addProcess" style="float: left;">添加工序</button>
     </div>
 </script>
 

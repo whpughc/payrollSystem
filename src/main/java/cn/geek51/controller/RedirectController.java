@@ -112,6 +112,24 @@ public class RedirectController {
         return "process_view";
     }
 
+    @GetMapping("/newProcess")
+    public String toNewProcess(Model model) {
+        List<Position> positionList = positionService.listAll();
+        List<Depart> departList = departService.list();
+        model.addAttribute("positionList", positionList);
+        model.addAttribute("departList", departList);
+        return "new_process_view";
+    }
+
+    @GetMapping("/workOrder")
+    public String toWorkOrder(Model model) {
+        List<Depart> departList = departService.list();
+        List<Product> productList = productService.list();
+        model.addAttribute("departList",departList);
+        model.addAttribute("productList",productList);
+        return "workOrder_view";
+    }
+
     @GetMapping("/auth")
     public String toAuth() {
         return "auth_view";

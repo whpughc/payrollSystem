@@ -2,9 +2,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="static/js/jquery-3.4.1.min.js"></script>
-    <script src="static/layui/layui.js"></script>
-    <link rel="stylesheet" href="static/layui/css/layui.css">
+    <script src="/static/js/jquery-3.4.1.min.js"></script>
+    <script src="/static/layui/layui.js"></script>
+    <link rel="stylesheet" href="/static/layui/css/layui.css">
 </head>
 <body>
 

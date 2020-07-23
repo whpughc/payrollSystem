@@ -40,7 +40,7 @@ public class Main {
         //配置策略
         StrategyConfig strategyConfig = new StrategyConfig();
         strategyConfig.setEntityLombokModel(true);
-        strategyConfig.setInclude("process");
+        strategyConfig.setInclude("work_order");
         strategyConfig.setNaming(NamingStrategy.underline_to_camel);
         strategyConfig.setColumnNaming(NamingStrategy.underline_to_camel);
         autoGenerator.setStrategy(strategyConfig);
