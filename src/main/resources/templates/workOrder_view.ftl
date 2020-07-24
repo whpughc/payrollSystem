@@ -78,7 +78,7 @@
 
 <script type="text/html" id="toolbar">
     <div class="layui-btn-container" style="float: left;">
-        <button class="layui-btn layui-btn-sm" lay-event="addProcess" style="float: left;">添加工序</button>
+        <button class="layui-btn layui-btn-sm" lay-event="addProcess" style="float: left;">新增计件单</button>
     </div>
 </script>
 
@@ -299,27 +299,27 @@
             });
         });
         $("#product-select").on('input',function () {
-            // 用来传递到后台的查询参数MAP
-            var whereData = {};
-            var qorderNumber = $("#search-input-orderNumber").val();
-            var qdepartUuid = $("#depart-select").val();
-            var qproductUuid = $("#product-select").val();
-            var qemployeeNumber = $("#search-input-employeeNumber").val();
-            var qstartTime = $("#search-input-startTime").val();
-            var qendTime = $("#search-input-endTime").val();
-            if (qorderNumber.length > 0) whereData["qorderNumber"] = qorderNumber;
-            if (qdepartUuid.length > 0) whereData["qdepartUuid"] = qdepartUuid;
-            if (qproductUuid.length > 0) whereData["qproductUuid"] = qproductUuid;
-            if (qemployeeNumber.length > 0) whereData["qemployeeNumber"] = qemployeeNumber;
-            if (qstartTime.length > 0) whereData["qstartTime"] = qstartTime;
-            if (qendTime.length > 0) whereData["qendTime"] = qendTime;
-            table.reload("workOrder-table",{
-                where: {
-                    query: JSON.stringify(whereData)
-                }
-                ,page: {
-                    curr: 1
-                }
+                // 用来传递到后台的查询参数MAP
+                var whereData = {};
+                var qorderNumber = $("#search-input-orderNumber").val();
+                var qdepartUuid = $("#depart-select").val();
+                var qproductUuid = $("#product-select").val();
+                var qemployeeNumber = $("#search-input-employeeNumber").val();
+                var qstartTime = $("#search-input-startTime").val();
+                var qendTime = $("#search-input-endTime").val();
+                if (qorderNumber.length > 0) whereData["qorderNumber"] = qorderNumber;
+                if (qdepartUuid.length > 0) whereData["qdepartUuid"] = qdepartUuid;
+                if (qproductUuid.length > 0) whereData["qproductUuid"] = qproductUuid;
+                if (qemployeeNumber.length > 0) whereData["qemployeeNumber"] = qemployeeNumber;
+                if (qstartTime.length > 0) whereData["qstartTime"] = qstartTime;
+                if (qendTime.length > 0) whereData["qendTime"] = qendTime;
+                table.reload("workOrder-table",{
+                    where: {
+                        query: JSON.stringify(whereData)
+                    }
+                    ,page: {
+                        curr: 1
+                    }
             });
         });
         $("#search-input-employeeNumber").on('input',function () {
@@ -346,56 +346,7 @@
                 }
             });
         });
-/*
-        $("#search-input-startTime").on('input',function () {
 
-                // 用来传递到后台的查询参数MAP
-                var whereData = {};
-                var qorderNumber = $("#search-input-orderNumber").val();
-                var qdepartUuid = $("#depart-select").val();
-                var qproductUuid = $("#product-select").val();
-                var qemployeeNumber = $("#search-input-employeeNumber").val();
-                var qstartTime = $("#search-input-startTime").val();
-                var qendTime = $("#search-input-endTime").val();
-                if (qorderNumber.length > 0) whereData["qorderNumber"] = qorderNumber;
-                if (qdepartUuid.length > 0) whereData["qdepartUuid"] = qdepartUuid;
-                if (qproductUuid.length > 0) whereData["qproductUuid"] = qproductUuid;
-                if (qemployeeNumber.length > 0) whereData["qemployeeNumber"] = qemployeeNumber;
-                if (qstartTime.length > 0) whereData["qstartTime"] = qstartTime;
-                if (qendTime.length > 0) whereData["qendTime"] = qendTime;
-                table.reload("workOrder-table",{
-                    where: {
-                        query: JSON.stringify(whereData)
-                    }
-                    ,page: {
-                        curr: 1
-                    }
-                });
-        });
-        $("#search-input-endTime").on('input',function () {
-            // 用来传递到后台的查询参数MAP
-            var whereData = {};
-            var qorderNumber = $("#search-input-orderNumber").val();
-            var qdepartUuid = $("#depart-select").val();
-            var qproductUuid = $("#product-select").val();
-            var qemployeeNumber = $("#search-input-employeeNumber").val();
-            var qstartTime = $("#search-input-startTime").val();
-            var qendTime = $("#search-input-endTime").val();
-            if (qorderNumber.length > 0) whereData["qorderNumber"] = qorderNumber;
-            if (qdepartUuid.length > 0) whereData["qdepartUuid"] = qdepartUuid;
-            if (qproductUuid.length > 0) whereData["qproductUuid"] = qproductUuid;
-            if (qemployeeNumber.length > 0) whereData["qemployeeNumber"] = qemployeeNumber;
-            if (qstartTime.length > 0) whereData["qstartTime"] = qstartTime;
-            if (qendTime.length > 0) whereData["qendTime"] = qendTime;
-            table.reload("workOrder-table",{
-                where: {
-                    query: JSON.stringify(whereData)
-                }
-                ,page: {
-                    curr: 1
-                }
-            });
-        });*/
         var temp;
         form.on('switch(admin_switch)', function (obj) {
             temp = obj.elem.checked;
@@ -404,18 +355,7 @@
         table.on('toolbar(workOrder-table)', function (obj) {
             // 回调函数
             layerCallback= function() {
-                /*// 执行局部刷新, 获取之前的TABLE内容, 再进行填充
-                var dataBak = [];
-                var tableBak = table.cache.workOrder-table;
-                for (var i = 0; i < tableBak.length; i++) {
-                    dataBak.push(tableBak[i]);      //将之前的数组备份
-                }
-                // 添加到表格缓存
-                dataBak.push(callbackData);
-                //console.log(dataBak);
-                table.reload("workOrder-table",{
-                    data:dataBak   // 将新数据重新载入表格
-                });*/
+
                 table.render({
                     elem: '#workOrder-table',
                     url:'/workOrders',

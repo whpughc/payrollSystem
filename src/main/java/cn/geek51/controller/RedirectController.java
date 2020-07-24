@@ -112,15 +112,6 @@ public class RedirectController {
         return "process_view";
     }
 
-    @GetMapping("/newProcess")
-    public String toNewProcess(Model model) {
-        List<Position> positionList = positionService.listAll();
-        List<Depart> departList = departService.list();
-        model.addAttribute("positionList", positionList);
-        model.addAttribute("departList", departList);
-        return "new_process_view";
-    }
-
     @GetMapping("/workOrder")
     public String toWorkOrder(Model model) {
         List<Depart> departList = departService.list();

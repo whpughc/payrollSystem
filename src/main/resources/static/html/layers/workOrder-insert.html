@@ -148,30 +148,6 @@
                     }
                 }
 
-
-
-                /*$("div[name='1']").each(function () {    //循环，类似map循环。每次循环一组输入的用户信息，创建一个空对象，然后把对应的值赋予属性，再push进提交的数组数据fromDa，所有循环完得到[{"number":1,"name":"张三","price":12},{"number":2,"name":"李四","price":18}]这种结构的数据
-                    let obj = {};
-
-                    var processNumber = $(this).find("input[name='number']").val();
-                    var processName = $(this).find("input[name='name']").val();
-                    var price = $(this).find("input[name='price']").val();
-
-                    if (processNumber != null && processNumber !== "") {
-                        obj.processNumber = processNumber;
-                    }
-                    if (processName != null && processName !== "") {
-                        obj.processName = processName;
-                    }
-                    if (price != null && price !== "") {
-                        obj.price = price;
-                    }
-
-                    if (!$.isEmptyObject(obj)) {
-                        fromData.push(obj)
-                    }
-                });*/
-
                 if (fromData == null || fromData == "") {
                     layer.alert('未添加订单，无法提交');
                     return false;
@@ -201,11 +177,11 @@
                         if (res.code == 200) {
                             // 回调主界面
                             parent.layerCallback();
-                            parent.layer.msg('添加工序成功', {icon: 1});
+                            parent.layer.msg('添加计件单成功', {icon: 1});
                             var index = parent.layer.getFrameIndex(window.name);
                             parent.layer.close(index);
                         } else {
-                            parent.layer.msg('添加工序失败', {icon: 2});
+                            parent.layer.msg('添加计件单失败', {icon: 2});
                         }
                         return false;
                     }
