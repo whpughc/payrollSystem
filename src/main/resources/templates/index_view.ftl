@@ -15,14 +15,14 @@
     <div class="layui-header">
         <div style="padding-left: 5px; width: 600px; height: 60px">
             <!-- 在这里替换具体的LOGO和标语 -->
-            <img width="120px" src="static/images/logos/diandian-logo.png" style="float: left; margin-top: 7px">
-            <div style="margin-left:20px;float:left;width:300px;height:100%;line-height:60px;text-align:left;color:#009688;font-size:16px;">工资管理系统</div>
+            <img width="120px" src="static/images/logos/login_logo.png" style="float: left; margin-top: 7px">
+            <div style="margin-left:20px;float:left;width:300px;height:100%;line-height:60px;text-align:left;color:#009688;font-size:16px;">AFU-工资管理系统</div>
         </div>
 
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
                 <a id="name-a" href="javascript:;">
-                    <img src="static/images/icons/diandian-icon.png" class="layui-nav-img">
+                    <img src="static/images/icons/login_head_01.png" class="layui-nav-img">
                     ${(user.username)!"未登陆"}
                 </a>
                 <dl class="layui-nav-child">
@@ -30,7 +30,7 @@
                 </dl>
             </li>
             <li class="layui-nav-item"><a id="logout-a" href="/">注销</a></li>
-            <li class="layui-nav-item"><a href="http://diandian2.cn">社区</a></li>
+<#--            <li class="layui-nav-item"><a href="http://diandian2.cn">社区</a></li>-->
         </ul>
     </div>
 

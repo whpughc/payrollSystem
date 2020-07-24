@@ -9,9 +9,9 @@
 
 <style>
     body {
-        background-image: url("/static/images/main-back.png");
+        background-image: url("/static/images/login_background.png");
         background-repeat: no-repeat;
-        background-size: 100% 150%;
+        background-size: 100% 100%;
         background-attachment: fixed;
     }
     .main-div {
@@ -76,25 +76,25 @@
 <body>
 <div class="main-div">
     <div class="layui-layout layui-layout-admin" style="height: 100%">
-        <div class="layui-header" style="background-color: #2066CE">
+        <div class="layui-header" style="background-color:#a79a9a">
             <div style="padding-left: 5px; width: 600px; height: 60px">
                 <!-- 在这里替换具体的LOGO和标语 -->
-                <img width="120px" src="static/images/logos/diandian-logo.png" style="float: left; margin-top: 5px">
+                <a href="#"><img width="120px" src="static/images/logos/login_logo.png" style="float: left; margin-top:5px"></a>
                 <!-- color:#009688-->
-                <div style="color: #E6E6E6; margin-left:20px;float:left;width:300px;height:100%;line-height:60px;text-align:left;font-size:16px;">工资管理系统</div>
+                <div style="color: #E6E6E6; margin-left:20px;float:left;width:300px;height:100%;line-height:60px;text-align:left;font-size:16px;">AFU-工资管理系统</div>
             </div>
 
-            <ul class="layui-nav layui-layout-right" style="background-color: #2066CE">
+            <ul class="layui-nav layui-layout-right" style="background-color: #8d8b8b">
                 <li class="layui-nav-item">
                     <a id="name-a" href="javascript:;">
-                        <img src="static/images/icons/diandian-icon.png" class="layui-nav-img">
+                        <img src="static/images/icons/login_head_01.png" class="layui-nav-img">
                     </a>
-                    <dl class="layui-nav-child">
+                    <li class="layui-nav-child">
                         <dd><a href="">基本资料</a></dd>
                         <dd><a href="">更改密码</a></dd>
-                    </dl>
+                    </li>
                 </li>
-                <li class="layui-nav-item"><a href="http://diandian2.cn">点点OJ</a></li>
+<#--                <li class="layui-nav-item"><a href="http://diandian2.cn">点点OJ</a></li>-->
             </ul>
         </div>
     </div>
@@ -117,17 +117,17 @@
             <div class="layui-form-item" style="font-size: 16px; margin-left: 5px; margin-top: 10px">
                 <label class="layui-form-label" style="width: 100px"></label>
                 <div class="layui-input-inline" style="width: 200px">
-                    <button type="submit" class="layui-btn" style="background-color: #0084ff; outline: none" id="login" lay-submit="">登录</button>
-                    <button type="button" class="layui-btn" style="background-color: #0084ff; outline: none" id="reset">重置</button>
+                    <button type="submit" class="layui-btn" style="background-color: #AF0103; outline: none" id="login" lay-submit="">登录</button>
+                    <button type="button" class="layui-btn" style="background-color: #AF0103; outline: none" id="reset">重置</button>
                 </div>
             </div>
         </div>
     </div>
 
 </div>
-<div style="color: black;font-size: 18px; position: fixed; bottom: 20px; right: 20px" class="layui-footer">
-    © Copyright BruceYan
-</div>
+<#--<div style="color: black;font-size: 18px; position: fixed; bottom: 20px; right: 20px" class="layui-footer">
+    Hangzhou Afu Children's Products Co. LTD
+</div>-->
 
 
 </body>
