@@ -194,7 +194,7 @@
 </script>
 
 <script>
-    for (var i = 0; i < 20; i++) {
+    for (var i = 0; i < 19; i++) {
         var number=(i+1)*3;
         var html = '<div class="layui-form-item" name="number">\n        <div class="layui-inline">\n            <label id="processNumber'+(number+1)+'" class="layui-form-label">'+(number+1)+'</label>\n            <div class="layui-input-inline">\n                <input id="employeeNumber'+(number+1)+'" type="text" name="employeeNumber'+(number+1)+'" lay-verify="title" autocomplete="off" placeholder="请输入员工工号"\n                       class="layui-input">\n            </div>\n        </div>\n        <div class="layui-inline">\n            <label id="processNumber'+(number+2)+'" class="layui-form-label">'+(number+2)+'</label>\n            <div class="layui-input-inline">\n                <input id="employeeNumber'+(number+2)+'" type="text" name="employeeNumber'+(number+2)+'" lay-verify="title" autocomplete="off" placeholder="请输入员工工号"\n                       class="layui-input">\n            </div>\n        </div>\n        <div class="layui-inline">\n            <label id="processNumber'+(number+3)+'" class="layui-form-label">'+(number+3)+'</label>\n            <div class="layui-input-inline">\n                <input id="employeeNumber'+(number+3)+'" type="text" name="employeeNumber'+(number+3)+'" lay-verify="title" autocomplete="off" placeholder="请输入员工工号"\n                       class="layui-input">\n            </div>\n        </div>\n    </div>';
         $('#add').before(html);

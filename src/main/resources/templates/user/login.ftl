@@ -64,6 +64,9 @@
         $("#login").click(function () {
             doLogin();
         });
+        $("#login_top_rightpic").click(function () {
+            doLogin();
+        });
         $(document).keyup(function (event) {
             if (event.keyCode == 13) {
                 doLogin();
@@ -86,7 +89,7 @@
 
             <ul class="layui-nav layui-layout-right" style="background-color: #8d8b8b">
                 <li class="layui-nav-item">
-                    <a id="name-a" href="javascript:;">
+                    <a id="login_top_rightpic"   lay-submit="">
                         <img src="static/images/icons/login_head_01.png" class="layui-nav-img">
                     </a>
                     <li class="layui-nav-child">
@@ -94,7 +97,7 @@
                         <dd><a href="">更改密码</a></dd>
                     </li>
                 </li>
-<#--                <li class="layui-nav-item"><a href="http://diandian2.cn">点点OJ</a></li>-->
+
             </ul>
         </div>
     </div>

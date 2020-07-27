@@ -49,22 +49,22 @@
 </script>
 
 <!-- 卡片搜索面板-->
-<div style="padding: 20px; background-color: #F2F2F2;">
-    <div class="layui-row layui-col-space15">
-        <div class="layui-col-md6">
+<div style="padding: 10px; background-color: #F2F2F2;">
+    <div class="layui-row ">
+        <div class="layui-col-md12">
             <div class="layui-card">
                 <div class="layui-card-header"><span style="margin-right: 10px; margin-bottom: 2px" class="layui-badge-dot"></span>快速搜索</div>
-                <div class="layui-card-body">
-                    <div style="margin-bottom: 10px">
+                <div class="layui-card-body layui-form-item">
+                    <div  style="" >
                         <label class="layui-form-label">名称</label>
-                        <div class="layui-input-block" style="width: 200px">
+                        <div class="layui-input-block layui-input-inline"  style="margin-left:0px">
                             <input id="search-input-name" type="text" name="title" required  lay-verify="required" placeholder="请输入名称" autocomplete="off" class="layui-input">
                         </div>
                     </div>
 
-                    <div style="margin-bottom: 10px">
+                    <div style="">
                         <label class="layui-form-label">型号</label>
-                        <div class="layui-input-block" style="width: 200px">
+                        <div class="layui-input-block layui-input-inline" style="margin-left:0px" >
                             <input id="search-input-number" type="text" name="title" required  lay-verify="required" placeholder="请输入型号" autocomplete="off" class="layui-input">
                         </div>
                     </div>

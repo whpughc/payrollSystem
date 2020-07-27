@@ -9,29 +9,29 @@
 <body>
 
 <!-- 卡片搜索面板-->
-<div style="padding: 20px; background-color: #F2F2F2;">
+<div style="padding: 10px; background-color: #F2F2F2;">
     <div class="layui-row layui-col-space15">
-        <div class="layui-col-md6">
+        <div class="">
             <div class="layui-card">
                 <div class="layui-card-header"><span style="margin-right: 10px; margin-bottom: 2px" class="layui-badge-dot"></span>快速搜索</div>
-                <div class="layui-card-body">
-                    <div style="margin-bottom: 10px">
+                <div class="layui-card-body layui-form-item">
+                    <div style="">
                         <label class="layui-form-label">姓名</label>
-                        <div class="layui-input-block" style="width: 200px">
+                        <div class="layui-input-block layui-input-inline" style="width: 200px;margin-left: 0;">
                             <input id="search-input-name" type="text" name="title" required  lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
                         </div>
                     </div>
 
-                    <div style="margin-bottom: 10px">
+                    <div style="">
                         <label class="layui-form-label">手机</label>
-                        <div class="layui-input-block" style="width: 200px">
+                        <div class="layui-input-block layui-input-inline" style="width: 200px;margin-left: 0;">
                             <input id="search-input-phone" type="text" name="title" required  lay-verify="required" placeholder="请输入手机号" autocomplete="off" class="layui-input">
                         </div>
                     </div>
 
-                    <div style="margin-bottom: 10px">
+                    <div style="">
                         <label class="layui-form-label">身份证</label>
-                        <div class="layui-input-block" style="width: 200px">
+                        <div class="layui-input-block layui-input-inline" style="width: 200px;margin-left: 0;">
                             <input id="search-input-idcard" type="text" name="title" required  lay-verify="required" placeholder="请输入身份证" autocomplete="off" class="layui-input">
                         </div>
                     </div>

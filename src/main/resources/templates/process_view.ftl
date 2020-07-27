@@ -17,12 +17,12 @@
         <div>
             <div class="layui-card">
                 <div class="layui-card-header"><span style="margin-right: 10px; margin-bottom: 2px" class="layui-badge-dot"></span>快速搜索</div>
-                <div class="layui-card-body layui-form-item">
+                <div class="layui-card-body layui-form-item layui-form">
 
                     <div class=" layui-col-md4" style="margin-bottom: 10px;">
                         <label class="layui-form-label">部门</label>
                         <div class="layui-input-block" style="width: 200px">
-                            <select id="depart-select" name="department"  style="width:200px;height:38px;border-color: #e6e6e6" >
+                            <select lay-search lay-filter="depart-select"  id="depart-select" name="department"  style="width:200px;height:38px;border-color: #e6e6e6" >
                                 <option style="" value="">请选择部门</option>
                             </select>
                         </div>
@@ -32,7 +32,7 @@
                     <div class="layui-col-md4" style="margin-bottom: 10px">
                         <label class="layui-form-label">产品</label>
                         <div class="layui-input-block" style="width: 200px">
-                            <select id="product-select" name="position" lay-verify="required" style="width:200px;height:38px;border-color: #e6e6e6">
+                            <select lay-search lay-filter="product-select" id="product-select" name="position" lay-verify="required" style="width:200px;height:38px;border-color: #e6e6e6">
                                 <option value="">请选择产品</option>
                             </select>
                         </div>
@@ -118,6 +118,53 @@
     layui.use(['table', 'form'], function(){
         var form = layui.form;
         var table = layui.table;
+
+        // 下拉框搜索
+        // 部门搜索下拉框
+        form.on('select(depart-select)', function(data){
+            // 用来传递到后台的查询参数MAP
+            // 用来传递到后台的查询参数MAP
+            var whereData = {};
+            var qprocessName = $("#search-input-name").val();
+            var qdepartUuid = $("#depart-select").val();
+            var qproductUuid = $("#product-select").val();
+            if (qprocessName.length > 0) whereData["qprocessName"] = qprocessName;
+            if (qdepartUuid.length > 0) whereData["qdepartUuid"] = qdepartUuid;
+            if (qproductUuid.length > 0) whereData["qproductUuid"] = qproductUuid;
+            table.reload("process-table",{
+                where: {
+                    query: JSON.stringify(whereData)
+                }
+                ,page: {
+                    curr: 1
+                }
+            });
+            //最后再渲柒一次
+            form.render('select');//select是固定写法 不是选择器
+        });
+
+        // 产品搜索
+        form.on('select(product-select)', function(data){
+            // 用来传递到后台的查询参数MAP
+            var whereData = {};
+            var qprocessName = $("#search-input-name").val();
+            var qdepartUuid = $("#depart-select").val();
+            var qproductUuid = $("#product-select").val();
+            if (qprocessName.length > 0) whereData["qprocessName"] = qprocessName;
+            if (qdepartUuid.length > 0) whereData["qdepartUuid"] = qdepartUuid;
+            if (qproductUuid.length > 0) whereData["qproductUuid"] = qproductUuid;
+            table.reload("process-table",{
+                where: {
+                    query: JSON.stringify(whereData)
+                }
+                ,page: {
+                    curr: 1
+                }
+            });
+            //最后再渲柒一次
+            form.render('select');//select是固定写法 不是选择器
+        });
+
         table.render({
             elem: '#process-table',
             url:'/processs',
@@ -158,42 +205,6 @@
 
         /* 搜索实现, 使用reload, 进行重新请求 */
         $("#search-input-name").on('input',function () {
-            // 用来传递到后台的查询参数MAP
-            var whereData = {};
-            var qprocessName = $("#search-input-name").val();
-            var qdepartUuid = $("#depart-select").val();
-            var qproductUuid = $("#product-select").val();
-            if (qprocessName.length > 0) whereData["qprocessName"] = qprocessName;
-            if (qdepartUuid.length > 0) whereData["qdepartUuid"] = qdepartUuid;
-            if (qproductUuid.length > 0) whereData["qproductUuid"] = qproductUuid;
-            table.reload("process-table",{
-                where: {
-                    query: JSON.stringify(whereData)
-                }
-                ,page: {
-                    curr: 1
-                }
-            });
-        });
-        $("#depart-select").on('input',function () {
-            // 用来传递到后台的查询参数MAP
-            var whereData = {};
-            var qprocessName = $("#search-input-name").val();
-            var qdepartUuid = $("#depart-select").val();
-            var qproductUuid = $("#product-select").val();
-            if (qprocessName.length > 0) whereData["qprocessName"] = qprocessName;
-            if (qdepartUuid.length > 0) whereData["qdepartUuid"] = qdepartUuid;
-            if (qproductUuid.length > 0) whereData["qproductUuid"] = qproductUuid;
-            table.reload("process-table",{
-                where: {
-                    query: JSON.stringify(whereData)
-                }
-                ,page: {
-                    curr: 1
-                }
-            });
-        });
-        $("#product-select").on('input',function () {
             // 用来传递到后台的查询参数MAP
             var whereData = {};
             var qprocessName = $("#search-input-name").val();
