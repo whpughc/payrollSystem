@@ -39,6 +39,10 @@ public class NewEmployeeServiceImpl extends ServiceImpl<NewEmployeeMapper, NewEm
             queryWrapper.like("employee_name",queryMap.get("qname"));
         }
 
+        if (queryMap.get("qemployeeNumber")!=null){
+            queryWrapper.like("employee_number",queryMap.get("qemployeeNumber"));
+        }
+
         if (queryMap.get("qphone")!=null){
             queryWrapper.like("phone",queryMap.get("qphone"));
         }

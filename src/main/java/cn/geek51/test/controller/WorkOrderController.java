@@ -1,14 +1,16 @@
 package cn.geek51.test.controller;
 
 
-import cn.geek51.test.entity.Order;
-import cn.geek51.test.entity.WorkOrder;
-import cn.geek51.test.entity.WorkOrderDto;
+import cn.geek51.test.entity.*;
+import cn.geek51.test.entity.Process;
+import cn.geek51.test.mapper.NewEmployeeMapper;
+import cn.geek51.test.mapper.ProcessMapper;
 import cn.geek51.test.service.WorkOrderService;
 import cn.geek51.util.ResponseUtil;
 import cn.geek51.util.UuidUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -29,8 +31,14 @@ import java.util.Map;
 @RestController
 public class WorkOrderController {
 
+    @Autowired(required = false)
+    private ProcessMapper processMapper;
+
     @Autowired
     private WorkOrderService workOrderService;
+
+    @Autowired(required = false)
+    private NewEmployeeMapper newEmployeeMapper;
 
     //查询
     @GetMapping("/workOrders")
@@ -54,11 +62,24 @@ public class WorkOrderController {
 
         List<Order> orderList = workOrderDto.getOrderList();
         orderList.forEach(System.out::println);
+        //设置Uuid和金额
         for (Order order : orderList) {
+            QueryWrapper<NewEmployee> queryWrapper = new QueryWrapper<>();
+            queryWrapper.like("employee_number",order.getEmployeeNumber());
+            NewEmployee newEmployee = newEmployeeMapper.selectOne(queryWrapper);
+            if (newEmployee ==null){
+                return ResponseUtil.general_response(400,"员工不存在，无法添加");
+            }
+            Process process = processMapper.findProcess(workOrderDto.getDepartUuid(), workOrderDto.getProductUuid(), order.getProcessNumber());
+            if (process==null){
+                return ResponseUtil.general_response(400,"工序不存在，无法添加");
+            }
+            double money = workOrderDto.getNumber() * process.getPrice();
+            order.setMoney(money);
             order.setOrderUuid(UuidUtil.getUuid());
         }
-        workOrderDto.setOrderList(orderList);
-        System.out.println(workOrderDto);
+        /*workOrderDto.setOrderList(orderList);
+        System.out.println(workOrderDto);*/
         int i = workOrderService.insertBatch(workOrderDto);
         return ResponseUtil.general_response(i);
     }

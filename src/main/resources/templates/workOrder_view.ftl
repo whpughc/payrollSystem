@@ -19,7 +19,7 @@
                 <div class="layui-card-header"><span style="margin-right: 10px; margin-bottom: 2px" class="layui-badge-dot"></span>快速搜索</div>
                 <div class="layui-card-body layui-form-item layui-form">
 
-                    <div class=" layui-col-md4" style="margin-bottom: 10px;">
+                    <div class=" layui-col-md3" style="margin-bottom: 10px;">
                         <label class="layui-form-label">部门</label>
                         <div class="layui-input-block" style="width: 200px">
                             <select  lay-filter="depart-select"   id="depart-select" name="department" lay-search  style="width:200px;height:38px;border-color: #e6e6e6" >
@@ -29,7 +29,7 @@
                     </div>
 
 
-                    <div class="layui-col-md4" style="margin-bottom: 10px">
+                    <div class="layui-col-md3" style="margin-bottom: 10px">
                         <label class="layui-form-label">产品</label>
                         <div class="layui-input-block" style="width: 200px">
                             <select lay-filter="product-select" id="product-select" name="position" lay-search  style="width:200px;height:38px;border-color: #e6e6e6">
@@ -38,28 +38,35 @@
                         </div>
                     </div>
 
-                    <div class="layui-col-md4" style="margin-bottom: 10px">
+                    <div class="layui-col-md3" style="margin-bottom: 10px">
                         <label class="layui-form-label">单号</label>
                         <div class="layui-input-block" style="width: 200px">
                             <input id="search-input-orderNumber" type="text" name="title"  placeholder="请输入计件单号" autocomplete="off" class="layui-input">
                         </div>
                     </div>
 
-                    <div class="layui-col-md4" style="margin-bottom: 10px">
+                    <div class="layui-col-md3" style="margin-bottom: 10px">
+                        <label class="layui-form-label">工序号</label>
+                        <div class="layui-input-block" style="width: 200px">
+                            <input id="search-input-processNumber" type="text" name="title"  placeholder="请输入工序号" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md3" style="margin-bottom: 10px">
                         <label class="layui-form-label">员工工号</label>
                         <div class="layui-input-block" style="width: 200px">
                             <input id="search-input-employeeNumber" type="text" name="title"  placeholder="请输入员工工号" autocomplete="off" class="layui-input">
                         </div>
                     </div>
 
-                    <div class="layui-col-md4 " style="margin-bottom: 10px;">
+                    <div class="layui-col-md3 " style="margin-bottom: 10px;">
                         <label class="layui-form-label">开始日期</label>
                         <div class="layui-input-block">
                             <input id="search-input-startTime" type="text" name="date"  lay-verify="date"  autocomplete="off" class="layui-input" style="width: 200px">
                         </div>
                     </div>
 
-                    <div class="layui-col-md4 " style="margin-bottom: 10px;">
+                    <div class="layui-col-md3 " style="margin-bottom: 10px;">
                         <label class="layui-form-label">结束日期</label>
                         <div class="layui-input-block">
                             <input id="search-input-endTime" type="text" name="date"  lay-verify="date"  autocomplete="off" class="layui-input" style="width: 200px">
@@ -151,6 +158,7 @@
             var qorderNumber = $("#search-input-orderNumber").val();
             var qdepartUuid = $("#depart-select").val();
             var qproductUuid = $("#product-select").val();
+            var qprocessNumber = $("#search-input-processNumber").val();
             var qemployeeNumber = $("#search-input-employeeNumber").val();
             var qstartTime = $("#search-input-startTime").val();
             var qendTime = $("#search-input-endTime").val();
@@ -160,6 +168,7 @@
             if (qemployeeNumber.length > 0) whereData["qemployeeNumber"] = qemployeeNumber;
             if (qstartTime.length > 0) whereData["qstartTime"] = qstartTime;
             if (qendTime.length > 0) whereData["qendTime"] = qendTime;
+            if (qprocessNumber.length > 0) whereData["qprocessNumber"] = qprocessNumber;
             table.reload("workOrder-table",{
                 where: {
                     query: JSON.stringify(whereData)
@@ -179,6 +188,7 @@
             var qorderNumber = $("#search-input-orderNumber").val();
             var qdepartUuid = $("#depart-select").val();
             var qproductUuid = $("#product-select").val();
+            var qprocessNumber = $("#search-input-processNumber").val();
             var qemployeeNumber = $("#search-input-employeeNumber").val();
             var qstartTime = $("#search-input-startTime").val();
             var qendTime = $("#search-input-endTime").val();
@@ -188,6 +198,7 @@
             if (qemployeeNumber.length > 0) whereData["qemployeeNumber"] = qemployeeNumber;
             if (qstartTime.length > 0) whereData["qstartTime"] = qstartTime;
             if (qendTime.length > 0) whereData["qendTime"] = qendTime;
+            if (qprocessNumber.length > 0) whereData["qprocessNumber"] = qprocessNumber;
             table.reload("workOrder-table",{
                 where: {
                     query: JSON.stringify(whereData)
@@ -215,7 +226,6 @@
             ,theme: 'molv'
             ,done:function(value){//value, date, endDate点击日期、清空、现在、确定均会触发。回调返回三个参数，分别代表：生成的值、日期时间对象、结束的日期时间对象
                 endTime(value);
-
             }
         });
 
@@ -246,6 +256,7 @@
                 {field:'number', width:100, title: '数量'},
                 {field:'processNumber', width:100, title: '工序数'},
                 {field:'employeeNumber', width:100, title: '员工'},
+                {field:'money', width:100, title: '金额'},
                 {field:'createAt', width:200, title: '创建时间', sort: true},
                 {fixed: 'right', width:150,title: '操作', align:'center', toolbar: '#barTpl'}
             ]]
@@ -261,6 +272,7 @@
             var qdepartUuid = $("#depart-select").val();
             var qproductUuid = $("#product-select").val();
             var qemployeeNumber = $("#search-input-employeeNumber").val();
+            var qprocessNumber = $("#search-input-processNumber").val();
             var qstartTime = value;
             var qendTime = $("#search-input-endTime").val();
             if (qorderNumber.length > 0) whereData["qorderNumber"] = qorderNumber;
@@ -269,6 +281,7 @@
             if (qemployeeNumber.length > 0) whereData["qemployeeNumber"] = qemployeeNumber;
             if (qstartTime.length > 0) whereData["qstartTime"] = qstartTime;
             if (qendTime.length > 0) whereData["qendTime"] = qendTime;
+            if (qprocessNumber.length > 0) whereData["qprocessNumber"] = qprocessNumber;
             table.reload("workOrder-table",{
                 where: {
                     query: JSON.stringify(whereData)
@@ -287,6 +300,7 @@
             var qdepartUuid = $("#depart-select").val();
             var qproductUuid = $("#product-select").val();
             var qemployeeNumber = $("#search-input-employeeNumber").val();
+            var qprocessNumber = $("#search-input-processNumber").val();
             var qstartTime = $("#search-input-startTime").val();
             var qendTime = value;
             if (qorderNumber.length > 0) whereData["qorderNumber"] = qorderNumber;
@@ -295,6 +309,7 @@
             if (qemployeeNumber.length > 0) whereData["qemployeeNumber"] = qemployeeNumber;
             if (qstartTime.length > 0) whereData["qstartTime"] = qstartTime;
             if (qendTime.length > 0) whereData["qendTime"] = qendTime;
+            if (qprocessNumber.length > 0) whereData["qprocessNumber"] = qprocessNumber;
             table.reload("workOrder-table",{
                 where: {
                     query: JSON.stringify(whereData)
@@ -307,12 +322,13 @@
 
 
         /* 搜索实现, 使用reload, 进行重新请求 */
-        $("#search-input-orderNumber").on('input',function () {
+        $("#search-input-processNumber").on('input',function () {
             // 用来传递到后台的查询参数MAP
             var whereData = {};
             var qorderNumber = $("#search-input-orderNumber").val();
             var qdepartUuid = $("#depart-select").val();
             var qproductUuid = $("#product-select").val();
+            var qprocessNumber = $("#search-input-processNumber").val();
             var qemployeeNumber = $("#search-input-employeeNumber").val();
             var qstartTime = $("#search-input-startTime").val();
             var qendTime = $("#search-input-endTime").val();
@@ -322,6 +338,34 @@
             if (qemployeeNumber.length > 0) whereData["qemployeeNumber"] = qemployeeNumber;
             if (qstartTime.length > 0) whereData["qstartTime"] = qstartTime;
             if (qendTime.length > 0) whereData["qendTime"] = qendTime;
+            if (qprocessNumber.length > 0) whereData["qprocessNumber"] = qprocessNumber;
+            table.reload("workOrder-table",{
+                where: {
+                    query: JSON.stringify(whereData)
+                }
+                ,page: {
+                    curr: 1
+                }
+            });
+        });
+
+        $("#search-input-orderNumber").on('input',function () {
+            // 用来传递到后台的查询参数MAP
+            var whereData = {};
+            var qorderNumber = $("#search-input-orderNumber").val();
+            var qdepartUuid = $("#depart-select").val();
+            var qproductUuid = $("#product-select").val();
+            var qprocessNumber = $("#search-input-processNumber").val();
+            var qemployeeNumber = $("#search-input-employeeNumber").val();
+            var qstartTime = $("#search-input-startTime").val();
+            var qendTime = $("#search-input-endTime").val();
+            if (qorderNumber.length > 0) whereData["qorderNumber"] = qorderNumber;
+            if (qdepartUuid.length > 0) whereData["qdepartUuid"] = qdepartUuid;
+            if (qproductUuid.length > 0) whereData["qproductUuid"] = qproductUuid;
+            if (qemployeeNumber.length > 0) whereData["qemployeeNumber"] = qemployeeNumber;
+            if (qstartTime.length > 0) whereData["qstartTime"] = qstartTime;
+            if (qendTime.length > 0) whereData["qendTime"] = qendTime;
+            if (qprocessNumber.length > 0) whereData["qprocessNumber"] = qprocessNumber;
             table.reload("workOrder-table",{
                 where: {
                     query: JSON.stringify(whereData)
@@ -338,6 +382,7 @@
             var qorderNumber = $("#search-input-orderNumber").val();
             var qdepartUuid = $("#depart-select").val();
             var qproductUuid = $("#product-select").val();
+            var qprocessNumber = $("#search-input-processNumber").val();
             var qemployeeNumber = $("#search-input-employeeNumber").val();
             var qstartTime = $("#search-input-startTime").val();
             var qendTime = $("#search-input-endTime").val();
@@ -347,6 +392,7 @@
             if (qemployeeNumber.length > 0) whereData["qemployeeNumber"] = qemployeeNumber;
             if (qstartTime.length > 0) whereData["qstartTime"] = qstartTime;
             if (qendTime.length > 0) whereData["qendTime"] = qendTime;
+            if (qprocessNumber.length > 0) whereData["qprocessNumber"] = qprocessNumber;
             table.reload("workOrder-table",{
                 where: {
                     query: JSON.stringify(whereData)
@@ -391,6 +437,7 @@
                         {field:'number', width:100, title: '数量'},
                         {field:'processNumber', width:100, title: '工序数'},
                         {field:'employeeNumber', width:100, title: '员工'},
+                        {field:'money', width:100, title: '金额'},
                         {field:'createAt', width:200, title: '创建时间', sort: true},
                         {fixed: 'right', width:150,title: '操作', align:'center', toolbar: '#barTpl'}
                     ]]

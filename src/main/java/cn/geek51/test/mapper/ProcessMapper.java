@@ -18,4 +18,6 @@ import java.util.List;
 public interface ProcessMapper extends BaseMapper<Process> {
 
     int insertBatch(@Param("departUuid") String departUuid, @Param("productUuid") String productUuid, @Param("processDtoList") List<ProcessDto> processDtoList);
+
+    Process findProcess(@Param("departUuid") String departUuid, @Param("productUuid") String productUuid,@Param("processNumber") Integer processNumber);
 }

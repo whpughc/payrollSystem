@@ -121,6 +121,15 @@ public class RedirectController {
         return "workOrder_view";
     }
 
+    @GetMapping("/employeeSalary")
+    public String toEmployeeSalary(Model model) {
+        List<Depart> departList = departService.list();
+        List<Product> productList = productService.list();
+        model.addAttribute("departList",departList);
+        model.addAttribute("productList",productList);
+        return "employeeSalary_view";
+    }
+
     @GetMapping("/auth")
     public String toAuth() {
         return "auth_view";

@@ -23,6 +23,13 @@
                     </div>
 
                     <div style="">
+                        <label class="layui-form-label">员工工号</label>
+                        <div class="layui-input-block layui-input-inline" style="width: 200px;margin-left: 0;">
+                            <input id="search-input-employeeNumber" type="text" name="title" required  lay-verify="required" placeholder="请输入员工工号" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div style="">
                         <label class="layui-form-label">手机</label>
                         <div class="layui-input-block layui-input-inline" style="width: 200px;margin-left: 0;">
                             <input id="search-input-phone" type="text" name="title" required  lay-verify="required" placeholder="请输入手机号" autocomplete="off" class="layui-input">
@@ -193,9 +200,11 @@
             var qname = $("#search-input-name").val();
             var qphone = $("#search-input-phone").val();
             var qidcard = $("#search-input-idcard").val();
+            var qemployeeNumber = $("#search-input-employeeNumber").val();
             if (qname.length > 0) whereData["qname"] = qname;
             if (qphone.length > 0) whereData["qphone"] = qphone;
             if (qidcard.length > 0) whereData["qidcard"] = qidcard;
+            if (qemployeeNumber.length > 0) whereData["qemployeeNumber"] = qemployeeNumber;
             table.reload("employee-table",{
                 where: {
                     query: JSON.stringify(whereData)
@@ -205,15 +214,39 @@
                 }
             });
         });
+
+        $("#search-input-employeeNumber").on('input',function () {
+            // 用来传递到后台的查询参数MAP
+            var whereData = {};
+            var qname = $("#search-input-name").val();
+            var qphone = $("#search-input-phone").val();
+            var qidcard = $("#search-input-idcard").val();
+            var qemployeeNumber = $("#search-input-employeeNumber").val();
+            if (qname.length > 0) whereData["qname"] = qname;
+            if (qphone.length > 0) whereData["qphone"] = qphone;
+            if (qidcard.length > 0) whereData["qidcard"] = qidcard;
+            if (qemployeeNumber.length > 0) whereData["qemployeeNumber"] = qemployeeNumber;
+            table.reload("employee-table",{
+                where: {
+                    query: JSON.stringify(whereData)
+                }
+                ,page: {
+                    curr: 1
+                }
+            });
+        });
+
         $("#search-input-phone").on('input',function () {
             // 用来传递到后台的查询参数MAP
             var whereData = {};
             var qname = $("#search-input-name").val();
             var qphone = $("#search-input-phone").val();
             var qidcard = $("#search-input-idcard").val();
+            var qemployeeNumber = $("#search-input-employeeNumber").val();
             if (qname.length > 0) whereData["qname"] = qname;
             if (qphone.length > 0) whereData["qphone"] = qphone;
             if (qidcard.length > 0) whereData["qidcard"] = qidcard;
+            if (qemployeeNumber.length > 0) whereData["qemployeeNumber"] = qemployeeNumber;
             table.reload("employee-table",{
                 where: {
                     query: JSON.stringify(whereData)
@@ -229,9 +262,11 @@
             var qname = $("#search-input-name").val();
             var qphone = $("#search-input-phone").val();
             var qidcard = $("#search-input-idcard").val();
+            var qemployeeNumber = $("#search-input-employeeNumber").val();
             if (qname.length > 0) whereData["qname"] = qname;
             if (qphone.length > 0) whereData["qphone"] = qphone;
             if (qidcard.length > 0) whereData["qidcard"] = qidcard;
+            if (qemployeeNumber.length > 0) whereData["qemployeeNumber"] = qemployeeNumber;
             table.reload("employee-table",{
                 where: {
                     query: JSON.stringify(whereData)

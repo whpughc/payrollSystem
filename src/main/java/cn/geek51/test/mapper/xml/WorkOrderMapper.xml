@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.geek51.test.mapper.WorkOrderMapper">
     <insert id="insertBatch" parameterType="cn.geek51.test.entity.WorkOrderDto">
-        insert into work_order(order_uuid,order_number,depart_uuid,product_uuid,color,sku_name,number,process_number,employee_number,create_at)
+        insert into work_order(order_uuid,order_number,depart_uuid,product_uuid,color,sku_name,number,process_number,employee_number,money,create_at)
         values
         <foreach collection="orderList" index="index" item="item" separator=",">
-            (#{item.orderUuid},#{orderNumber},#{departUuid},#{productUuid},#{color},#{skuName},#{number},#{item.processNumber},#{item.employeeNumber},now())
+            (#{item.orderUuid},#{orderNumber},#{departUuid},#{productUuid},#{color},#{skuName},#{number},#{item.processNumber},#{item.employeeNumber},#{item.money},now())
         </foreach>
     </insert>
 </mapper>
