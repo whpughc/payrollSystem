@@ -26,7 +26,7 @@ import java.util.List;
 @Service
 public class WorkOrderServiceImpl extends ServiceImpl<WorkOrderMapper, WorkOrder> implements WorkOrderService {
     
-    @Autowired
+    @Autowired(required = false)
     private WorkOrderMapper workOrderMapper;
 
     @Override
@@ -48,6 +48,10 @@ public class WorkOrderServiceImpl extends ServiceImpl<WorkOrderMapper, WorkOrder
             queryWrapper.eq("product_uuid",queryMap.get("qproductUuid"));
         }
 
+        if (queryMap.get("qprocessNumber") != null){
+            queryWrapper.eq("process_number",queryMap.get("qprocessNumber"));
+        }
+
         if (queryMap.get("qemployeeNumber") != null){
             queryWrapper.like("employee_number",queryMap.get("qemployeeNumber"));
         }
@@ -59,6 +63,8 @@ public class WorkOrderServiceImpl extends ServiceImpl<WorkOrderMapper, WorkOrder
         if (queryMap.get("qendTime") != null){
             queryWrapper.le("create_at",queryMap.get("qendTime"));
         }
+
+        queryWrapper.orderByDesc("create_at");
 
         IPage<WorkOrder> result = workOrderMapper.selectPage(workOrderIPage, queryWrapper);
         List<WorkOrder> WorkOrderList = result.getRecords();

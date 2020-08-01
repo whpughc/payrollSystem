@@ -33,4 +33,9 @@ public class Order implements Serializable {
      */
     private String employeeNumber;
 
+    /**
+     * 金额
+     */
+    private Double money;
+
 }

@@ -8,4 +8,7 @@
             (#{item.processUuid},#{departUuid},#{productUuid},#{item.processNumber},#{item.processName},#{item.price},now())
         </foreach>
     </insert>
+    <select id="findProcess" resultType="cn.geek51.test.entity.Process">
+        select * from process where depart_uuid = #{departUuid} and product_uuid = #{productUuid} and process_number = #{processNumber}
+    </select>
 </mapper>

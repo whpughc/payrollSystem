@@ -79,6 +79,11 @@ public class WorkOrder implements Serializable {
     private String employeeNumber;
 
     /**
+     * 金额
+     */
+    private Double money;
+
+    /**
      * 创建时间
      */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone="GMT+8")

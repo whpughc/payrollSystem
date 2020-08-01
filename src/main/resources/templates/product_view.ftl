@@ -179,7 +179,7 @@
                         title: '添加新产品',
                         content: $("#product-insert").text(),
                         offset: 'c',
-                        area: ["500px", "600px"],
+                        area: ["500px", "400px"],
                         yes: function () {
                             /*form.render();*/
                             var name = $("#name").val();
