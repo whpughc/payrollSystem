@@ -23,18 +23,27 @@
                     </div>
 
                     <div style="">
+                        <label class="layui-form-label">员工工号</label>
+                        <div class="layui-input-block layui-input-inline" style="width: 200px;margin-left: 0;">
+                            <input id="search-input-idcard" type="text" name="title" required  lay-verify="required" placeholder="请输入员工工号" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+
+              <#--      <div style="" class="width: 150px">
+                        <label class="layui-form-label">员工工号</label>
+                        <div class="layui-input-block" style="">
+                            <input id="search-input-employeeNumber" type="text" name="title" required  style="" lay-verify="required" placeholder="请输入员工工号" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>-->
+
+                    <div style="">
                         <label class="layui-form-label">手机</label>
                         <div class="layui-input-block layui-input-inline" style="width: 200px;margin-left: 0;">
                             <input id="search-input-phone" type="text" name="title" required  lay-verify="required" placeholder="请输入手机号" autocomplete="off" class="layui-input">
                         </div>
                     </div>
 
-                    <div style="">
-                        <label class="layui-form-label">身份证</label>
-                        <div class="layui-input-block layui-input-inline" style="width: 200px;margin-left: 0;">
-                            <input id="search-input-idcard" type="text" name="title" required  lay-verify="required" placeholder="请输入身份证" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -148,7 +157,9 @@
 
                 {field:'idCard', width: 160, title:'身份证', edit: true},
                 <!--{field:'address', width: 140, title:'地址', edit: true},-->
+/*
                 {field:'positionId', width: 150, title:'职位', templet: '#positionTpl'},
+*/
                 /*{field:'position.name', width: 110, title:'职位', templet: function (d) {
                     if (d.position == null) return "未分配";
                     return d.position.name
@@ -167,7 +178,7 @@
                             '<input type="checkbox" name="admin_switch" id="admin_switch" lay-skin="switch" lay-text="是|否"/>'
                         ].join('');*/
                     }},
-                {field:'createAt', width: 120, title: '创建时间', sort: true},
+                {field:'createAt', width: 160, title: '创建时间', sort: true},
                 {fixed: 'right', width:150,title: '操作', align:'center', toolbar: '#barTpl'}
             ]]
             ,page: true

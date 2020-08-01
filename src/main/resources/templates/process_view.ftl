@@ -30,10 +30,10 @@
 
 
                     <div class="layui-col-md4" style="margin-bottom: 10px">
-                        <label class="layui-form-label">产品</label>
+                        <label class="layui-form-label">型号</label>
                         <div class="layui-input-block" style="width: 200px">
                             <select lay-search lay-filter="product-select" id="product-select" name="position" lay-verify="required" style="width:200px;height:38px;border-color: #e6e6e6">
-                                <option value="">请选择产品</option>
+                                <option value="">请选择型号</option>
                             </select>
                         </div>
                     </div>
@@ -81,7 +81,7 @@
     <#list productList as product>
      products.push({
         'id' : '${product.productUuid}',
-        'name' : '${product.name}'
+        'productNumber' : '${product.productNumber}'
     });
     </#list>
 
@@ -93,7 +93,7 @@
     </#list>
 
     for (var i = 0; i < products.length; i++) {
-        $("#product-select").append('<option value=' + products[i].id + '>' + products[i].name + '</option>');
+        $("#product-select").append('<option value=' + products[i].id + '>' + products[i].productNumber + '</option>');
     }
     for (var i = 0; i < departs.length; i++) {
         $("#depart-select").append('<option value=' + departs[i].id + '>' + departs[i].name + '</option>');
@@ -197,7 +197,7 @@
                             '<input type="checkbox" name="admin_switch" id="admin_switch" lay-skin="switch" lay-text="是|否"/>'
                         ].join('');*/
                     }},
-                {field:'createAt', width: 120, title: '创建时间', sort: true},
+                {field:'createAt', width: 160, title: '创建时间', sort: true},
                 {fixed: 'right', width:150,title: '操作', align:'center', toolbar: '#barTpl'}
             ]]
             ,page: true
@@ -306,7 +306,7 @@
                             <#list productList as product>
                             products.push({
                                 'id' : '${product.productUuid}',
-                                'name' : '${product.name}'
+                                'productNumber' : '${product.productNumber}'
                             });
                             </#list>
                             var dataDict = {

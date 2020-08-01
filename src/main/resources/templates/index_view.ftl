@@ -38,10 +38,10 @@
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree"  lay-filter="test">
-                <li class="layui-nav-item layui-this"><a href="/auth" target="admin-list">权限管理</a></li>
+                <li class="layui-nav-item layui-this"><a href="/auth" target="admin-list">角色管理</a></li>
 <#--                <li class="layui-nav-item"><a href="/department" target="admin-list">部门管理</a></li>-->
                 <li class="layui-nav-item"><a href="/depart" target="admin-list">部门管理</a></li>
-                <li class="layui-nav-item"><a href="/position" target="admin-list">职位管理</a></li>
+<#--                <li class="layui-nav-item"><a href="/position" target="admin-list">职位管理</a></li>-->
 <#--                <li class="layui-nav-item"><a href="/employee" target="admin-list">员工管理</a></li>-->
                 <li class="layui-nav-item"><a href="/newEmployee" target="admin-list">员工管理</a></li>
                 <li class="layui-nav-item"><a href="/product" target="admin-list">产品管理</a></li>

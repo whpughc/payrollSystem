@@ -40,11 +40,6 @@
             </div>
         </div>
 
-        <div class="layui-form-item" style="padding-right: 30px; width: 300px; margin: 0 auto; margin-top: 15px">
-            <div class="layui-input-block">
-                <button id="reset" type="reset" class="layui-btn layui-btn-primary" style="color: #FF5722">刷新</button>
-            </div>
-        </div>
     </form>
 </script>
 

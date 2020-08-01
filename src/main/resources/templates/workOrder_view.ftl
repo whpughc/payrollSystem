@@ -30,16 +30,16 @@
 
 
                     <div class="layui-col-md4" style="margin-bottom: 10px">
-                        <label class="layui-form-label">产品</label>
+                        <label class="layui-form-label">型号</label>
                         <div class="layui-input-block" style="width: 200px">
                             <select lay-filter="product-select" id="product-select" name="position" lay-search  style="width:200px;height:38px;border-color: #e6e6e6">
-                                <option value="">请选择产品</option>
+                                <option value="">请选择型号</option>
                             </select>
                         </div>
                     </div>
 
                     <div class="layui-col-md4" style="margin-bottom: 10px">
-                        <label class="layui-form-label">单号</label>
+                        <label class="layui-form-label">计件单号</label>
                         <div class="layui-input-block" style="width: 200px">
                             <input id="search-input-orderNumber" type="text" name="title"  placeholder="请输入计件单号" autocomplete="off" class="layui-input">
                         </div>
@@ -102,7 +102,7 @@
     <#list productList as product>
     products.push({
         'id' : '${product.productUuid}',
-        'name' : '${product.name}'
+        'productNumber' : '${product.productNumber}'
     });
     </#list>
 
@@ -114,7 +114,7 @@
     </#list>
 
     for (var i = 0; i < products.length; i++) {
-        $("#product-select").append('<option value=' + products[i].id + '>' + products[i].name + '</option>');
+        $("#product-select").append('<option value=' + products[i].id + '>' + products[i].productNumber + '</option>');
     }
     for (var i = 0; i < departs.length; i++) {
         $("#depart-select").append('<option value=' + departs[i].id + '>' + departs[i].name + '</option>');
@@ -146,7 +146,7 @@
         // 下拉框搜索
           // 部门搜索下拉框
         form.on('select(depart-select)', function(data){
-         // 用来传递到后台的查询参数MAP
+          // 用来传递到后台的查询参数MAP
             var whereData = {};
             var qorderNumber = $("#search-input-orderNumber").val();
             var qdepartUuid = $("#depart-select").val();
@@ -241,7 +241,7 @@
                 {field:'orderNumber', width:100, title: '计件单号'},
                 {field:'departUuid', width:100, title: '部门',templet:'<div>{{sotitle(d.departUuid,departs)}}</div>'},
                 {field:'productUuid', width:100, title: '产品',templet:'<div>{{sotitle(d.productUuid,products)}}</div>'},
-                {field:'color', width:100, title: '颜色'},
+                {field:'color', width:150, title: '颜色'},
                 {field:'skuName', width:100, title: '尺码'},
                 {field:'number', width:100, title: '数量'},
                 {field:'processNumber', width:100, title: '工序数'},
@@ -422,7 +422,7 @@
                             <#list productList as product>
                             products.push({
                                 'id' : '${product.productUuid}',
-                                'name' : '${product.name}'
+                                'productNumber' : '${product.productNumber}'
                             });
                             </#list>
                             var dataDict = {

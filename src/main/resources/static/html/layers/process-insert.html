@@ -21,10 +21,10 @@
     </div>
     
     <div class="layui-form-item" style="padding-right: 50px;width:500px" id="product">
-        <label class="layui-form-label">产品</label>
+        <label class="layui-form-label">型号</label>
         <div class="layui-input-block">
-            <select id="product-select" name="position" lay-verify="required">
-                <option value="">请选择产品</option>
+            <select id="product-select" name="position" lay-verify="required" lay-search>
+                <option value="">请选择型号</option>
             </select>
         </div>
     </div>
@@ -62,11 +62,11 @@
 <script>
     var layerCallback;  // 子页面回调函数
     // 父页面传过来的信息
-    var productsIdAndName = [];
+    var productsIdAndProductNumber = [];
     var departsIdAndName = [];
     // 全局函数, 父页面向子页面传值
     function child(data) {
-        productsIdAndName = data.products;
+        productsIdAndProductNumber = data.products;
         departsIdAndName = data.departs;
         // 完成后, 回调, 进行渲染
         selectorAppend();
@@ -79,9 +79,9 @@
     }
     function selectorAppend() {
         /*进行下拉框动态拼接*/
-        console.log(productsIdAndName);
-        for (var i = 0; i < productsIdAndName.length; i++) {
-            $("#product-select").append('<option value=' + productsIdAndName[i].id + '>' + productsIdAndName[i].name + '</option>');
+        console.log(productsIdAndProductNumber);
+        for (var i = 0; i < productsIdAndProductNumber.length; i++) {
+            $("#product-select").append('<option value=' + productsIdAndProductNumber[i].id + '>' + productsIdAndProductNumber[i].productNumber + '</option>');
         }
         for (var i = 0; i < departsIdAndName.length; i++) {
             $("#department-select").append('<option value=' + departsIdAndName[i].id + '>' + departsIdAndName[i].name + '</option>');
@@ -161,7 +161,7 @@
 
 <script>
 
-    for (var i=0;i<1;i++){
+    for (var i=0;i<60;i++){
         var html="<div class=\"layui-form-item\" name=\"1\">\n        <div class=\"layui-inline\">\n            <label class=\"layui-form-label\">工序号</label>\n            <div class=\"layui-input-inline\">\n                <input  type=\"text\" name=\"number\" placeholder=\"请输入工序号\" autocomplete=\"off\" class=\"layui-input\">\n            </div>\n        </div>\n        <div class=\"layui-inline\">\n            <label class=\"layui-form-label\">名称</label>\n            <div class=\"layui-input-inline\">\n                <input  type=\"text\" name=\"name\" placeholder=\"请输入工序名称\" autocomplete=\"off\" class=\"layui-input\">\n            </div>\n        </div>\n        <div class=\"layui-inline\">\n            <label class=\"layui-form-label\">价格</label>\n            <div class=\"layui-input-inline\">\n                <input type=\"text\" name=\"price\" placeholder=\"请输入工序价格\" autocomplete=\"off\" class=\"layui-input\">\n            </div>\n        </div>\n    </div>";
         $('#add').before(html);
     }

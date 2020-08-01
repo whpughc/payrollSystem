@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<script type="text/html" id="dept-insert">
+<script type="text/html" id="dept-insert" style="margin-top: 50px">
     <form class="layui-form" method="post">
         <div class="layui-form-item" style="padding-right: 50px">
             <label class="layui-form-label">部门名称</label>
@@ -16,7 +16,7 @@
                 <input id="dept-name" type="text" name="name" required  lay-verify="required" placeholder="请输入部门名称, 如: 人事部" autocomplete="off" class="layui-input">
             </div>
         </div>
-        <div class="layui-form-item" style="padding-right: 50px">
+  <#--      <div class="layui-form-item" style="padding-right: 50px">
             <label class="layui-form-label">部门经理</label>
             <div class="layui-input-block">
                 <input id="dept-manager" type="text" name="name" required  lay-verify="required" placeholder="请输入部门经理, 如: 张三" autocomplete="off" class="layui-input">
@@ -27,11 +27,11 @@
             <div class="layui-input-block">
                 <input id="phone" type="text" name="name" required  lay-verify="required|phone|number" placeholder="请输入11位电话号" autocomplete="off" class="layui-input">
             </div>
-        </div>
+        </div>-->
         <div class="layui-form-item layui-form-text" style="padding-right: 50px">
             <label class="layui-form-label">部门描述</label>
             <div class="layui-input-block">
-                <textarea id="dept-description" name="description" placeholder="请输入部门描述..." class="layui-textarea"></textarea>
+                <textarea id="dept-description" name="description"  placeholder="请输入部门描述..." class="layui-textarea"></textarea>
             </div>
         </div>
     </form>
@@ -73,8 +73,8 @@
                 {field:'id', width:80, title: 'ID',hide : true},
                 {field:'departUuid', width:80, title: '唯一标识',hide : true},
                 {field:'departName', width:150, title: '部门名称', edit: true},
-                {field:'departManager', width:150, title: '部门经理', edit: true},
-                {field:'phone', width:150, title: '电话', edit: true},
+              /*  {field:'departManager', width:150, title: '部门经理', edit: true},
+                {field:'phone', width:150, title: '电话', edit: true},*/
                 {field:'remark', width:120, title:'部门描述', edit: true},
                 {field:'status', width:130, title: '状态', templet:function (row) {
                         return [
@@ -114,17 +114,17 @@
                             var description = $("#dept-description").val();
                             var departManager= $("#dept-manager").val();
                             var phone = $("#phone").val();
-                            if (name.length <= 0  || description.length <= 0) {
+                            if (name.length <= 0 ) {
                                 if (name.length <= 0) {
                                     layer.tips('部门名称不能为空', '#dept-name',  {
                                         tipsMore: true
                                     });
                                 }
-                                if (description.length <= 0) {
+                              /*  if (description.length <= 0) {
                                     layer.tips('部门描述不能为空', '#dept-description', {
                                         tipsMore: true
                                     });
-                                }
+                                }*/
                             } else {
                                 // 调用新建API
                                 var nowDate = new Date();

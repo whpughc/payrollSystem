@@ -27,7 +27,7 @@ public class DepartmentController {
         map.put("size", service.count());
         return ResponseUtil.general_response(departmentList, map);
     }
-    @GetMapping("/depts/{id}")
+    @GetMapping("/depts/{id}")  
     public Object getDerpartments(@PathVariable("id") Integer id) {
         Department department = service.listOneById(id);
         return ResponseUtil.general_response(department);
