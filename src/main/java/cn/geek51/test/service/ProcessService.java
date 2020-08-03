@@ -2,6 +2,7 @@ package cn.geek51.test.service;
 
 import cn.geek51.test.entity.Process;
 import cn.geek51.test.entity.ProcessDto;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.HashMap;
@@ -17,7 +18,7 @@ import java.util.List;
  */
 public interface ProcessService extends IService<Process> {
 
-    List<Process> findList(Integer page, Integer limit, HashMap queryMap);
+    IPage<Process> findList(Integer page, Integer limit, HashMap queryMap);
 
     int insertBatch(String departUuid, String productUuid, List<ProcessDto> processDtoList);
 }

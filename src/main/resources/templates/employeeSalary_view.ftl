@@ -44,7 +44,7 @@
         var table = layui.table;
         table.render({
             elem: '#dept-table',
-            url:'/depts',
+            url:'/employeeSalarys',
             toolbar: '#toolbar',
             parseData: function (res) {
                 console.log(res);
@@ -56,10 +56,10 @@
                 }
             }
             ,cols: [[
-                {field:'id', width:80, title: 'ID'},
-                {field:'name', width:150, title: '部门名称', edit: true},
-                {field:'description', width:120, title:'部门描述', edit: true},
-                {field:'createdTime', width:180, title: '创建时间', sort: true},
+                {field:'employeeNumber', width:120, title: '员工工号'},
+                {field:'employeeName', width:150, title: '员工姓名', edit: true},
+                {field:'departName', width:120, title:'部门', edit: true},
+                {field:'wage', width:180, title: '总工资', sort: true},
                 {fixed: 'right', width:150, align:'center', toolbar: '#barTpl'}
             ]]
             ,page: true

@@ -29,7 +29,7 @@ public class NewEmployeeServiceImpl extends ServiceImpl<NewEmployeeMapper, NewEm
     private NewEmployeeMapper newEmployeeMapper;
 
     @Override
-    public List<NewEmployee> findList(Integer page, Integer limit, Map queryMap) {
+    public IPage<NewEmployee> findList(Integer page, Integer limit, Map queryMap) {
 
         IPage<NewEmployee> newEmployeeIPage = new Page<>(page,limit);
 
@@ -53,8 +53,6 @@ public class NewEmployeeServiceImpl extends ServiceImpl<NewEmployeeMapper, NewEm
 
         IPage<NewEmployee> result = newEmployeeMapper.selectPage(newEmployeeIPage, queryWrapper);
 
-        List<NewEmployee> newEmployeeList = result.getRecords();
-
-        return newEmployeeList;
+        return result;
     }
 }

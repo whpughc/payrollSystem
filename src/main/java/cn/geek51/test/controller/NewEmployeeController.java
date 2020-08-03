@@ -10,6 +10,7 @@ import cn.geek51.test.mapper.DepartMapper;
 import cn.geek51.test.service.NewEmployeeService;
 import cn.geek51.util.ResponseUtil;
 import cn.geek51.util.UuidUtil;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,10 +50,10 @@ public class NewEmployeeController {
             queryMap = new ObjectMapper().readValue(query, HashMap.class);
         }
 
-        List<NewEmployee> list = newEmployeeService.findList(page, limit,queryMap);
+        IPage<NewEmployee> newEmployeeIPage = newEmployeeService.findList(page, limit, queryMap);
         HashMap<Object, Object> map = new HashMap<>();
-        map.put("size",newEmployeeService.count());
-        return ResponseUtil.general_response(list,map);
+        map.put("size",newEmployeeIPage.getTotal());
+        return ResponseUtil.general_response(newEmployeeIPage.getRecords(),map);
     }
 
     // 新建

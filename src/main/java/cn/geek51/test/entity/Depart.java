@@ -19,8 +19,8 @@ import lombok.experimental.Accessors;
  * @since 2020-07-02
  */
 @Data
-  @EqualsAndHashCode(callSuper = false)
-  @Accessors(chain = true)
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
 public class Depart implements Serializable {
 
     private static final long serialVersionUID=1L;

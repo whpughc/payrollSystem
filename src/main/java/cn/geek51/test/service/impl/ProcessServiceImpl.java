@@ -30,7 +30,7 @@ public class ProcessServiceImpl extends ServiceImpl<ProcessMapper, Process> impl
     ProcessMapper processMapper;
     
     @Override
-    public List<Process> findList(Integer page, Integer limit, HashMap queryMap) {
+    public IPage<Process> findList(Integer page, Integer limit, HashMap queryMap) {
 
         IPage<Process> processIPage = new Page<>(page,limit);
 
@@ -49,8 +49,7 @@ public class ProcessServiceImpl extends ServiceImpl<ProcessMapper, Process> impl
         }
 
         IPage<Process> result = processMapper.selectPage(processIPage, queryWrapper);
-        List<Process> ProcessList = result.getRecords();
-        return ProcessList;
+        return result;
     }
 
     @Override

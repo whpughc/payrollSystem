@@ -8,4 +8,7 @@
             (#{item.orderUuid},#{orderNumber},#{departUuid},#{productUuid},#{color},#{skuName},#{number},#{item.processNumber},#{item.employeeNumber},#{item.money},now())
         </foreach>
     </insert>
+    <select id="employeeSalaryList" resultType="cn.geek51.test.entity.EmployeeSalary">
+        SELECT employee_number,SUM(money) wage FROM work_order GROUP BY employee_number
+    </select>
 </mapper>

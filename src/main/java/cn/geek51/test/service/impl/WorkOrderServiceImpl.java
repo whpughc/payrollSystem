@@ -30,7 +30,7 @@ public class WorkOrderServiceImpl extends ServiceImpl<WorkOrderMapper, WorkOrder
     private WorkOrderMapper workOrderMapper;
 
     @Override
-    public List<WorkOrder> findList(Integer page, Integer limit, HashMap queryMap) {
+    public IPage<WorkOrder> findList(Integer page, Integer limit, HashMap queryMap) {
         
         IPage<WorkOrder> workOrderIPage = new Page<>(page,limit);
 
@@ -67,8 +67,7 @@ public class WorkOrderServiceImpl extends ServiceImpl<WorkOrderMapper, WorkOrder
         queryWrapper.orderByDesc("create_at");
 
         IPage<WorkOrder> result = workOrderMapper.selectPage(workOrderIPage, queryWrapper);
-        List<WorkOrder> WorkOrderList = result.getRecords();
-        return WorkOrderList;
+        return result;
     }
 
     @Override

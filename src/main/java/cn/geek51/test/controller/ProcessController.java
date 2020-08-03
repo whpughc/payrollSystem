@@ -9,6 +9,7 @@ import cn.geek51.util.UuidUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.apache.ibatis.annotations.Param;
@@ -44,10 +45,10 @@ public class ProcessController {
             queryMap = new ObjectMapper().readValue(query, HashMap.class);
         }
 
-        List<Process> list = processService.findList(page, limit,queryMap);
+        IPage<Process> processIPage = processService.findList(page, limit, queryMap);
         HashMap<Object, Object> map = new HashMap<>();
-        map.put("size",processService.count());
-        return ResponseUtil.general_response(list,map);
+        map.put("size",processIPage.getTotal());
+        return ResponseUtil.general_response(processIPage.getRecords(),map);
     }
 
     // 新建

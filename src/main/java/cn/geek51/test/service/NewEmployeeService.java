@@ -1,6 +1,7 @@
 package cn.geek51.test.service;
 
 import cn.geek51.test.entity.NewEmployee;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
@@ -16,6 +17,6 @@ import java.util.Map;
  */
 public interface NewEmployeeService extends IService<NewEmployee> {
 
-   List<NewEmployee> findList(Integer page, Integer limit, Map queryMap);
+   IPage<NewEmployee> findList(Integer page, Integer limit, Map queryMap);
 
 }

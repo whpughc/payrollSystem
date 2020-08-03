@@ -53,14 +53,14 @@
                     <div  style="" >
                         <label class="layui-form-label">名称</label>
                         <div class="layui-input-block layui-input-inline"  style="margin-left:0px">
-                            <input id="search-input-name" type="text" name="title" required  lay-verify="required" placeholder="请输入名称" autocomplete="off" class="layui-input">
+                            <input id="search-input-name" type="text" name="title" required   placeholder="请输入名称" autocomplete="off" class="layui-input">
                         </div>
                     </div>
 
                     <div style="">
                         <label class="layui-form-label">型号</label>
                         <div class="layui-input-block layui-input-inline" style="margin-left:0px" >
-                            <input id="search-input-number" type="text" name="title" required  lay-verify="required" placeholder="请输入型号" autocomplete="off" class="layui-input">
+                            <input id="search-input-number" type="text" name="title" required   placeholder="请输入型号" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     
@@ -157,7 +157,7 @@
                     query: JSON.stringify(whereData)
                 }
                 ,page: {
-                    curr: 2
+                    curr: 1
                 }
             });
         });

@@ -8,6 +8,7 @@ import cn.geek51.test.service.DepartService;
 import cn.geek51.test.service.ProductService;
 import cn.geek51.util.ResponseUtil;
 import cn.geek51.util.UuidUtil;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -42,10 +43,10 @@ public class ProductController {
             queryMap = new ObjectMapper().readValue(query, HashMap.class);
         }
 
-        List<Product> list = productService.findList(page, limit,queryMap);
+        IPage<Product> product = productService.findList(page, limit, queryMap);
         HashMap<Object, Object> map = new HashMap<>();
-        map.put("size",productService.count());
-        return ResponseUtil.general_response(list,map);
+        map.put("size",product.getTotal());
+        return ResponseUtil.general_response(product.getRecords(),map);
     }
 
     // 新建

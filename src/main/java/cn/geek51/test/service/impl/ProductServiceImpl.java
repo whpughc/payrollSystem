@@ -29,7 +29,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     private ProductMapper productMapper;
 
     @Override
-    public List<Product> findList(Integer page, Integer limit, Map queryMap) {
+    public IPage<Product> findList(Integer page, Integer limit, Map queryMap) {
 
         IPage<Product> productIPage = new Page<>(page,limit);
 
@@ -44,7 +44,6 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         }
 
         IPage<Product> result = productMapper.selectPage(productIPage, queryWrapper);
-        List<Product> productList = result.getRecords();
-        return productList;
+        return result;
     }
 }

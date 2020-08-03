@@ -114,6 +114,20 @@
         }
     };
 
+    function sotitle2(id,arr){
+        var title;
+        $.each(arr, function (index, obj) {
+            if(obj.id==id){
+                title=obj.productNumber;
+            }
+        });
+        if(title==null){
+            return "";
+        }else{
+            return title;
+        }
+    };
+
     var tableContent = [];
     layui.use(['table', 'form'], function(){
         var form = layui.form;
@@ -183,7 +197,7 @@
                 {field:'id', width:30, title: 'ID',hide:true},
                 {field:'processUuid', width:30, title: '唯一标识',hide:true},
                 {field:'departUuid', width:120, title: '部门',templet:'<div>{{sotitle(d.departUuid,departs)}}</div>'},
-                {field:'productUuid', width:120, title: '产品',templet:'<div>{{sotitle(d.productUuid,products)}}</div>'},
+                {field:'productUuid', width:120, title: '产品',templet:'<div>{{sotitle2(d.productUuid,products)}}</div>'},
                 {field:'processNumber', width:120, title: '工序序号'},
                 {field:'processName', width:120, title: '工序名称',edit:true},
                 {field:'price', width:120, title: '工序价格',edit:true},
@@ -261,7 +275,7 @@
                         {field:'id', width:30, title: 'ID',hide:true},
                         {field:'processUuid', width:30, title: '唯一标识',hide:true},
                         {field:'departUuid', width:120, title: '部门',templet:'<div>{{sotitle(d.departUuid,departs)}}</div>'},
-                        {field:'productUuid', width:120, title: '产品',templet:'<div>{{sotitle(d.productUuid,products)}}</div>'},
+                        {field:'productUuid', width:120, title: '产品',templet:'<div>{{sotitle2(d.productUuid,products)}}</div>'},
                         {field:'processNumber', width:120, title: '工序数'},
                         {field:'processName', width:120, title: '工序名称'},
                         {field:'price', width:120, title: '工序价格',edit:true},

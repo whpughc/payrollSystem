@@ -142,6 +142,20 @@
         }
     };
 
+    function sotitle2(id,arr){
+        var title;
+        $.each(arr, function (index, obj) {
+            if(obj.id==id){
+                title=obj.productNumber;
+            }
+        });
+        if(title==null){
+            return "";
+        }else{
+            return title;
+        }
+    };
+
     var tableContent = [];
     layui.use(['table', 'form', 'layedit', 'laydate'], function(){
 
@@ -250,7 +264,7 @@
                 {field:'orderUuid', width:30, title: '唯一标识',hide:true},
                 {field:'orderNumber', width:100, title: '计件单号'},
                 {field:'departUuid', width:100, title: '部门',templet:'<div>{{sotitle(d.departUuid,departs)}}</div>'},
-                {field:'productUuid', width:100, title: '产品',templet:'<div>{{sotitle(d.productUuid,products)}}</div>'},
+                {field:'productUuid', width:100, title: '产品',templet:'<div>{{sotitle2(d.productUuid,products)}}</div>'},
                 {field:'color', width:150, title: '颜色'},
                 {field:'skuName', width:100, title: '尺码'},
                 {field:'number', width:100, title: '数量'},
@@ -431,7 +445,7 @@
                         {field:'orderUuid', width:30, title: '唯一标识',hide:true},
                         {field:'orderNumber', width:100, title: '计件单号'},
                         {field:'departUuid', width:100, title: '部门',templet:'<div>{{sotitle(d.departUuid,departs)}}</div>'},
-                        {field:'productUuid', width:100, title: '产品',templet:'<div>{{sotitle(d.productUuid,products)}}</div>'},
+                        {field:'productUuid', width:100, title: '产品',templet:'<div>{{sotitle2(d.productUuid,products)}}</div>'},
                         {field:'color', width:100, title: '颜色'},
                         {field:'skuName', width:100, title: '尺码'},
                         {field:'number', width:100, title: '数量'},

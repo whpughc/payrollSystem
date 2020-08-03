@@ -11,6 +11,7 @@ import cn.geek51.util.UuidUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -50,10 +51,12 @@ public class WorkOrderController {
             queryMap = new ObjectMapper().readValue(query, HashMap.class);
         }
 
-        List<WorkOrder> list = workOrderService.findList(page, limit,queryMap);
+        IPage<WorkOrder> result = workOrderService.findList(page, limit, queryMap);
+        List<WorkOrder> workOrderList = result.getRecords();
+        long total = result.getTotal();
         HashMap<Object, Object> map = new HashMap<>();
-        map.put("size",workOrderService.count());
-        return ResponseUtil.general_response(list,map);
+        map.put("size",total);
+        return ResponseUtil.general_response(workOrderList,map);
     }
 
     // 新建

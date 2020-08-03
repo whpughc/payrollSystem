@@ -2,6 +2,7 @@ package cn.geek51.test.service;
 
 import cn.geek51.test.entity.Depart;
 import cn.geek51.test.entity.Product;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
@@ -17,5 +18,5 @@ import java.util.Map;
  */
 public interface ProductService extends IService<Product> {
 
-    List<Product> findList(Integer page, Integer limit, Map queryMap);
+    IPage<Product> findList(Integer page, Integer limit, Map queryMap);
 }

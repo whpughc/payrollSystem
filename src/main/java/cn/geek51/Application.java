@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
@@ -18,6 +19,7 @@ import java.sql.Connection;
 
 @SpringBootApplication
 @MapperScan("cn.geek51.test.mapper")
+@ComponentScan(value = "cn.geek51")
 public class Application extends WebMvcConfigurationSupport {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
