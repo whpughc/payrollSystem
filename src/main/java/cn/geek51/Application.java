@@ -19,7 +19,6 @@ import java.sql.Connection;
 
 @SpringBootApplication
 @MapperScan("cn.geek51.test.mapper")
-@ComponentScan(value = "cn.geek51")
 public class Application extends WebMvcConfigurationSupport {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);

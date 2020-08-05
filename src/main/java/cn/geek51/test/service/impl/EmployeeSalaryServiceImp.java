@@ -46,6 +46,7 @@ public class EmployeeSalaryServiceImp implements EmployeeSalaryService {
 
     @Override
     public List<EmployeeSalary> employeeSalaryList(){
+
         List<EmployeeSalary> employeeSalaryList = workOrderMapper.employeeSalaryList();
 
         if (employeeSalaryList != null && !employeeSalaryList.isEmpty()){

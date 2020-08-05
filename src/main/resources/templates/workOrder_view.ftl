@@ -20,14 +20,13 @@
                 <div class="layui-card-body layui-form-item layui-form">
 
                     <div class=" layui-col-md3" style="margin-bottom: 10px;">
-                        <label class="layui-form-label">部门</label>
+                        <label class="layui-form-label ">部门</label>
                         <div class="layui-input-block" style="width: 200px">
                             <select  lay-filter="depart-select"   id="depart-select" name="department" lay-search  style="width:200px;height:38px;border-color: #e6e6e6" >
                                 <option style="" value="">请选择部门</option>
                             </select>
                         </div>
                     </div>
-
 
                     <div class="layui-col-md3" style="margin-bottom: 10px">
                         <label class="layui-form-label">产品</label>
@@ -473,7 +472,18 @@
                             var iframe = window['layui-layer-iframe' + index];
                             var departs = [];
                             var products = [];
+                            var departUuid;
+                            var productUuid;
                             <!-- 向子页面进行数据传递 (下拉框选项, 及主键 -> 不一定连续)-->
+
+                            <#if Session["departUuid"]?exists>
+                            departUuid='${Session["departUuid"]}';
+                            </#if>
+
+                            <#if Session["productUuid"]?exists>
+                            productUuid='${Session["productUuid"]}';
+                            </#if>
+
                             <#list departList as depart>
                             departs.push({
                                 'id' : '${depart.departUuid}',
@@ -488,7 +498,9 @@
                             </#list>
                             var dataDict = {
                                 'departs': departs,
-                                'products': products
+                                'products': products,
+                                'departUuid':departUuid,
+                                'productUuid':productUuid
                             };
                             iframe.child(dataDict);
                         }
