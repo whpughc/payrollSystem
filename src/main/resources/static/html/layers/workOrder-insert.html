@@ -20,21 +20,21 @@
             </div>
 
             <label class="layui-form-label">部门</label>
-            <div class="layui-input-inline"  style="width: 150px;">
+            <div class="layui-input-inline"  style="width: 150px;margin-left: 10px;">
                 <select style="width: 150px;"  id="department-select" name="department" lay-verify="required" lay-search>
                     <option value="">请选择部门</option>
                 </select>
             </div>
 
             <label class="layui-form-label">型号</label>
-            <div class="layui-input-inline" style="width: 150px;">
+            <div class="layui-input-inline" style="width: 150px;margin-left: 10px;">
                 <select   id="product-select" name="product" lay-verify="required" lay-search>
                     <option value="">请选择型号</option>
                 </select>
             </div>
 
             <label class="layui-form-label">数量</label>
-            <div class="layui-input-inline" style="width: 150px;" >
+            <div class="layui-input-inline" style="width: 150px;margin-left: 10px;" >
                 <input id="number" type="text" name="number" lay-verify="title" autocomplete="off"
                        placeholder="请输入数量" class="layui-input">
             </div>
@@ -42,45 +42,21 @@
     </div>
 
 
-
-
-    <div class="layui-form-item" name="number">
-
-            <label id="processNumber1" class="layui-form-label">1</label>
-            <div class="layui-input-inline" style="width: 150px;">
-                <input id="employeeNumber1"   type="text" name="employeeNumber1" lay-verify="title" autocomplete="off" placeholder="请输入员工工号"
-                       class="layui-input">
-            </div>
-
-
-            <label id="processNumber2" class="layui-form-label">11</label>
-            <div class="layui-input-inline" style="width: 150px;">
-                <input id="employeeNumber2"  type="text" name="employeeNumber2" lay-verify="title" autocomplete="off" placeholder="请输入员工工号"
-                       class="layui-input">
-            </div>
-
-
-            <label id="processNumber3" class="layui-form-label">21</label>
-            <div class="layui-input-inline" style="width: 150px;">
-                <input id="employeeNumber3"  type="text" name="employeeNumber3" lay-verify="title" autocomplete="off" placeholder="请输入员工工号"
-                       class="layui-input">
-            </div>
-
-
-            <label id="processNumber4" class="layui-form-label">31</label>
-            <div class="layui-input-inline" style="width: 150px;">
-                <input id="employeeNumber4"  type="text" name="employeeNumber4" lay-verify="title" autocomplete="off" placeholder="请输入员工工号"
-                       class="layui-input">
-            </div>
-
-    </div>
+<!-- 这里的计件输入框是下面循环出来的-->
 
 
     <button type="button" class="layui-btn" id="new_add">新增输入框</button>
-    <div class="layui-form-item" style="padding-right: 30px; width: 300px; margin-top: 15px">
-        <div class="layui-input-block">
-            <button class="layui-btn" lay-submit lay-filter="formDemo" id="submit-btn">提交</button>
-            <button id="reset" type="reset" class="layui-btn layui-btn-primary">重置</button>
+    <div class="layui-form-item" style="margin-top: 15px;">
+        <div class="layui-input-block" style="width:500px;margin-left: 520px;">
+            <div class="layui-input-inline" style="width: 60px;">
+                <button class="layui-btn" lay-submit lay-filter="formDemo" id="submit-btn">提交
+                </button>
+            </div>
+            <div class="layui-input-inline" style="width: 60px;">
+                <button style="margin-left: 10px" class="layui-btn" id="reset" type="reset"
+                        class="layui-btn layui-btn-primary layui-input-inline">重置
+                </button>
+            </div>
         </div>
     </div>
 </form>
@@ -183,71 +159,58 @@
 
 <script>
 
-    for (var i = 1; i < 10; i++) {
-        // number为每一行最后元素的下标
-        // var number=(i+1)*4;
+    // 循环
+    var sum='<div class="layui-form-item" name="number" style="margin-bottom: 0px">';
+    for (var i = 0; i <4; i++) {
 
-        var html = '    <div class="layui-form-item" name="number">\n' +
-            '\n' +
-            '            <label id="processNumber'+(i+1)+'" class="layui-form-label">'+(i+1)+'</label>\n' +
-            '            <div class="layui-input-inline" style="width: 150px;">\n' +
-            '                <input id="employeeNumber'+(i+1)+'"   type="text" name="employeeNumber'+(i+1)+'" lay-verify="title" autocomplete="off" placeholder="请输入员工工号"\n' +
-            '                       class="layui-input">\n' +
-            '            </div>\n' +
-            '\n' +
-            '\n' +
-            '            <label id="processNumber'+(11+i)+'" class="layui-form-label">'+(11+i)+'</label>\n' +
-            '            <div class="layui-input-inline" style="width: 150px;">\n' +
-            '                <input id="employeeNumber'+(11+i)+'"  type="text" name="employeeNumber'+(11+i)+'" lay-verify="title" autocomplete="off" placeholder="请输入员工工号"\n' +
-            '                       class="layui-input">\n' +
-            '            </div>\n' +
-            '\n' +
-            '\n' +
-            '            <label id="processNumber'+(21+i)+'" class="layui-form-label">'+(21+i)+'</label>\n' +
-            '            <div class="layui-input-inline" style="width: 150px;">\n' +
-            '                <input id="employeeNumber'+(21+i)+'"  type="text" name="employeeNumber'+(21+i)+'" lay-verify="title" autocomplete="off" placeholder="请输入员工工号"\n' +
-            '                       class="layui-input">\n' +
-            '            </div>\n' +
-            '\n' +
-            '\n' +
-            '            <label id="processNumber'+(31+i)+'" class="layui-form-label">'+(31+i)+'</label>\n' +
-            '            <div class="layui-input-inline" style="width: 150px;">\n' +
-            '                <input id="employeeNumber'+(31+i)+'"  type="text" name="employeeNumber'+(31+i)+'" lay-verify="title" autocomplete="off" placeholder="请输入员工工号"\n' +
-            '                       class="layui-input">\n' +
-            '            </div>\n' +
-            '\n' +
-            '    </div>';
-        $('#new_add').before(html);
+        var sum=sum+'<div style="width: 280px;float:left;">';
+
+
+        for (var j = 1; j <=10; j++) {
+            var html = ' <label id="processNumber'+(j+10*i)+'" class="layui-form-label">'+(j+10*i)+'</label>\n' +
+                '            <div name="jijiandan" class="layui-input-inline" style="width: 150px;margin-bottom: 15px;">\n' +
+                '                <input id="employeeNumber'+(j+10*i)+'"   type="text" name="employeeNumber'+(j+10*i)+'" lay-verify="title" autocomplete="off" placeholder="请输入员工工号"\n' +
+                '                       class="layui-input">\n' +
+                '            </div>\n';
+            sum=sum+html;
+
+
+        }
+        sum=sum+'</div>';
     }
+    sum=sum+'</div>';
+    $('#new_add').before(sum);
 
+
+    // 新增一行计件单
     $('#new_add').click(function () {
-        var length = $("div[name='number']").length;
+        var length = $("div[name='jijiandan']").length;
         var html ='    <div class="layui-form-item" name="number">\n' +
             '\n' +
-            '            <label id="processNumber'+(4*length+1)+'" class="layui-form-label">'+(4*length+1)+'</label>\n' +
-            '            <div class="layui-input-inline" style="width: 150px;">\n' +
-            '                <input id="employeeNumber'+(4*length+1)+'"   type="text" name="employeeNumber'+(4*length+1)+'" lay-verify="title" autocomplete="off" placeholder="请输入员工工号"\n' +
+            '            <label  id="processNumber'+(length+1)+'" class="layui-form-label">'+(length+1)+'</label>\n' +
+            '            <div name="jijiandan" class="layui-input-inline" style="width: 150px;">\n' +
+            '                <input id="employeeNumber'+(length+1)+'"   type="text" name="employeeNumber'+(length+1)+'" lay-verify="title" autocomplete="off" placeholder="请输入员工工号"\n' +
             '                       class="layui-input">\n' +
             '            </div>\n' +
             '\n' +
             '\n' +
-            '            <label id="processNumber'+(4*length+2)+'" class="layui-form-label">'+(4*length+2)+'</label>\n' +
-            '            <div class="layui-input-inline" style="width: 150px;">\n' +
-            '                <input id="employeeNumber'+(4*length+2)+'"  type="text" name="employeeNumber'+(4*length+2)+'" lay-verify="title" autocomplete="off" placeholder="请输入员工工号"\n' +
+            '            <label style="margin-left: 10px" id="processNumber'+(length+2)+'" class="layui-form-label">'+(length+2)+'</label>\n' +
+            '            <div name="jijiandan" class="layui-input-inline" style="width: 150px;">\n' +
+            '                <input id="employeeNumber'+(length+2)+'"  type="text" name="employeeNumber'+(length+2)+'" lay-verify="title" autocomplete="off" placeholder="请输入员工工号"\n' +
             '                       class="layui-input">\n' +
             '            </div>\n' +
             '\n' +
             '\n' +
-            '            <label id="processNumber'+(4*length+3)+'" class="layui-form-label">'+(4*length+3)+'</label>\n' +
-            '            <div class="layui-input-inline" style="width: 150px;">\n' +
-            '                <input id="employeeNumber'+(4*length+3)+'"  type="text" name="employeeNumber'+(4*length+3)+'" lay-verify="title" autocomplete="off" placeholder="请输入员工工号"\n' +
+            '            <label style="margin-left: 10px" id="processNumber'+(length+3)+'" class="layui-form-label">'+(length+3)+'</label>\n' +
+            '            <div name="jijiandan" class="layui-input-inline" style="width: 150px;">\n' +
+            '                <input id="employeeNumber'+(length+3)+'"  type="text" name="employeeNumber'+(length+3)+'" lay-verify="title" autocomplete="off" placeholder="请输入员工工号"\n' +
             '                       class="layui-input">\n' +
             '            </div>\n' +
             '\n' +
             '\n' +
-            '            <label id="processNumber'+(4*length+4)+'" class="layui-form-label">'+(4*length+4)+'</label>\n' +
-            '            <div class="layui-input-inline" style="width: 150px;">\n' +
-            '                <input id="employeeNumber'+(4*length+4)+'"  type="text" name="employeeNumber'+(4*length+4)+'" lay-verify="title" autocomplete="off" placeholder="请输入员工工号"\n' +
+            '            <label style="margin-left: 10px" id="processNumber'+(length+4)+'" class="layui-form-label">'+(length+4)+'</label>\n' +
+            '            <div name="jijiandan" class="layui-input-inline" style="width: 150px;">\n' +
+            '                <input id="employeeNumber'+(length+4)+'"  type="text" name="employeeNumber'+(length+4)+'" lay-verify="title" autocomplete="off" placeholder="请输入员工工号"\n' +
             '                       class="layui-input">\n' +
             '            </div>\n' +
             '\n' +

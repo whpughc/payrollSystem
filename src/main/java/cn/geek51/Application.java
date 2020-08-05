@@ -43,4 +43,5 @@ public class Application extends WebMvcConfigurationSupport {
         super.addResourceHandlers(registry);
     }
 
+
 }

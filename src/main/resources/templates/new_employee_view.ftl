@@ -29,19 +29,9 @@
                         </div>
                     </div>
 
-                    <div style="">
-                        <label class="layui-form-label">手机</label>
-                        <div class="layui-input-block layui-input-inline" style="width: 200px;margin-left: 0;">
-                            <input id="search-input-phone" type="text" name="title" required  lay-verify="required" placeholder="请输入手机号" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
 
-                    <div style="">
-                        <label class="layui-form-label">身份证</label>
-                        <div class="layui-input-block layui-input-inline" style="width: 200px;margin-left: 0;">
-                            <input id="search-input-idcard" type="text" name="title" required  lay-verify="required" placeholder="请输入身份证" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
+
+
                 </div>
             </div>
         </div>

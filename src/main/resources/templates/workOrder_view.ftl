@@ -183,11 +183,11 @@
             if (qstartTime.length > 0) whereData["qstartTime"] = qstartTime;
             if (qendTime.length > 0) whereData["qendTime"] = qendTime;
             if (qprocessNumber.length > 0) whereData["qprocessNumber"] = qprocessNumber;
-            table.reload("workOrder-table",{
+            table.reload("workOrder-table", {
                 where: {
                     query: JSON.stringify(whereData)
                 }
-                ,page: {
+                , page: {
                     curr: 1
                 }
             });
@@ -268,7 +268,7 @@
                 {field:'color', width:150, title: '颜色'},
                 {field:'skuName', width:100, title: '尺码'},
                 {field:'number', width:100, title: '数量'},
-                {field:'processNumber', width:100, title: '工序数'},
+                {field:'processNumber', width:100, title: '工序号'},
                 {field:'employeeNumber', width:100, title: '员工'},
                 {field:'money', width:100, title: '金额'},
                 {field:'createAt', width:200, title: '创建时间', sort: true},

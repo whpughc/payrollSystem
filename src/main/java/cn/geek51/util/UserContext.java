@@ -21,6 +21,7 @@ public class UserContext {
             getSession().invalidate();
         } else {
             getSession().setAttribute(USER_IN_SESSION, currentUser);
+            getSession().setMaxInactiveInterval(60*60*24*10);
         }
     }
 

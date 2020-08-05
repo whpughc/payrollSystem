@@ -28,12 +28,7 @@ public class EmployeeSalaryTest {
     @Autowired
     private EmployeeSalaryService employeeSalaryService;
 
-    @Test
-    public void test(){
-        List<EmployeeSalary> employeeSalaryList = workOrderMapper.employeeSalaryList();
-        List<String> collect = employeeSalaryList.stream().map(EmployeeSalary::getEmployeeNumber).collect(Collectors.toList());
 
-    }
 
     @Test
     public void test1(){
