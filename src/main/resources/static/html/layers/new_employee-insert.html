@@ -121,6 +121,7 @@
                     method: 'post',
                     data: ajaxData,
                     success: function (res) {
+                        var msg= (res.msg==null||res.msg=="")?"添加员工失败":res.msg;
                         if (res.code == 200) {
                             // 回调主界面
                             parent.layerCallback(ajaxData);
@@ -128,7 +129,7 @@
                             var index = parent.layer.getFrameIndex(window.name);
                             parent.layer.close(index);
                         } else {
-                            parent.layer.msg('添加员工失败', {icon: 2});
+                            parent.layer.msg(msg, {icon: 2});
                         }
                         return false;
                     }

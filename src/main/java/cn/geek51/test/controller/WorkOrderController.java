@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -61,7 +62,9 @@ public class WorkOrderController {
 
     // 新建
     @PostMapping("/workOrders")
-    public Object insertWorkOrder(@RequestBody WorkOrderDto workOrderDto) {
+    public Object insertWorkOrder(HttpServletRequest request,@RequestBody WorkOrderDto workOrderDto) {
+        request.getSession().setAttribute("departUuid",workOrderDto.getDepartUuid());
+        request.getSession().setAttribute("productUuid",workOrderDto.getProductUuid());
 
         List<Order> orderList = workOrderDto.getOrderList();
         orderList.forEach(System.out::println);

@@ -332,6 +332,7 @@
                     contentType: "application/json",
 
                     success: function (res) {
+                        var msg= (res.msg==null||res.msg=="")?"更改员工信息失败":res.msg;
                         console.log(res);
                         if (res.code == 200) {
                             layer.msg('更改员工信息成功', {icon: 1});
@@ -343,7 +344,7 @@
                                 idCard: data.idCard,
                             });
                         } else {
-                            layer.msg('更改员工信息失败', {icon: 2});
+                            layer.msg(msg, {icon: 2});
                         }
                     }
                 });

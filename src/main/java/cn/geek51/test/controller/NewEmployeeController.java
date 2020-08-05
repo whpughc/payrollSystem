@@ -9,7 +9,9 @@ import cn.geek51.test.entity.NewEmployee;
 import cn.geek51.test.mapper.DepartMapper;
 import cn.geek51.test.service.NewEmployeeService;
 import cn.geek51.util.ResponseUtil;
+import cn.geek51.util.StringUtils;
 import cn.geek51.util.UuidUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -59,7 +61,15 @@ public class NewEmployeeController {
     // 新建
     @PostMapping("/newEmployees")
     public Object insertEmployee(NewEmployee newEmployee) {
-        System.out.println(newEmployee);
+        String employeeNumber = newEmployee.getEmployeeNumber();
+        QueryWrapper<NewEmployee> queryWrapper = new QueryWrapper<>();
+        if (StringUtils.isNotEmpty(employeeNumber)){
+            queryWrapper.eq("employee_number",employeeNumber);
+        }
+        NewEmployee tempEmployee = newEmployeeService.getOne(queryWrapper);
+        if (tempEmployee != null){
+            return ResponseUtil.general_response(405,"员工工号已存在");
+        }
         Depart depart = departMapper.selectById(newEmployee.getDepartId());
         newEmployee.setDepartUuid(depart.getDepartUuid());
         newEmployee.setCreateAt(LocalDateTime.now());
@@ -71,7 +81,15 @@ public class NewEmployeeController {
     // 更改
     @PutMapping("/newEmployees")
     public Object updateNewEmployee(@RequestBody NewEmployee newEmployee) {
-        System.out.println(newEmployee);
+        String employeeNumber = newEmployee.getEmployeeNumber();
+        QueryWrapper<NewEmployee> queryWrapper = new QueryWrapper<>();
+        if (StringUtils.isNotEmpty(employeeNumber)){
+            queryWrapper.eq("employee_number",employeeNumber);
+        }
+        NewEmployee tempEmployee = newEmployeeService.getOne(queryWrapper);
+        if (tempEmployee != null && !tempEmployee.getId().equals(newEmployee.getId())){
+            return ResponseUtil.general_response(405,"员工工号已存在");
+        }
         newEmployeeService.updateById(newEmployee);
         return ResponseUtil.general_response("success update department!");
     }
