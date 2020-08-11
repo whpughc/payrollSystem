@@ -6,6 +6,7 @@ import java.util.Map;
 public class ResponseUtil {
     public static final int CODE_OK = 200;
     public static final int CODE_ERROR = 402;
+    /*自定义失败返回码*/
     public static final int CODE_EXCEPTION = 405;
 
     public static Map<Object,Object> general_response(Integer statusCode, String msg, Object data, Map<Object, Object> args) {

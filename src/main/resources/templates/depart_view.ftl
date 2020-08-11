@@ -69,7 +69,7 @@
                 }
             }
             ,cols: [[
-                {type: 'checkbox', fixed: 'left'},
+                /*{type: 'checkbox', fixed: 'left'},*/
                 {field:'id', width:80, title: 'ID',hide : true},
                 {field:'departUuid', width:80, title: '唯一标识',hide : true},
                 {field:'departName', width:150, title: '部门名称', edit: true},

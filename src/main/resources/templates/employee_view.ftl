@@ -56,7 +56,7 @@
 </script>
 
 
-<script type="text/html" id="positionTpl">
+<#--<script type="text/html" id="positionTpl">
     <select id="position-select" name="position" lay-verify="required">
         <#if positionList?? && positionList?size gt 0>
             <#list positionList as position>
@@ -69,7 +69,10 @@
             </#list>
         </#if>
     </select>
-</script>
+</script>-->
+
+
+
 
 <script type="text/html" id="departmentTpl">
     <select id="department-select" name="department" lay-verify="required">
@@ -87,18 +90,18 @@
 
 </script>
 
-<script type="text/html" id="educationTpl">
+<#--<script type="text/html" id="educationTpl">
     <select id="education-select" name="city" lay-verify="required">
         <#list ["本科", "硕士", "博士"] as education>
             <option value=${education_index}
-                            {{#if (d.education == ${education_index?c}) { }}    <#-- 这里需要类型转换?c-->
+                            {{#if (d.education == ${education_index?c}) { }}    &lt;#&ndash; 这里需要类型转换?c&ndash;&gt;
                     selected
                     {{# }}}
             >
                 ${education}</option>
         </#list>
     </select>
-</script>
+</script>-->
 
 <style type="text/css">
     .layui-table-cell{
@@ -144,7 +147,7 @@
                 {field:'education', width: 100, title:'学历', templet: '#educationTpl'},
                 {field:'idcard', width: 160, title:'身份证', edit: true},
                 <!--{field:'address', width: 140, title:'地址', edit: true},-->
-                {field:'position.name', width: 150, title:'职位', templet: '#positionTpl'},
+                /*{field:'position.name', width: 150, title:'职位', templet: '#positionTpl'},*/
                 /*{field:'position.name', width: 110, title:'职位', templet: function (d) {
                     if (d.position == null) return "未分配";
                     return d.position.name

@@ -69,11 +69,11 @@
 <script>
     var layerCallback;  // 子页面回调函数
     // 父页面传过来的信息
-    var positionsIdAndName = [];
+    /*var positionsIdAndName = [];*/
     var departsIdAndName = [];
     // 全局函数, 父页面向子页面传值
     function child(data) {
-        positionsIdAndName = data.positions;
+        /*positionsIdAndName = data.positions;*/
         departsIdAndName = data.departs;
         // 完成后, 回调, 进行渲染
         selectorAppend();
@@ -87,9 +87,9 @@
     function selectorAppend() {
         /*进行下拉框动态拼接*/
         console.log(positionsIdAndName);
-        for (var i = 0; i < positionsIdAndName.length; i++) {
+        /*for (var i = 0; i < positionsIdAndName.length; i++) {
             $("#position-select").append('<option value=' + positionsIdAndName[i].id + '>' + positionsIdAndName[i].name + '</option>');
-        }
+        }*/
         for (var i = 0; i < departsIdAndName.length; i++) {
             $("#department-select").append('<option value=' + departsIdAndName[i].id + '>' + departsIdAndName[i].name + '</option>');
         }

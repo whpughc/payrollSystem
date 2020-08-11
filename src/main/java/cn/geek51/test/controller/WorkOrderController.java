@@ -94,8 +94,11 @@ public class WorkOrderController {
     @PutMapping("/workOrders")
     public Object updateWorkOrder(@RequestBody WorkOrder workOrder) {
         System.out.println(workOrder);
-        workOrderService.updateById(workOrder);
-        return ResponseUtil.general_response("success update department!");
+        boolean b = workOrderService.updateById(workOrder);
+        if (b)
+            return ResponseUtil.general_response("success update");
+        else
+            return ResponseUtil.general_response(ResponseUtil.CODE_EXCEPTION,"更新失败");
     }
 
     // 删除

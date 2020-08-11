@@ -40,6 +40,7 @@
             <ul class="layui-nav layui-nav-tree"  lay-filter="test">
                 <li class="layui-nav-item layui-this"><a href="/auth" target="admin-list">角色管理</a></li>
 <#--                <li class="layui-nav-item"><a href="/department" target="admin-list">部门管理</a></li>-->
+
                 <li class="layui-nav-item"><a href="/depart" target="admin-list">部门管理</a></li>
 <#--                <li class="layui-nav-item"><a href="/position" target="admin-list">职位管理</a></li>-->
 <#--                <li class="layui-nav-item"><a href="/employee" target="admin-list">员工管理</a></li>-->
@@ -48,8 +49,8 @@
                 <li class="layui-nav-item"><a href="/process" target="admin-list">工序管理</a></li>
                 <li class="layui-nav-item"><a href="/workOrder" target="admin-list">计件管理</a></li>
                 <li class="layui-nav-item"><a href="/employeeSalary" target="admin-list">按员工统计</a></li>
-                <li class="layui-nav-item"><a href="/post" target="admin-list">公告管理</a></li>
-                <li class="layui-nav-item"><a href="/download" target="admin-list">下载中心</a></li>
+                <#--<li class="layui-nav-item"><a href="/post" target="admin-list">公告管理</a></li>
+                <li class="layui-nav-item"><a href="/download" target="admin-list">下载中心</a></li>-->
 
             </ul>
         </div>

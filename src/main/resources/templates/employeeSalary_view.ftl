@@ -1,4 +1,4 @@
-<!-- 部门管理-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<script type="text/html" id="dept-insert">
+<#--<script type="text/html" id="dept-insert">
     <form class="layui-form" method="post">
         <div class="layui-form-item" style="padding-right: 50px">
             <label class="layui-form-label">部门名称</label>
@@ -25,20 +25,22 @@
 
     </form>
 
-</script>
+</script>-->
 
 <table class="layui-hide" id="dept-table" lay-filter="dept-table"></table>
 
+<#--
 <script type="text/html" id="toolbar">
     <div class="layui-btn-container">
         <button class="layui-btn layui-btn-sm" lay-event="addDept">添加部门</button>
     </div>
 </script>
+-->
 
-<script type="text/html" id="barTpl">
+<#--<script type="text/html" id="barTpl">
     <a class="layui-btn layui-btn-xs" lay-event="edit">保存</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-</script>
+</script>-->
 <script>
     layui.use('table', function(){
         var table = layui.table;
@@ -60,12 +62,14 @@
                 {field:'employeeName', width:150, title: '员工姓名', edit: true},
                 {field:'departName', width:120, title:'部门', edit: true},
                 {field:'wage', width:180, title: '总工资', sort: true},
-                {fixed: 'right', width:150, align:'center', toolbar: '#barTpl'}
+                /*{fixed: 'right', width:150, align:'center', toolbar: '#barTpl'}*/
             ]]
-            ,page: true
+            ,page: {
+                limits:[10,20,30,1000,100000]
+            }
         });
 
-        table.on('toolbar(dept-table)', function (obj) {
+        /*table.on('toolbar(dept-table)', function (obj) {
             var data = obj.data; //获得当前行数据
             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
             var tr = obj.tr; //获得当前行 tr 的DOM对象
@@ -131,10 +135,10 @@
                     });
             }
         });
+*/
 
 
-
-        //监听工具条(右侧)
+        /*//监听工具条(右侧)
         table.on('tool(dept-table)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
             var data = obj.data; //获得当前行数据
             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
@@ -184,7 +188,7 @@
                 });
             }
         });
-
+*/
     });
 </script>
 </body>

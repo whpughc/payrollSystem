@@ -12,9 +12,9 @@
     <property name="logDir" value="./logs"/>
 
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${logDir}/cmsApi.log</file>
+        <file>${logDir}/payrollSystem.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <fileNamePattern>${logDir}/cmsApi_%d{yyyy-M-d}.%i.log</fileNamePattern>
+            <fileNamePattern>${logDir}/payrollSystem_%d{yyyy-M-d}.%i.log</fileNamePattern>
             <maxFileSize>1GB</maxFileSize>
             <maxHistory>5</maxHistory>
             <totalSizeCap>5GB</totalSizeCap>
@@ -26,7 +26,7 @@
     </appender>
 
     <logger name="org.springframework" level="ERROR"/>
-    <logger name="com.afj" level="${logLevel}"/>
+    <logger name="cn.geek51" level="${logLevel}"/>
     <root level="INFO">
         <!--<appender-ref ref="STDOUT"/>-->
         <appender-ref ref="FILE"/>
