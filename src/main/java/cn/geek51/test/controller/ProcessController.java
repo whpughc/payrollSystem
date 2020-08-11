@@ -73,8 +73,11 @@ public class ProcessController {
     @PutMapping("/processs")
     public Object updateProcess(@RequestBody Process process) {
         System.out.println(process);
-        processService.updateById(process);
-        return ResponseUtil.general_response("success update department!");
+        boolean b = processService.updateById(process);
+        if (b)
+            return ResponseUtil.general_response("success update department!");
+        else
+            return ResponseUtil.general_response(ResponseUtil.CODE_EXCEPTION,"更新失败");
     }
 
     // 删除

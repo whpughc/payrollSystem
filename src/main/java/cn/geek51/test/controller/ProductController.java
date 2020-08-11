@@ -63,8 +63,11 @@ public class ProductController {
     @PutMapping("/products")
     public Object updateProduct(@RequestBody Product product) {
         System.out.println(product);
-        productService.updateById(product);
-        return ResponseUtil.general_response("success update department!");
+        boolean b = productService.updateById(product);
+        if (b)
+            return ResponseUtil.general_response("success update");
+        else
+            return ResponseUtil.general_response(ResponseUtil.CODE_EXCEPTION,"更新失败");
     }
 
     // 删除

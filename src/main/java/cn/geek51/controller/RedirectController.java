@@ -58,9 +58,9 @@ public class RedirectController {
 
     @GetMapping("/newEmployee")
     public String toNewEmployee(Model model) {
-        List<Position> positionList = positionService.listAll();
+        /*List<Position> positionList = positionService.listAll();*/
         List<Depart> departList = departService.list();
-        model.addAttribute("positionList", positionList);
+        /*model.addAttribute("positionList", positionList);*/
         model.addAttribute("departList", departList);
         return "new_employee_view";
     }

@@ -13,6 +13,7 @@ import cn.geek51.util.StringUtils;
 import cn.geek51.util.UuidUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.api.R;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,10 +89,15 @@ public class NewEmployeeController {
         }
         NewEmployee tempEmployee = newEmployeeService.getOne(queryWrapper);
         if (tempEmployee != null && !tempEmployee.getId().equals(newEmployee.getId())){
-            return ResponseUtil.general_response(405,"员工工号已存在");
+            return ResponseUtil.general_response(ResponseUtil.CODE_EXCEPTION,"员工工号已存在");
         }
-        newEmployeeService.updateById(newEmployee);
-        return ResponseUtil.general_response("success update department!");
+        Depart depart = departMapper.selectById(newEmployee.getDepartId());
+        newEmployee.setDepartUuid(depart.getDepartUuid());
+        boolean b = newEmployeeService.updateById(newEmployee);
+        if (b)
+        return ResponseUtil.general_response("success update!");
+        else
+            return ResponseUtil.general_response(ResponseUtil.CODE_EXCEPTION,"更新失败");
     }
 
     // 删除

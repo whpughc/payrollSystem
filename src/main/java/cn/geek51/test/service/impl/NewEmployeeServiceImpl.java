@@ -51,6 +51,10 @@ public class NewEmployeeServiceImpl extends ServiceImpl<NewEmployeeMapper, NewEm
             queryWrapper.like("id_card",queryMap.get("qidcard"));
         }
 
+        if (queryMap.get("qdepartUuid") != null){
+            queryWrapper.eq("depart_uuid",queryMap.get("qdepartUuid"));
+        }
+
         IPage<NewEmployee> result = newEmployeeMapper.selectPage(newEmployeeIPage, queryWrapper);
 
         return result;

@@ -52,8 +52,12 @@ public class DepartController {
     @PutMapping("/departs")
     public Object updateDepart(@RequestBody Depart depart) {
         System.out.println(depart);
-        departService.updateById(depart);
-        return ResponseUtil.general_response("success update department!");
+        boolean b = departService.updateById(depart);
+        if (b)
+            return ResponseUtil.general_response("success update department!");
+        else
+            return ResponseUtil.general_response(ResponseUtil.CODE_EXCEPTION,"更新失败");
+
     }
 
     // 删除
