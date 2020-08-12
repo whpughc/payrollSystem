@@ -415,7 +415,7 @@
             var tr = obj.tr; //获得当前行 tr 的DOM对象
             if(layEvent === 'edit'){ //编辑
                 console.log($("#department-select").val());
-                layer.alert($('select[name="department"] option:selected').val());
+                console.log($('#department-select option:selected').val());
                 console.log($('select[name="department"] option:selected').val());
                 // 发送更新请求
                 $.ajax({
@@ -427,7 +427,7 @@
                         employeeNumber:data.employeeNumber,
                         phone: data.phone,
                         idCard: data.idCard,
-                        departId: $('select[name="department"] option:selected').val(),
+                        departId: $("#department-select option:selected").val(),
                         status: temp == null ? data.status : temp
                     }),
                     contentType: "application/json",

@@ -140,6 +140,7 @@
                     data: JSON.stringify(ajaxData),   //ajaxData,
                     contentType: "application/json",
                     success: function (res) {
+                        var msg= (res.msg==null||res.msg=="")?"添加工序失败":res.msg;
                         if (res.code == 200) {
                             // 回调主界面
                             parent.layerCallback();
@@ -147,7 +148,7 @@
                             var index = parent.layer.getFrameIndex(window.name);
                             parent.layer.close(index);
                         } else {
-                            parent.layer.msg('添加工序失败', {icon: 2});
+                            parent.layer.msg(msg, {icon: 2});
                         }
                         return false;
                     }
