@@ -424,7 +424,6 @@
             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
             var tr = obj.tr; //获得当前行 tr 的DOM对象
             if(layEvent === 'edit'){ //编辑
-                layer.alert($("#department-select").val());
                 console.log($("#department-select").val());
                 layer.alert($('select[name="department"] option:selected').val());
                 console.log($('select[name="department"] option:selected').val());
