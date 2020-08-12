@@ -3,6 +3,7 @@ package cn.geek51.test.controller;
 
 import cn.geek51.test.entity.Process;
 import cn.geek51.test.entity.ProcessDto;
+import cn.geek51.test.mapper.ProcessMapper;
 import cn.geek51.test.service.ProcessService;
 import cn.geek51.util.ResponseUtil;
 import cn.geek51.util.UuidUtil;
@@ -35,6 +36,9 @@ public class ProcessController {
     @Autowired
     private ProcessService processService;
 
+    @Autowired
+    private ProcessMapper processMapper;
+
     //查询
     @GetMapping("/processs")
     public Object list(Integer page,Integer limit,String query) throws Exception {
@@ -59,6 +63,10 @@ public class ProcessController {
         JSONArray jsonArray = params.getJSONArray("processDtoList");
         List<ProcessDto> processDtoList = jsonArray.toJavaList(ProcessDto.class);
         for (ProcessDto processDto : processDtoList) {
+            Process process = processMapper.findProcess(departUuid, productUuid, processDto.getProcessNumber());
+            if (process != null){
+                return ResponseUtil.general_response(405,"工序已存在");
+            }
             processDto.setProcessUuid(UuidUtil.getUuid());
         }
         System.out.println(departUuid);

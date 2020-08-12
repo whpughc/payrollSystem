@@ -9,6 +9,6 @@
         </foreach>
     </insert>
     <select id="findProcess" resultType="cn.geek51.test.entity.Process">
-        select * from process where depart_uuid = #{departUuid} and product_uuid = #{productUuid} and process_number = #{processNumber}
+        select * from process where depart_uuid = #{departUuid} and product_uuid = #{productUuid} and process_number = #{processNumber} and deleted = 0;
     </select>
 </mapper>
