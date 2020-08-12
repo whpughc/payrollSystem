@@ -85,11 +85,6 @@
         }*/
     }
     function selectorAppend() {
-        /*进行下拉框动态拼接*/
-        console.log(positionsIdAndName);
-        /*for (var i = 0; i < positionsIdAndName.length; i++) {
-            $("#position-select").append('<option value=' + positionsIdAndName[i].id + '>' + positionsIdAndName[i].name + '</option>');
-        }*/
         for (var i = 0; i < departsIdAndName.length; i++) {
             $("#department-select").append('<option value=' + departsIdAndName[i].id + '>' + departsIdAndName[i].name + '</option>');
         }
@@ -103,7 +98,6 @@
                 var sex = $('input[name="employee-sex"]:checked').val();
                 var phone = $("#employee-phone").val();
                 var idcard = $("#employee-idcard").val();
-                var positionId = $("#position-select").val();
                 var departId = $("#department-select").val();
                 var ajaxData = {
                     employeeName: name,
@@ -111,7 +105,6 @@
                     sex: sex,
                     phone: phone,
                     idCard: idcard,
-                    positionId: positionId,
                     departId: departId
                 };
 

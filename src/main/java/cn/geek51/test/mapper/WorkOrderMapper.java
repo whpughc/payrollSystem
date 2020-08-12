@@ -1,6 +1,7 @@
 package cn.geek51.test.mapper;
 
 import cn.geek51.test.entity.EmployeeSalary;
+import cn.geek51.test.entity.ProductSalary;
 import cn.geek51.test.entity.WorkOrder;
 import cn.geek51.test.entity.WorkOrderDto;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
@@ -21,4 +22,7 @@ public interface WorkOrderMapper extends BaseMapper<WorkOrder> {
     int insertBatch(WorkOrderDto workOrderDto);
 
     List<EmployeeSalary> employeeSalaryList();
+
+    List<ProductSalary> productSalaryList();
+
 }

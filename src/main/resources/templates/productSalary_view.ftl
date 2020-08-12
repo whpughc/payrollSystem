@@ -27,7 +27,7 @@
 
 </script>-->
 
-<table class="layui-hide" id="employeeSalary-table" lay-filter="employeeSalary-table"></table>
+<table class="layui-hide" id="productSalary-table" lay-filter="productSalary-table"></table>
 
 <#--
 <script type="text/html" id="toolbar">
@@ -45,8 +45,8 @@
     layui.use('table', function(){
         var table = layui.table;
         table.render({
-            elem: '#employeeSalary-table',
-            url:'/employeeSalarys',
+            elem: '#productSalary-table',
+            url:'/productSalarys',
             toolbar: '#toolbar',
             parseData: function (res) {
                 console.log(res);
@@ -58,10 +58,10 @@
                 }
             }
             ,cols: [[
-                {field:'employeeNumber', width:120, title: '员工工号'},
-                {field:'employeeName', width:150, title: '员工姓名', edit: true},
-                {field:'departName', width:120, title:'部门', edit: true},
-                {field:'wage', width:180, title: '总工资', sort: true},
+                {field:'name', width:120, title: '产品名称'},
+                {field:'productNumber', width:150, title: '产品型号', edit: true},
+                {field:'totalNumber', width:120, title:'总数量', edit: true},
+                {field:'totalMoney', width:180, title: '计件总额', sort: true},
                 /*{fixed: 'right', width:150, align:'center', toolbar: '#barTpl'}*/
             ]]
             ,page: {
@@ -69,7 +69,7 @@
             }
         });
 
-        /*table.on('toolbar(employeeSalary-table)', function (obj) {
+        /*table.on('toolbar(productSalary-table)', function (obj) {
             var data = obj.data; //获得当前行数据
             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
             var tr = obj.tr; //获得当前行 tr 的DOM对象
@@ -111,7 +111,7 @@
                                         if (res.code == 200) {
                                             // 执行局部刷新, 获取之前的TABLE内容, 再进行填充
                                             var dataBak = [];
-                                            var tableBak = table.cache.employeeSalary-table;
+                                            var tableBak = table.cache.productSalary-table;
                                             for (var i = 0; i < tableBak.length; i++) {
                                                 dataBak.push(tableBak[i]);      //将之前的数组备份
                                             }
@@ -121,7 +121,7 @@
                                                 createdTime: nowDate
                                             });
                                             //console.log(dataBak);
-                                            table.reload("employeeSalary-table",{
+                                            table.reload("productSalary-table",{
                                                 data:dataBak   // 将新数据重新载入表格
                                             });
                                             layer.msg('新建部门成功', {icon: 1});
@@ -139,7 +139,7 @@
 
 
         /*//监听工具条(右侧)
-        table.on('tool(employeeSalary-table)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+        table.on('tool(productSalary-table)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
             var data = obj.data; //获得当前行数据
             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
             var tr = obj.tr; //获得当前行 tr 的DOM对象

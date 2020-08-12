@@ -73,6 +73,21 @@
 </script>
 
 
+<script>
+    var departs = [];
+
+    <#list departList as depart>
+    departs.push({
+        'id' : '${depart.departUuid}',
+        'name' : '${depart.departName}'
+    });
+    </#list>
+
+    for (var i = 0; i < departs.length; i++) {
+        $("#depart-select").append('<option value=' + departs[i].id + '>' + departs[i].name + '</option>');
+    }
+</script>
+
 <#--<script type="text/html" id="positionTpl">
     <select id="position-select" name="position" lay-verify="required" lay-search>
         <#if positionList?? && positionList?size gt 0>
@@ -88,24 +103,10 @@
     </select>
 </script>-->
 
-<script>
-    var departs = [];
 
-    <!-- 向子页面进行数据传递 (下拉框选项, 及主键 -> 不一定连续)-->
-    <#list departList as depart>
-    departs.push({
-        'id' : '${depart.departUuid}',
-        'name' : '${depart.departName}'
-    });
-    </#list>
-
-    for (var i = 0; i < departs.length; i++) {
-        $("#depart-select").append('<option value=' + departs[i].id + '>' + departs[i].name + '</option>');
-    }
-</script>
 
 <script type="text/html" id="departTpl">
-    <select id="department-select" name="department" lay-verify="required" lay-search>
+    <select id="department-select" name="department" lay-verify="required">
         <#if departList?? && departList?size gt 0>
             <#list departList as depart>
                 <option value=${depart.id}
@@ -119,7 +120,7 @@
     </select>
 </script>
 
-<script type="text/html" id="departTpl2">
+<#--<script type="text/html" id="departTpl2">
     <select id="department-select2" name="department2" lay-verify="required" lay-search>
         <#if departList?? && departList?size gt 0>
             <#list departList as depart>
@@ -132,7 +133,7 @@
             </#list>
         </#if>
     </select>
-</script>
+</script>-->
 
 <script>
     function sotitle(id,arr){
@@ -400,7 +401,6 @@
                         success: function (layero, index) {
                             var iframe = window['layui-layer-iframe' + index];
                             var departs = [];
-                            var positions = [];
                             <!-- 向子页面进行数据传递 (下拉框选项, 及主键 -> 不一定连续)-->
                             <#list departList as depart>
                             departs.push({
@@ -424,7 +424,10 @@
             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
             var tr = obj.tr; //获得当前行 tr 的DOM对象
             if(layEvent === 'edit'){ //编辑
+                layer.alert($("#department-select").val());
                 console.log($("#department-select").val());
+                layer.alert($('select[name="department"] option:selected').val());
+                console.log($('select[name="department"] option:selected').val());
                 // 发送更新请求
                 $.ajax({
                     url: '/newEmployees',
@@ -435,8 +438,7 @@
                         employeeNumber:data.employeeNumber,
                         phone: data.phone,
                         idCard: data.idCard,
-                        positionId: $("#position-select").val(),
-                        departId: $("#department-select").val(),
+                        departId: $('select[name="department"] option:selected').val(),
                         status: temp == null ? data.status : temp
                     }),
                     contentType: "application/json",
@@ -451,7 +453,7 @@
                                 employeeName: data.employeeName,
                                 employeeNumber:data.employeeNumber,
                                 phone: data.phone,
-                                idCard: data.idCard,
+                                idCard: data.idCard
                             });
                         } else {
                             layer.msg(msg, {icon: 2});

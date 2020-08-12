@@ -11,4 +11,32 @@
     <select id="employeeSalaryList" resultType="cn.geek51.test.entity.EmployeeSalary">
         SELECT employee_number,SUM(money) wage FROM work_order GROUP BY employee_number
     </select>
+    <select id="productSalaryList" resultType="cn.geek51.test.entity.ProductSalary">
+        SELECT
+	t1.product_uuid,
+	(
+	SELECT
+		SUM( t.number )
+	FROM
+		(
+		SELECT
+			GROUP_CONCAT( DISTINCT product_uuid ) AS product_uuid,
+			GROUP_CONCAT( DISTINCT depart_uuid ) AS depart_uuid,
+			GROUP_CONCAT( DISTINCT number ) AS number
+		FROM
+			work_order
+		GROUP BY
+			product_uuid,
+			depart_uuid,
+			number
+		) t
+	GROUP BY
+		product_uuid
+	) totalNumber,
+	SUM( t1.money ) totalMoney
+FROM
+	work_order t1
+GROUP BY
+	t1.product_uuid
+    </select>
 </mapper>
