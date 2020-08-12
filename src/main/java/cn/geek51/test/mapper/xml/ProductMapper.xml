@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.geek51.test.mapper.ProductMapper">
-
+    <select id="findProductList" resultType="cn.geek51.test.entity.Product">
+        select * from product where deleted = 0 and product_uuid in
+        <foreach collection="productUuidList" item="item" separator="," index="index" open="(" close=")">
+            #{item}
+        </foreach>
+    </select>
 </mapper>
