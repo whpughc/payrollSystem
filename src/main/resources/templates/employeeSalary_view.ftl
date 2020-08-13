@@ -27,6 +27,36 @@
 
 </script>-->
 
+<!-- 卡片搜索面板-->
+
+<div style="padding: 10px; background-color: #F2F2F2;/*height: 180px;*/">
+    <div class="layui-row layui-col-space15">
+        <div >
+            <div class="layui-card ">
+                <div class="layui-card-header"><span style="margin-right: 10px; margin-bottom: 2px" class="layui-badge-dot"></span>快速搜索</div>
+                <div class="layui-card-body layui-form-item layui-form">
+
+                    <div class="layui-col-md3 " style="margin-bottom: 10px;">
+                        <label class="layui-form-label">开始日期</label>
+                        <div class="layui-input-block">
+                            <input id="search-input-startTime" type="text" name="date"  lay-verify="date"  autocomplete="off" class="layui-input" style="width: 200px">
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md3 " style="margin-bottom: 10px;">
+                        <label class="layui-form-label">结束日期</label>
+                        <div class="layui-input-block">
+                            <input id="search-input-endTime" type="text" name="date"  lay-verify="date"  autocomplete="off" class="layui-input" style="width: 200px">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <table class="layui-hide" id="employeeSalary-table" lay-filter="employeeSalary-table"></table>
 
 <#--
@@ -42,8 +72,75 @@
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>-->
 <script>
-    layui.use('table', function(){
+    layui.use(['table', 'form', 'layedit', 'laydate'], function(){
+        var form = layui.form
+            ,layer = layui.layer
+            ,layedit = layui.layedit
+            ,laydate = layui.laydate;
         var table = layui.table;
+
+
+        //日期
+        laydate.render({
+            elem: '#search-input-startTime'
+            ,type: 'datetime'
+            ,theme: 'molv'
+            ,done:function(value){//value, date, endDate点击日期、清空、现在、确定均会触发。回调返回三个参数，分别代表：生成的值、日期时间对象、结束的日期时间对象
+                startTime(value);
+            }
+        });
+        laydate.render({
+            elem: '#search-input-endTime'
+            ,type: 'datetime'
+            ,theme: 'molv'
+            ,done:function(value){//value, date, endDate点击日期、清空、现在、确定均会触发。回调返回三个参数，分别代表：生成的值、日期时间对象、结束的日期时间对象
+                endTime(value);
+            }
+        });
+
+
+        function startTime(value)
+        {
+            // 用来传递到后台的查询参数MAP
+            var whereData = {};
+
+            var qstartTime = value;
+            var qendTime = $("#search-input-endTime").val();
+
+            if (qstartTime.length > 0) whereData["qstartTime"] = qstartTime;
+            if (qendTime.length > 0) whereData["qendTime"] = qendTime;
+
+            table.reload("employeeSalary-table",{
+                where: {
+                    query: JSON.stringify(whereData)
+                }
+                ,page: {
+                    curr: 1
+                }
+            });
+        }
+
+        function endTime(value)
+        {
+            // 用来传递到后台的查询参数MAP
+            var whereData = {};
+
+            var qstartTime = $("#search-input-startTime").val();
+            var qendTime = value;
+
+            if (qstartTime.length > 0) whereData["qstartTime"] = qstartTime;
+            if (qendTime.length > 0) whereData["qendTime"] = qendTime;
+
+            table.reload("employeeSalary-table",{
+                where: {
+                    query: JSON.stringify(whereData)
+                }
+                ,page: {
+                    curr: 1
+                }
+            });
+        }
+
         table.render({
             elem: '#employeeSalary-table',
             url:'/employeeSalarys',

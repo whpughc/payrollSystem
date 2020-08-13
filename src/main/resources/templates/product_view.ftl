@@ -141,7 +141,7 @@
                     query: JSON.stringify(whereData)
                 }
                 ,page: {
-                    curr: 2
+                    curr: 1
                 }
             });
         });

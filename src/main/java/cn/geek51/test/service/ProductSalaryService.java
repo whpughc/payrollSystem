@@ -4,6 +4,7 @@ import cn.geek51.test.entity.ProductSalary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @description:
@@ -12,5 +13,5 @@ import java.util.List;
  **/
 @Service
 public interface ProductSalaryService {
-    List<ProductSalary> productSalaryList();
+    List<ProductSalary> productSalaryList(Map<String,Object> map);
 }

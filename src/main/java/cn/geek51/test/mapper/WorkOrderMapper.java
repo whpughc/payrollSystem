@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -21,8 +22,8 @@ public interface WorkOrderMapper extends BaseMapper<WorkOrder> {
 
     int insertBatch(WorkOrderDto workOrderDto);
 
-    List<EmployeeSalary> employeeSalaryList();
+    List<EmployeeSalary> employeeSalaryList(Map<String,Object> map);
 
-    List<ProductSalary> productSalaryList();
+    List<ProductSalary> productSalaryList(Map<String,Object> map);
 
 }

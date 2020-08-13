@@ -45,9 +45,9 @@ public class EmployeeSalaryServiceImp implements EmployeeSalaryService {
     private WorkOrderMapper workOrderMapper;
 
     @Override
-    public List<EmployeeSalary> employeeSalaryList(){
+    public List<EmployeeSalary> employeeSalaryList(Map<String,Object> map){
 
-        List<EmployeeSalary> employeeSalaryList = workOrderMapper.employeeSalaryList();
+        List<EmployeeSalary> employeeSalaryList = workOrderMapper.employeeSalaryList(map);
 
         if (employeeSalaryList != null && !employeeSalaryList.isEmpty()){
             List<String> employeeNumberList = employeeSalaryList.stream().map(EmployeeSalary::getEmployeeNumber).collect(Collectors.toList());

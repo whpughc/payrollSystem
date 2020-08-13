@@ -31,8 +31,8 @@ public class ProductSalaryServiceImpl implements ProductSalaryService {
 
 
     @Override
-    public List<ProductSalary> productSalaryList() {
-        List<ProductSalary> productSalaryList = workOrderMapper.productSalaryList();
+    public List<ProductSalary> productSalaryList(Map<String,Object> map) {
+        List<ProductSalary> productSalaryList = workOrderMapper.productSalaryList(map);
 
         if (productSalaryList != null && !productSalaryList.isEmpty()){
             List<String> productUuidList = productSalaryList.stream().map(ProductSalary::getProductUuid).collect(Collectors.toList());

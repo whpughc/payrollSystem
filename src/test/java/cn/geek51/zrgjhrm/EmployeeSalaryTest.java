@@ -1,8 +1,10 @@
 package cn.geek51.zrgjhrm;
 
 import cn.geek51.test.entity.EmployeeSalary;
+import cn.geek51.test.entity.ProductSalary;
 import cn.geek51.test.mapper.WorkOrderMapper;
 import cn.geek51.test.service.EmployeeSalaryService;
+import cn.geek51.test.service.ProductSalaryService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,11 +30,27 @@ public class EmployeeSalaryTest {
     @Autowired
     private EmployeeSalaryService employeeSalaryService;
 
+    @Autowired
+    private ProductSalaryService productSalaryService;
+    @Test
+    public void test(){
+        List<EmployeeSalary> employeeSalaryList = workOrderMapper.employeeSalaryList(null);
+        List<String> collect = employeeSalaryList.stream().map(EmployeeSalary::getEmployeeNumber).collect(Collectors.toList());
 
+    }
 
     @Test
     public void test1(){
-        List<EmployeeSalary> employeeSalaries = employeeSalaryService.employeeSalaryList();
+        List<EmployeeSalary> employeeSalaries = employeeSalaryService.employeeSalaryList(null);
         /*employeeSalaries.forEach(S);*/
+    }
+
+    @Test
+    public void test2(){
+        List<ProductSalary> productSalaryList = workOrderMapper.productSalaryList(null);
+        productSalaryList.forEach(System.out::println);
+
+        List<ProductSalary> productSalaryList1 = productSalaryService.productSalaryList(null);
+        productSalaryList1.forEach(System.out::println);
     }
 }

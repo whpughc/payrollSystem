@@ -51,7 +51,6 @@ public class WorkOrderController {
         if (query != null) {
             queryMap = new ObjectMapper().readValue(query, HashMap.class);
         }
-
         IPage<WorkOrder> result = workOrderService.findList(page, limit, queryMap);
         List<WorkOrder> workOrderList = result.getRecords();
         long total = result.getTotal();

@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @description:
@@ -16,5 +17,5 @@ import java.util.List;
  **/
 @Service
 public interface EmployeeSalaryService  {
-    List<EmployeeSalary> employeeSalaryList();
+    List<EmployeeSalary> employeeSalaryList(Map<String,Object> map);
 }
