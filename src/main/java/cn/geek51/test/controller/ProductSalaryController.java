@@ -36,8 +36,7 @@ public class ProductSalaryController {
         if (query != null) {
             queryMap = new ObjectMapper().readValue(query, HashMap.class);
         }
-       /* queryMap.put("page",page);
-*/
+
         PageHelper.startPage(page,limit);
         List<ProductSalary> productSalaryList = productSalaryService.productSalaryList(queryMap);
         PageInfo<ProductSalary> pageInfo = new PageInfo<>(productSalaryList);

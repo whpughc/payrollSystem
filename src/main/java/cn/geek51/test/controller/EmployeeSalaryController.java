@@ -35,7 +35,6 @@ public class EmployeeSalaryController {
         if (query != null) {
             queryMap = new ObjectMapper().readValue(query, HashMap.class);
         }
-        queryMap.put("page",page);
 
         PageHelper.startPage(page,limit);
         List<EmployeeSalary> employeeSalaryList = employeeSalaryService.employeeSalaryList(queryMap);
