@@ -15,7 +15,7 @@
 		SELECT
 			t1.product_uuid,
 			t2.totalNumber,
-			SUM( t1.money ) toatlMoney
+			SUM( t1.money ) totalMoney
 		FROM
 			work_order t1,
 			(

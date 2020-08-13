@@ -201,7 +201,7 @@
                 {field:'processNumber', width:120, title: '工序序号'},
                 {field:'processName', width:120, title: '工序名称',edit:true},
                 {field:'price', width:120, title: '工序价格',edit:true},
-                {field:'remark', width:150, title: '描述',edit:true},
+        /*        {field:'remark', width:150, title: '描述',edit:true},*/
                 {field:'status', width:130, title: '状态', templet:function (row) {
                         return [
                             '<input type="checkbox" lay-filter="admin_switch" lay-skin="switch" lay-text="有效|无效" ',
