@@ -467,7 +467,7 @@
                         content: 'static/html/layers/workOrder-insert.html',
                         type: 2,
                         offset: 't',
-                        area: ["1200px", "600px"],
+                        area: ["1200px", "770px"],
                         success: function (layero, index) {
                             var iframe = window['layui-layer-iframe' + index];
                             var departs = [];

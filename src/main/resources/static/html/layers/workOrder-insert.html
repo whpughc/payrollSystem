@@ -111,8 +111,8 @@
             $("#submit-btn").click(function () {
 
                 let fromData = [];
-                var length = $("div[name='number']").length;
-                for (var i=1;i<(4 * length+1);i++){
+                var length = $("div[name='jijiandan']").length;
+                for (var i=1;i<=length;i++){
                     let obj = {};
                     var processNumber = $("#processNumber"+i+"").text();
                     var employeeNumber = $("#employeeNumber"+i+"").val();
@@ -156,8 +156,8 @@
                             // 回调主界面
                             parent.layerCallback();
                             parent.layer.msg('添加计件单成功', {icon: 1});
-                            var index = parent.layer.getFrameIndex(window.name);
-                            parent.layer.close(index);
+                            /*var index = parent.layer.getFrameIndex(window.name);
+                            parent.layer.close(index);*/
                         } else {
                             parent.layer.msg(msg, {icon: 2});
                         }

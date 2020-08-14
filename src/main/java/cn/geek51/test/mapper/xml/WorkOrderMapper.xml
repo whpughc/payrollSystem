@@ -17,6 +17,7 @@
 			<if test="@cn.geek51.util.StringUtils@isNotEmpty(qendTime)">
 				AND create_at &lt;= STR_TO_DATE(#{qendTime},'%Y-%m-%d %H:%i:%s')
 			</if>
+			and deleted = 0
 		</where>
 		GROUP BY employee_number
     </select>
@@ -46,6 +47,7 @@
 					<if test="@cn.geek51.util.StringUtils@isNotEmpty(qendTime)">
 						AND create_at &lt;= STR_TO_DATE(#{qendTime},'%Y-%m-%d %H:%i:%s')
 					</if>
+					and deleted = 0
 				</where>
 				GROUP BY
 					product_uuid,
@@ -63,6 +65,7 @@
 			<if test="@cn.geek51.util.StringUtils@isNotEmpty(qendTime)">
 				AND t1.create_at &lt;= STR_TO_DATE(#{qendTime},'%Y-%m-%d %H:%i:%s')
 			</if>
+			and t1.deleted = 0
 		</where>
 		GROUP BY
 			t1.product_uuid
