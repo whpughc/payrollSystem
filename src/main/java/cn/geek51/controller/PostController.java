@@ -1,15 +1,12 @@
 package cn.geek51.controller;
 
-import cn.geek51.domain.Employee;
 import cn.geek51.domain.PageHelper;
 import cn.geek51.domain.Post;
-import cn.geek51.service.IEmployeeService;
 import cn.geek51.service.IPostService;
 import cn.geek51.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.ws.Response;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

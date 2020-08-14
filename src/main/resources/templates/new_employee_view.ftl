@@ -19,7 +19,7 @@
                     <div style=""<#--class="layui-form-label" style="margin-bottom: 10px;"-->>
                         <label class="layui-form-label">部门</label>
                         <div class="layui-input-block layui-input-inline" style="width: 200px;margin-left: 0;">
-                            <select lay-search lay-filter="depart-select"  id="depart-select" name="department"  style="width:200px;height:38px;border-color: #e6e6e6" >
+                            <select lay-search lay-filter="depart-select"  id="depart-select" name="depart"  style="width:200px;height:38px;border-color: #e6e6e6" >
                                 <option style="" value="">请选择部门</option>
                             </select>
                         </div>
@@ -38,9 +38,6 @@
                             <input id="search-input-employeeNumber" type="text" name="title" required  lay-verify="required" placeholder="请输入员工工号" autocomplete="off" class="layui-input">
                         </div>
                     </div>
-
-
-
 
                 </div>
             </div>
@@ -78,25 +75,9 @@
     }
 </script>
 
-<#--<script type="text/html" id="positionTpl">
-    <select id="position-select" name="position" lay-verify="required" lay-search>
-        <#if positionList?? && positionList?size gt 0>
-            <#list positionList as position>
-                <option value=${position.id}
-                        {{#if (d.positionId == ${position.id}) { }}
-                        selected
-                        {{# }}}
-                >
-                    ${position.name}</option>
-            </#list>
-        </#if>
-    </select>
-</script>-->
-
-
-
 <script type="text/html" id="departTpl">
-    <select id="department-select" name="department" lay-verify="required">
+
+    <select id="{{d.id}}" name="department" lay-verify="required">
         <#if departList?? && departList?size gt 0>
             <#list departList as depart>
                 <option value=${depart.id}
@@ -109,21 +90,6 @@
         </#if>
     </select>
 </script>
-
-<#--<script type="text/html" id="departTpl2">
-    <select id="department-select2" name="department2" lay-verify="required" lay-search>
-        <#if departList?? && departList?size gt 0>
-            <#list departList as depart>
-                <option value=${depart.departUuid}
-                        {{#if (d.departUuid == ${depart.departUuid}) { }}
-                        selected
-                        {{# }}}
-                >
-                    ${depart.departName}</option>
-            </#list>
-        </#if>
-    </select>
-</script>-->
 
 <script>
     function sotitle(id,arr){
@@ -139,22 +105,8 @@
             return title;
         }
     };
-</script>
-<#--<script type="text/html" id="departTpl2">
-    <select id="department-select" name="department" lay-verify="required">
-        <#if departList?? && departList?size gt 0>
-            <#list departList as depart>
-                <option value=${depart.departUuid}
-                        {{#if (d.departUuid == ${depart.departUuid?string}) { }}
-                        selected
-                        {{# }}}
-                >
-                    ${depart.departName}</option>
-            </#list>
-        </#if>
-    </select>
 
-</script>-->
+</script>
 
 <style type="text/css">
     .layui-table-cell{
@@ -198,25 +150,13 @@
                         ].join('');
                     }},
                 {field:'phone', width: 120, title:'电话', edit: true},
-
                 {field:'idCard', width:200, title:'身份证', edit: true},
-                <!--{field:'address', width: 140, title:'地址', edit: true},-->
-                /*{field:'positionId', width: 150, title:'职位', templet: '#positionTpl'},*/
-                /*{field:'position.name', width: 110, title:'职位', templet: function (d) {
-                    if (d.position == null) return "未分配";
-                    return d.position.name
-                }},*/
-                {field:'departId', width: 150, title:'部门', templet: '#departTpl'},
-                /*{field:'departUuid', width: 120, title:'部门', templet: '#departTpl2'},
-                {field:'departUuid', width: 120, title:'部门', templet: '<div>{{sotitle(d.departUuid,departs)}}</div>'},*/
+                {field:'departId', width: 120, title:'部门', templet: '#departTpl'},
                 {field:'status',width:120, title: '状态', templet:function (row) {
                         return [
-                            '<input type="checkbox" lay-filter="admin_switch" lay-skin="switch" lay-text="有效|无效" ',
+                            '<input style="color: red; margin-left: 20px" type="checkbox" lay-filter="admin_switch" lay-skin="switch" lay-text="有效|无效" ',
                             row.status == true ? "checked />" : " />"
                         ].join('');
-                        /*return [
-                            '<input type="checkbox" name="admin_switch" id="admin_switch" lay-skin="switch" lay-text="是|否"/>'
-                        ].join('');*/
                     }},
                 {field:'createAt', width: 160, title: '创建时间', sort: true},
                 {fixed: 'right', width:150,title: '操作', align:'center', toolbar: '#barTpl'}
@@ -236,122 +176,44 @@
                 $("td").css("padding", "0px")
             }
         });
+        form.render('select');
+
+        function search(){
+            // 用来传递到后台的查询参数MAP
+            var whereData = {};
+            var qname = $("#search-input-name").val();
+            /*var qphone = $("#search-input-phone").val();
+            var qidcard = $("#search-input-idcard").val();*/
+            var qemployeeNumber = $("#search-input-employeeNumber").val();
+            var qdepartUuid = $("#depart-select").val();
+            if (qname.length > 0) whereData["qname"] = qname;
+            /*if (qphone.length > 0) whereData["qphone"] = qphone;
+            if (qidcard.length > 0) whereData["qidcard"] = qidcard;*/
+            if (qdepartUuid.length > 0) whereData["qdepartUuid"] = qdepartUuid;
+            if (qemployeeNumber.length > 0) whereData["qemployeeNumber"] = qemployeeNumber;
+            table.reload("employee-table",{
+                where: {
+                    query: JSON.stringify(whereData)
+                }
+                ,page: {
+                    curr: 1
+                }
+            });
+        }
 
         /* 搜索实现, 使用reload, 进行重新请求 */
         $("#search-input-name").on('input',function () {
-            // 用来传递到后台的查询参数MAP
-            var whereData = {};
-            var qname = $("#search-input-name").val();
-            var qphone = $("#search-input-phone").val();
-            var qidcard = $("#search-input-idcard").val();
-            var qemployeeNumber = $("#search-input-employeeNumber").val();
-            var qdepartUuid = $("#depart-select").val();
-            if (qname.length > 0) whereData["qname"] = qname;
-            if (qphone.length > 0) whereData["qphone"] = qphone;
-            if (qidcard.length > 0) whereData["qidcard"] = qidcard;
-            if (qdepartUuid.length > 0) whereData["qdepartUuid"] = qdepartUuid;
-            if (qemployeeNumber.length > 0) whereData["qemployeeNumber"] = qemployeeNumber;
-            table.reload("employee-table",{
-                where: {
-                    query: JSON.stringify(whereData)
-                }
-                ,page: {
-                    curr: 1
-                }
-            });
+            search();
         });
 
         $("#search-input-employeeNumber").on('input',function () {
-            // 用来传递到后台的查询参数MAP
-            var whereData = {};
-            var qname = $("#search-input-name").val();
-            var qphone = $("#search-input-phone").val();
-            var qidcard = $("#search-input-idcard").val();
-            var qemployeeNumber = $("#search-input-employeeNumber").val();
-            var qdepartUuid = $("#depart-select").val();
-            if (qname.length > 0) whereData["qname"] = qname;
-            if (qphone.length > 0) whereData["qphone"] = qphone;
-            if (qidcard.length > 0) whereData["qidcard"] = qidcard;
-            if (qdepartUuid.length > 0) whereData["qdepartUuid"] = qdepartUuid;
-            if (qemployeeNumber.length > 0) whereData["qemployeeNumber"] = qemployeeNumber;
-            table.reload("employee-table",{
-                where: {
-                    query: JSON.stringify(whereData)
-                }
-                ,page: {
-                    curr: 1
-                }
-            });
-        });
-
-        $("#search-input-phone").on('input',function () {
-            // 用来传递到后台的查询参数MAP
-            var whereData = {};
-            var qname = $("#search-input-name").val();
-            var qphone = $("#search-input-phone").val();
-            var qidcard = $("#search-input-idcard").val();
-            var qemployeeNumber = $("#search-input-employeeNumber").val();
-            var qdepartUuid = $("#depart-select").val();
-            if (qname.length > 0) whereData["qname"] = qname;
-            if (qphone.length > 0) whereData["qphone"] = qphone;
-            if (qidcard.length > 0) whereData["qidcard"] = qidcard;
-            if (qdepartUuid.length > 0) whereData["qdepartUuid"] = qdepartUuid;
-            if (qemployeeNumber.length > 0) whereData["qemployeeNumber"] = qemployeeNumber;
-            table.reload("employee-table",{
-                where: {
-                    query: JSON.stringify(whereData)
-                }
-                ,page: {
-                    curr: 1
-                }
-            });
-        });
-        $("#search-input-idcard").on('input',function () {
-            // 用来传递到后台的查询参数MAP
-            var whereData = {};
-            var qname = $("#search-input-name").val();
-            var qphone = $("#search-input-phone").val();
-            var qidcard = $("#search-input-idcard").val();
-            var qemployeeNumber = $("#search-input-employeeNumber").val();
-            var qdepartUuid = $("#depart-select").val();
-            if (qname.length > 0) whereData["qname"] = qname;
-            if (qphone.length > 0) whereData["qphone"] = qphone;
-            if (qidcard.length > 0) whereData["qidcard"] = qidcard;
-            if (qdepartUuid.length > 0) whereData["qdepartUuid"] = qdepartUuid;
-            if (qemployeeNumber.length > 0) whereData["qemployeeNumber"] = qemployeeNumber;
-            table.reload("employee-table",{
-                where: {
-                    query: JSON.stringify(whereData)
-                }
-                ,page: {
-                    curr: 1
-                }
-            });
+            search();
         });
 
         // 下拉框搜索
         // 部门搜索下拉框
         form.on('select(depart-select)', function(data){
-            // 用来传递到后台的查询参数MAP
-            var whereData = {};
-            var qname = $("#search-input-name").val();
-            var qphone = $("#search-input-phone").val();
-            var qidcard = $("#search-input-idcard").val();
-            var qemployeeNumber = $("#search-input-employeeNumber").val();
-            var qdepartUuid = $("#depart-select").val();
-            if (qname.length > 0) whereData["qname"] = qname;
-            if (qphone.length > 0) whereData["qphone"] = qphone;
-            if (qidcard.length > 0) whereData["qidcard"] = qidcard;
-            if (qdepartUuid.length > 0) whereData["qdepartUuid"] = qdepartUuid;
-            if (qemployeeNumber.length > 0) whereData["qemployeeNumber"] = qemployeeNumber;
-            table.reload("employee-table",{
-                where: {
-                    query: JSON.stringify(whereData)
-                }
-                ,page: {
-                    curr: 1
-                }
-            });
+            search();
             //最后再渲柒一次
             form.render('select');//select是固定写法 不是选择器
         });
@@ -414,8 +276,8 @@
             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
             var tr = obj.tr; //获得当前行 tr 的DOM对象
             if(layEvent === 'edit'){ //编辑
-                console.log($("#department-select").val());
-                console.log($('#department-select option:selected').val());
+                console.log($("#"+data.id+"").val());
+                console.log($('#'+data.id+' option:selected').val());
                 console.log($('select[name="department"] option:selected').val());
                 // 发送更新请求
                 $.ajax({
@@ -427,7 +289,7 @@
                         employeeNumber:data.employeeNumber,
                         phone: data.phone,
                         idCard: data.idCard,
-                        departId: $("#department-select option:selected").val(),
+                        departId: $("#"+data.id+"").val(),
                         status: temp == null ? data.status : temp
                     }),
                     contentType: "application/json",
