@@ -204,6 +204,7 @@
                                         status: 1
                                     },
                                     success: function (res) {
+                                        var msg= (res.msg==null||res.msg=="")?"添加产品失败":res.msg;
                                         console.log(res);
                                         if (res.code == 200) {
                                             // 执行局部刷新, 获取之前的TABLE内容, 再进行填充
@@ -226,7 +227,7 @@
                                             });
                                             layer.msg('新建产品成功', {icon: 1});
                                         } else {
-                                            layer.msg('新建产品失败', {icon: 2});
+                                            layer.msg(msg, {icon: 2});
                                         }
                                     }
                                 });

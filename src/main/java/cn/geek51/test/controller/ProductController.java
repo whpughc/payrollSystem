@@ -8,6 +8,7 @@ import cn.geek51.test.service.DepartService;
 import cn.geek51.test.service.ProductService;
 import cn.geek51.util.ResponseUtil;
 import cn.geek51.util.UuidUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,9 +53,15 @@ public class ProductController {
     // 新建
     @PostMapping("/products")
     public Object insertProduct(Product product) {
+
+        QueryWrapper<Product> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("product_number",product.getProductNumber());
+        Product tempProduct = productService.getOne(queryWrapper);
+        if (tempProduct != null){
+            return ResponseUtil.general_response(405,"产品型号已存在");
+        }
         product.setProductUuid(UuidUtil.getUuid());
         product.setCreateAt(LocalDateTime.now());
-        System.out.println(product);
         boolean save = productService.save(product);
         return ResponseUtil.general_response(save);
     }
