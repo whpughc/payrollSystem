@@ -154,15 +154,16 @@
                     data: res.data
                 }
             }
+            ,totalRow: true
             ,cols: [[
-                {field:'employeeNumber', width:120, title: '员工工号'},
-                {field:'employeeName', width:150, title: '员工姓名', edit: true},
-                {field:'departName', width:120, title:'部门', edit: true},
-                {field:'wage', width:180, title: '总工资', sort: true},
+                {field:'employeeNumber', width:120, title: '员工工号', totalRowText: '合计'},
+                {field:'employeeName', width:150, title: '员工姓名'},
+                {field:'departName', width:120, title:'部门'},
+                {field:'wage', width:180, title: '总工资',sort: true, totalRow: true},
                 /*{fixed: 'right', width:150, align:'center', toolbar: '#barTpl'}*/
             ]]
             ,page: {
-                limits:[10,20,30,1000,100000]
+                limits:[10,20,30,40,100000]
             }
         });
 

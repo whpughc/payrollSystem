@@ -36,8 +36,8 @@
 				(
 				SELECT
 					GROUP_CONCAT( DISTINCT product_uuid ) AS product_uuid,
-					GROUP_CONCAT( DISTINCT depart_uuid ) AS depart_uuid,
-					GROUP_CONCAT( DISTINCT number ) AS number
+					GROUP_CONCAT( DISTINCT number ) AS number,
+					create_at
 				FROM
 					work_order
 				<where>
@@ -50,9 +50,7 @@
 					and deleted = 0
 				</where>
 				GROUP BY
-					product_uuid,
-					depart_uuid,
-					number
+					create_at
 				) t
 			GROUP BY
 				product_uuid

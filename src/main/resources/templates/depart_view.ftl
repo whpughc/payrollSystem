@@ -58,7 +58,6 @@
             url:'/departs',
             toolbar: '#toolbar',
             title:'部门信息表',
-            totalRow: true,
             parseData: function (res) {
                 console.log(res);
                 return {
@@ -88,7 +87,9 @@
                 {field:'createAt', width:180, title: '创建时间', sort: true},
                 {fixed: 'right', width:150, align:'center', toolbar: '#barTpl'}
             ]]
-            ,page: true
+            ,page: {
+                limits:[10,20,30,40,100000]
+            }
         });
 
         var temp;

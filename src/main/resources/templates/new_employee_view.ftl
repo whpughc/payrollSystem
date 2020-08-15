@@ -76,7 +76,6 @@
 </script>
 
 <script type="text/html" id="departTpl">
-
     <select id="{{d.id}}" name="department" lay-verify="required">
         <#if departList?? && departList?size gt 0>
             <#list departList as depart>
@@ -142,17 +141,21 @@
                 {field:'employeeUuid', width:30, title: '唯一标识',hide:true},
                 {field:'employeeName', width:120, title: '姓名', edit: true},
                 {field:'employeeNumber', width:120, title: '员工码',edit: true},
-                {field:'sex', width:50, title: '性别', templet:function (row) {
-                        return [
+                {field:'sex', width:100, title: '性别', templet:function (row) {
+                        /*return [
                             '<div>',
                             row.sex == 0 ? '男' : '女',
                             '</div>'
+                        ].join('');*/
+                        return [
+                            '<input style="color: red; margin-left: 20px" type="checkbox" lay-filter="sex_switch" lay-skin="switch" lay-text="男|女" ',
+                            row.sex == true ? "checked />" : " />"
                         ].join('');
                     }},
                 {field:'phone', width: 120, title:'电话', edit: true},
                 {field:'idCard', width:200, title:'身份证', edit: true},
                 {field:'departId', width: 120, title:'部门', templet: '#departTpl'},
-                {field:'status',width:120, title: '状态', templet:function (row) {
+                {field:'status',width:120,align:"center", title: '状态', templet:function (row) {
                         return [
                             '<input style="color: red; margin-left: 20px" type="checkbox" lay-filter="admin_switch" lay-skin="switch" lay-text="有效|无效" ',
                             row.status == true ? "checked />" : " />"
@@ -161,7 +164,9 @@
                 {field:'createAt', width: 160, title: '创建时间', sort: true},
                 {fixed: 'right', width:150,title: '操作', align:'center', toolbar: '#barTpl'}
             ]]
-            ,page: true
+            ,page: {
+                limits:[10,20,30,40,100000]
+            }
             ,done: function (res, curr, count) {
                 // 支持表格内嵌下拉框
                 $(".layui-table-body, .layui-table-box, .layui-table-cell").css('overflow', 'visible')
@@ -218,9 +223,15 @@
             form.render('select');//select是固定写法 不是选择器
         });
 
+        //监听状态
         var temp;
         form.on('switch(admin_switch)', function (obj) {
             temp = obj.elem.checked;
+        });
+
+        var tempSex;
+        form.on('switch(sex_switch)', function (obj) {
+            tempSex = obj.elem.checked;
         });
 
         table.on('toolbar(employee-table)', function (obj) {
@@ -290,7 +301,8 @@
                         phone: data.phone,
                         idCard: data.idCard,
                         departId: $("#"+data.id+"").val(),
-                        status: temp == null ? data.status : temp
+                        status: temp == null ? data.status : temp,
+                        sex:tempSex == null ? data.sex : tempSex
                     }),
                     contentType: "application/json",
 

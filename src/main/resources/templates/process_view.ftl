@@ -214,7 +214,9 @@
                 {field:'createAt', width: 160, title: '创建时间', sort: true},
                 {fixed: 'right', width:150,title: '操作', align:'center', toolbar: '#barTpl'}
             ]]
-            ,page: true
+            ,page: {
+                limits:[10,20,30,40,100000]
+            }
         });
 
         /* 搜索实现, 使用reload, 进行重新请求 */
@@ -292,7 +294,9 @@
                         {field:'createAt', width: 120, title: '创建时间', sort: true},
                         {fixed: 'right', width:150,title: '操作', align:'center', toolbar: '#barTpl'}
                     ]]
-                    ,page: true
+                    ,page: {
+                        limits:[10,20,30,40,100000]
+                    }
                 });
             };
             var data = obj.data; //获得当前行数据

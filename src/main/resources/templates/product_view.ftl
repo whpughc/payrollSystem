@@ -83,6 +83,21 @@
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 
+
+<script type="text/html" id="seasonTpl">
+    <select id="{{d.id}}" name="season" lay-verify="required">
+        <#list ["春款", "夏款", "秋款","冬款"] as season>
+            <option value=${season_index}
+                            {{#if (d.season == ${season_index?c}) { }}    <#-- 这里需要类型转换?c-->
+                    selected
+                    {{# }}}
+            >
+                ${season}</option>
+        </#list>
+    </select>
+</script>
+
+
 <script>
     layui.use(['table', 'form'], function(){
         var table = layui.table;
@@ -92,7 +107,6 @@
             url:'/products',
             toolbar: '#toolbar',
             title:'产品信息表',
-            totalRow: true,
             parseData: function (res) {
                 console.log(res);
                 return {
@@ -103,31 +117,40 @@
                 }
             }
             ,cols: [[
-                {field:'id', width:80, title: 'ID',hide : true},
-                {field:'productUuid', width:80, title: '唯一标识',hide : true},
-                {field:'name', width:150, title: '产品名称',edit : true},
-                {field:'productNumber', width:100, title: '产品型号', edit: true},
-                {field:'season', width:100, title: '季节', templet: function(d){
-                    switch (d.season) {
-                    case 1: return '春款';break;
-                    case 2: return '夏款';break;
-                    case 3: return '秋款';break;
-                    case 4: return '冬款';break;
-                    }
-                    }},
-                {field:'remark', width:150, title:'产品描述', edit: true},
-                {field:'status', width:130, title: '状态', templet:function (row) {
+                {field:'id', width:80,align:"center", title: 'ID',hide : true},
+                {field:'productUuid',align:"center", width:80, title: '唯一标识',hide : true},
+                {field:'name', width:150,align:"center", title: '产品名称',edit : true},
+                {field:'productNumber', align:"center",width:100, title: '产品型号', edit: true},
+                {field:'season', width:120,align:"center", title: '季节', templet: '#seasonTpl'},
+                {field:'remark', width:150,align:"center",title:'产品描述', edit: true},
+                {field:'status', width:130, align:"center",title: '状态', templet:function (row) {
                         return [
                             '<input type="checkbox" lay-filter="admin_switch" lay-skin="switch" lay-text="有效|无效" ',
                             row.status == true ? "checked />" : " />"
                         ].join('');
                     }},
-                {field:'createAt', width:180, title: '创建时间', sort: true},
+                {field:'createAt', width:180, align:'center', title: '创建时间', sort: true},
                 {fixed: 'right', width:150, align:'center', toolbar: '#barTpl'}
             ]]
-            ,page: true
+            ,page: {
+                limits:[10,20,30,40,100000]
+            }
+            ,done: function (res, curr, count) {
+                // 支持表格内嵌下拉框
+                $(".layui-table-body, .layui-table-box, .layui-table-cell").css('overflow', 'visible')
+                // 下拉框CSS重写 (覆盖父容器的CSS - padding)
+                $(".laytable-cell-1-0-4").css("padding-bottom", "30px")
+                $(".laytable-cell-1-0-7").css("padding", "0px")
+                $(".laytable-cell-1-0-8").css("padding", "0px")
+                $(".laytable-cell-1-0-5 span").css("padding", "0 10px")
+                $(".laytable-cell-1-0-7 span").css("padding", "0 10px")
+                $(".laytable-cell-1-0-8 span").css("padding", "0 10px")
+
+                $("td").css("padding-top", "10px")
+            }
         });
 
+        form.render('select');
         /* 搜索实现, 使用reload, 进行重新请求 */
         $("#search-input-name").on('input',function () {
             // 用来传递到后台的查询参数MAP
@@ -255,6 +278,7 @@
                         productNumber:data.productNumber,
                         name: data.name,
                         remark:data.remark,
+                        season: $("#"+data.id+"").val(),
                         status: temp == null ? data.status : temp
                     }),
                     contentType: "application/json",

@@ -59,7 +59,7 @@ public class NewEmployee implements Serializable {
     /**
      * 性别：0：男 1：女
      */
-    private Integer sex;
+    private Boolean sex;
 
     /**
      * 手机

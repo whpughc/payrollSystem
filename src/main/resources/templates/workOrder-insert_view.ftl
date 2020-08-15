@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>新增计件单子页面</title>
-    <script src="../../js/jquery-3.4.1.min.js"></script>
-    <script src="../../layui/layui.js"></script>
-    <link rel="stylesheet" href="../../layui/css/layui.css">
+        <script src="static/js/jquery-3.4.1.min.js"></script>
+        <script src="static/layui/layui.js"></script>
+        <link rel="stylesheet" href="static/layui/css/layui.css">
 </head>
 <body style="/*width: 1250px;*/">
 <span style="display:block;width:150px;margin:0px auto;font-size:25px;font-weight:900;font-color:blue;"><font
@@ -74,8 +74,15 @@
     function child(data) {
         productsIdAndProductNumber = data.products;
         departsIdAndName = data.departs;
-       /* departUuid = data.departUuid;
-        productUuid = data.productUuid;*/
+
+        <#if Session["departUuid"]?exists>
+        departUuid='${Session["departUuid"]}';
+        </#if>
+
+        <#if Session["productUuid"]?exists>
+        productUuid='${Session["productUuid"]}';
+        </#if>
+
         // 完成后, 回调, 进行渲染
         selectorAppend();
         /*for (var i = 0; i < data.products.length; i++) {
@@ -168,12 +175,6 @@
 
                     }
                 });
-                window.parent.document.getElementById("A").value=1;
-                var session = parent.tools.func1();
-                departUuid = session.departUuid;
-                productUuid = session.productUuid;
-                /*parent.window.location.reload();*/
-                /*parent.location.reload();*/
                 window.location.reload();
             });
         });

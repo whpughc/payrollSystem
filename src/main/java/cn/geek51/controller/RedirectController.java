@@ -4,7 +4,6 @@ import cn.geek51.domain.Department;
 import cn.geek51.domain.Position;
 import cn.geek51.domain.UserAuth;
 import cn.geek51.service.IDepartmentService;
-import cn.geek51.service.IEmployeeService;
 import cn.geek51.service.IPositionService;
 import cn.geek51.test.entity.Depart;
 import cn.geek51.test.entity.Product;
@@ -15,8 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -121,6 +118,11 @@ public class RedirectController {
         return "workOrder_view";
     }
 
+
+    @GetMapping("/workOrderInsert")
+    public String workOrderInsert() {
+        return "workOrder-insert_view";
+    }
     @GetMapping("/employeeSalary")
     public String toEmployeeSalary(Model model) {
         List<Depart> departList = departService.list();
@@ -138,6 +140,7 @@ public class RedirectController {
         model.addAttribute("productList",productList);*/
         return "productSalary_view";
     }
+
 
     @GetMapping("/auth")
     public String toAuth() {

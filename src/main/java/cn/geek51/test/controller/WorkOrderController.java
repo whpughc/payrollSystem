@@ -66,7 +66,15 @@ public class WorkOrderController {
         request.getSession().setAttribute("productUuid",workOrderDto.getProductUuid());
 
         List<Order> orderList = workOrderDto.getOrderList();
-        orderList.forEach(System.out::println);
+        List<Process> processList = processMapper.findProcessList(workOrderDto.getDepartUuid(), workOrderDto.getProductUuid());
+        if (processList !=null && !processList.isEmpty()){
+            if (orderList.size() != processList.size()){
+                return ResponseUtil.general_response(ResponseUtil.CODE_EXCEPTION,"有工序未添加");
+            }
+        }else {
+            return ResponseUtil.general_response(ResponseUtil.CODE_EXCEPTION,"工序不存在，无法添加");
+        }
+
         //设置Uuid和金额
         for (Order order : orderList) {
             QueryWrapper<NewEmployee> queryWrapper = new QueryWrapper<>();

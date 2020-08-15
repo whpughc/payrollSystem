@@ -4,6 +4,7 @@ import cn.geek51.test.entity.Depart;
 import cn.geek51.test.entity.EmployeeSalary;
 import cn.geek51.test.service.EmployeeSalaryService;
 import cn.geek51.util.ResponseUtil;
+import cn.geek51.util.StringUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.PageHelper;
@@ -12,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 
@@ -34,6 +37,13 @@ public class EmployeeSalaryController {
         // 进行拼接, 拼接成一个MAP查询
         if (query != null) {
             queryMap = new ObjectMapper().readValue(query, HashMap.class);
+        }
+
+        if (StringUtils.isEmpty(queryMap.get("qstartTime"))){
+            LocalDateTime localDateTime = LocalDateTime.now().withHour(0).withMinute(0).withSecond(0).withNano(0);
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            String format = dateTimeFormatter.format(localDateTime);
+            queryMap.put("qstartTime",format);
         }
 
         PageHelper.startPage(page,limit);

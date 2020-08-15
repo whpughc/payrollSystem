@@ -160,7 +160,7 @@
                 {fixed: 'right', title: '操作', align:'center', toolbar: '#barTpl'}
             ]]
             ,page: true
-            /*,done: function (res, curr, count) {
+            ,done: function (res, curr, count) {
                 // 支持表格内嵌下拉框
                 $(".layui-table-body, .layui-table-box, .layui-table-cell").css('overflow', 'visible')
                 // 下拉框CSS重写 (覆盖父容器的CSS - padding)
@@ -171,8 +171,8 @@
                 $(".laytable-cell-1-0-7 span").css("padding", "0 10px")
                 $(".laytable-cell-1-0-8 span").css("padding", "0 10px")
 
-                $("td").css("padding", "0px")
-            }*/
+                $("td").css("padding", "5px")
+            }
         });
 
         /* 搜索实现, 使用reload, 进行重新请求 */

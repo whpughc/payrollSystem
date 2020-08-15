@@ -78,8 +78,6 @@
     </div>
 </div>
 
-
-
 <table class="layui-hide" id="workOrder-table" lay-filter="workOrder-table"></table>
 
 <script type="text/html" id="toolbar">
@@ -268,7 +266,7 @@
                 {field:'skuName', width:100, title: '尺码',hide:true},
                 {field:'number', width:100, title: '数量'},
                 {field:'processNumber', width:100, title: '工序号'},
-                {field:'employeeNumber', width:100, title: '员工'},
+                {field:'employeeNumber', width:100, title: '员工',edit:true},
                 {field:'money', width:100, title: '金额'},
                 {field:'createAt', width:200, title: '创建时间', sort: true},
                 {fixed: 'right', width:150,title: '操作', align:'center', toolbar: '#barTpl'}
@@ -449,12 +447,14 @@
                         {field:'skuName', width:100, title: '尺码',hide:true},
                         {field:'number', width:100, title: '数量'},
                         {field:'processNumber', width:100, title: '工序数'},
-                        {field:'employeeNumber', width:100, title: '员工'},
+                        {field:'employeeNumber', width:100, title: '员工',edit: true},
                         {field:'money', width:100, title: '金额'},
                         {field:'createAt', width:200, title: '创建时间', sort: true},
                         {fixed: 'right', width:150,title: '操作', align:'center', toolbar: '#barTpl'}
                     ]]
-                    ,page: true
+                    ,page: {
+                        limits:[10,20,30,40,100000]
+                    }
                 });
             };
             var data = obj.data; //获得当前行数据
@@ -464,7 +464,7 @@
                 case 'addProcess':
                     layer.open({
                         title: '新增计件单',
-                        content: 'static/html/layers/workOrder-insert.html',
+                        content: "/workOrderInsert",
                         type: 2,
                         offset: 't',
                         area: ["1200px", "770px"],
@@ -476,13 +476,6 @@
                             var productUuid;
                             <!-- 向子页面进行数据传递 (下拉框选项, 及主键 -> 不一定连续)-->
 
-                            <#if Session["departUuid"]?exists>
-                            departUuid='${Session["departUuid"]}';
-                            </#if>
-
-                            <#if Session["productUuid"]?exists>
-                            productUuid='${Session["productUuid"]}';
-                            </#if>
 
                             <#list departList as depart>
                             departs.push({
@@ -499,14 +492,34 @@
                             var dataDict = {
                                 'departs': departs,
                                 'products': products,
-                                'departUuid':departUuid,
-                                'productUuid':productUuid
                             };
                             iframe.child(dataDict);
                         }
                     });
             }
         });
+
+        var _tools = {
+            func1: function(){
+                var departUuid;
+                var productUuid;
+
+                <#if Session["departUuid"]?exists>
+                departUuid='${Session["departUuid"]}';
+                </#if>
+
+                <#if Session["productUuid"]?exists>
+                productUuid='${Session["productUuid"]}';
+                </#if>
+                var dataDict = {
+                    'departUuid':departUuid,
+                    'productUuid':productUuid
+                };
+                return dataDict;
+            }
+        }
+        window.tools = _tools;
+
 
         //监听工具条(右侧)
         table.on('tool(workOrder-table)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
@@ -520,11 +533,8 @@
                     url: '/workOrders',
                     method: 'put',
                     data: JSON.stringify({
-                        id: data.id,
-                        processName:data.processName,
-                        price:data.price,
-                        remark:data.remark,
-                        status: temp == null ? data.status : temp
+                        id:data.id,
+                        employeeNumber:data.employeeNumber
                     }),
                     contentType: "application/json",
 
@@ -533,10 +543,7 @@
                         if (res.code == 200) {
                             layer.msg('更新计件单信息成功', {icon: 1});
                             obj.update({
-                                id: data.id,
-                                processName:data.processName,
-                                price:data.price,
-                                remark:data.remark,
+                                employeeNumber:data.employeeNumber
                             });
                         } else {
                             layer.msg('更改计件单信息失败', {icon: 2});

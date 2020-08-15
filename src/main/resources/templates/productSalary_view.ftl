@@ -151,15 +151,16 @@
                     data: res.data
                 }
             }
+            ,totalRow: true
             ,cols: [[
-                {field:'name', width:120, title: '产品名称'},
-                {field:'productNumber', width:150, title: '产品型号', edit: true},
-                {field:'totalNumber', width:120, title:'总数量', edit: true},
-                {field:'totalMoney', width:180, title: '计件总额', sort: true},
+                {field:'name', width:120, title: '产品名称',totalRowText: '合计'},
+                {field:'productNumber', width:150, title: '产品型号'},
+                {field:'totalNumber', width:120, title:'总数量'},
+                {field:'totalMoney', width:180, title: '计件总额', sort: true, totalRow: true},
                 /*{fixed: 'right', width:150, align:'center', toolbar: '#barTpl'}*/
             ]]
             ,page: {
-                limits:[10,20,30,1000,100000]
+                limits:[10,20,30,40,100000]
             }
         });
 
