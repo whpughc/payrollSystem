@@ -7,30 +7,24 @@
     <script src="/static/layui/layui.js"></script>
     <link rel="stylesheet" href="/static/layui/css/layui.css">
 </head>
-<body>
+<body style="background-color: #f0f0f0">
 <form class="layui-form" method="post" style="margin-top: 20px">
     <div class="layui-form-item" style="padding-right: 50px; width: 300px; margin: 0 auto; margin-top: 15px">
         <label class="layui-form-label">登录名</label>
         <div class="layui-input-block">
-            <input id="auth-username" type="text" name="title" required  lay-verify="required" placeholder="请输入登录名" autocomplete="off" class="layui-input">
+            <input style="font-size:18px;color:black;border:black 1px solid;font-weight: bolder;" id="auth-username" type="text" name="title" required  lay-verify="required" placeholder="请输入登录名" autocomplete="off" class="layui-input">
         </div>
     </div>
-    <!--<div class="layui-form-item" style="padding-right: 50px; width: 300px; margin: 0 auto; margin-top: 15px ">
-        <label class="layui-form-label">姓名</label>
-        <div class="layui-input-block">
-            <input id="auth-name" type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
-        </div>
-    </div>-->
     <div class="layui-form-item" style="padding-right: 50px; width: 300px; margin: 0 auto; margin-top: 15px ">
         <label class="layui-form-label">密码</label>
         <div class="layui-input-block">
-            <input id="auth-password" type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+            <input style="font-size:18px;color:black;border:black 1px solid;font-weight: bolder;" id="auth-password" type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item" style="padding-right: 50px; width: 300px; margin: 0 auto; margin-top: 15px ">
         <label class="layui-form-label">管理员</label>
         <div class="layui-input-block">
-            <input id="auth-isAdmin" type="checkbox" lay-filter="insert_switch" lay-skin="switch" name="close" lay-text="是|否" checked>
+            <input style="font-size:18px;color:black;border:black 1px solid;font-weight: bolder;" id="auth-isAdmin" type="checkbox" lay-filter="insert_switch" lay-skin="switch" name="close" lay-text="是|否" checked>
         </div>
     </div>
 
@@ -52,7 +46,7 @@
         form.on('submit(formDemo)', function(data){
 
             $.ajax({
-                url: '/auths',
+                url: '/auths/login',
                 method: 'post',
                 data: {
                     username: $("#auth-username").val(),

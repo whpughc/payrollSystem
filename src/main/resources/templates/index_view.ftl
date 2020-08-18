@@ -15,7 +15,7 @@
     <div class="layui-header">
         <div style="padding-left: 5px; width: 600px; height: 60px">
             <!-- 在这里替换具体的LOGO和标语 -->
-            <img width="120px" src="static/images/logos/login_logo.png" style="float: left; margin-top: 7px">
+            <a href="#" id="logout-ghc"><img width="120px" src="static/images/logos/login_logo.png" style="float: left; margin-top: 7px"></a>
             <div style="margin-left:20px;float:left;width:300px;height:100%;line-height:60px;text-align:left;color:#009688;font-size:16px;">AFU-工资管理系统</div>
         </div>
 

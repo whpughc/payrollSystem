@@ -6,23 +6,23 @@
     <script src="static/layui/layui.js"></script>
     <link rel="stylesheet" href="static/layui/css/layui.css">
 </head>
-<body>
+<body style="background-color: #f0f0f0" >
 
-<script type="text/html" id="product-insert">
-    <form class="layui-form" method="post" style="margin-top: 20px">
+<script type="text/html" id="product-insert" >
+    <form class="layui-form" method="post" <#--style="width:100%;height:100%;margin-top:20px;background-color: #f0f0f0" -->>
         <div class="layui-form-item" style="padding-right: 50px">
             <label class="layui-form-label">产品名称</label>
             <div class="layui-input-block">
-                <input id="name" type="text" name="name" required  lay-verify="required" placeholder="请输入产品名称, 如: 阿福贝贝" autocomplete="off" class="layui-input">
+                <input style="font-size:18px;color:black;border:black 1px solid;font-weight: bolder;"  id="name" type="text" name="name" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item" style="padding-right: 50px">
             <label class="layui-form-label">产品型号</label>
             <div class="layui-input-block">
-                <input id="product-number" type="text" name="name" required  lay-verify="required" placeholder="请输入产品型号, 如: A1234" autocomplete="off" class="layui-input">
+                <input style="font-size:18px;color:black;border:black 1px solid;font-weight: bolder;"  id="product-number" type="text" name="name" required  lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
             </div>
         </div>
-        <div class="layui-form-item"  style="padding-right: 50px">
+        <div class="layui-form-item"  style="padding-right: 50px" >
             <label class="layui-form-label">季节</label>
             <div class="layui-input-block">
                 <select id="season" lay-filter="season">
@@ -36,7 +36,7 @@
         <div class="layui-form-item layui-form-text" style="padding-right: 50px">
             <label class="layui-form-label">产品描述</label>
             <div class="layui-input-block">
-                <textarea id="remark" name="remark" placeholder="请输入产品描述..." class="layui-textarea"></textarea>
+                <textarea  style="font-size:18px;color:black;border:black 1px solid;font-weight: bolder;"  id="remark" name="remark" placeholder="" class="layui-textarea"></textarea>
             </div>
         </div>
 
@@ -72,8 +72,8 @@
 
 <table class="layui-hide" id="product-table" lay-filter="product-table"></table>
 
-<script type="text/html" id="toolbar">
-    <div class="layui-btn-container">
+<script type="text/html" id="toolbar" style="background-color: #f0f0f0">
+    <div class="layui-btn-container" style="background-color: #f0f0f0" >
         <button class="layui-btn layui-btn-sm" lay-event="addProduct">添加产品</button>
     </div>
 </script>
@@ -202,7 +202,7 @@
                         title: '添加新产品',
                         content: $("#product-insert").text(),
                         offset: 'c',
-                        area: ["500px", "400px"],
+                        area: ["500px", "500px"],
                         yes: function () {
                             /*form.render();*/
                             var name = $("#name").val();

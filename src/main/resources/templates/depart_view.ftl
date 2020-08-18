@@ -6,32 +6,21 @@
     <script src="static/layui/layui.js"></script>
     <link rel="stylesheet" href="static/layui/css/layui.css">
 </head>
-<body>
+<body  style="background-color: #f0f0f0;">
 
-<script type="text/html" id="dept-insert" style="margin-top: 50px">
+<script type="text/html" id="dept-insert" style="margin-top: 50px" style="background-color: #f0f0f0">
     <form class="layui-form" method="post">
         <div class="layui-form-item" style="padding-right: 50px">
             <label class="layui-form-label">部门名称</label>
             <div class="layui-input-block">
-                <input id="dept-name" type="text" name="name" required  lay-verify="required" placeholder="请输入部门名称, 如: 人事部" autocomplete="off" class="layui-input">
+                <input style="font-size:18px;color:black;border:black 1px solid;font-weight: bolder;" id="dept-name" type="text" name="name" required  lay-verify="required" placeholder="请输入部门名称, 如: 人事部" autocomplete="off" class="layui-input">
             </div>
         </div>
-  <#--      <div class="layui-form-item" style="padding-right: 50px">
-            <label class="layui-form-label">部门经理</label>
-            <div class="layui-input-block">
-                <input id="dept-manager" type="text" name="name" required  lay-verify="required" placeholder="请输入部门经理, 如: 张三" autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item" style="padding-right: 50px">
-            <label class="layui-form-label">电话</label>
-            <div class="layui-input-block">
-                <input id="phone" type="text" name="name" required  lay-verify="required|phone|number" placeholder="请输入11位电话号" autocomplete="off" class="layui-input">
-            </div>
-        </div>-->
+
         <div class="layui-form-item layui-form-text" style="padding-right: 50px">
             <label class="layui-form-label">部门描述</label>
             <div class="layui-input-block">
-                <textarea id="dept-description" name="description"  placeholder="请输入部门描述..." class="layui-textarea"></textarea>
+                <textarea style="font-size:18px;color:black;border:black 1px solid;font-weight: bolder;" id="dept-description" name="description"  placeholder="请输入部门描述..." class="layui-textarea"></textarea>
             </div>
         </div>
     </form>
@@ -39,8 +28,8 @@
 
 <table class="layui-hide" id="dept-table" lay-filter="dept-table"></table>
 
-<script type="text/html" id="toolbar">
-    <div class="layui-btn-container">
+<script type="text/html" id="toolbar" style="background-color: #f0f0f0;">
+    <div class="layui-btn-container" style="background-color: #f0f0f0;">
         <button class="layui-btn layui-btn-sm" lay-event="addDept">添加部门</button>
     </div>
 </script>

@@ -309,7 +309,7 @@
                         content: 'static/html/layers/process-insert.html',
                         type: 2,
                         offset: 't',
-                        area: ["1200px", "770px"],
+                        area: ["1200px", "100%"],
                         success: function (layero, index) {
                             var iframe = window['layui-layer-iframe' + index];
                             var departs = [];

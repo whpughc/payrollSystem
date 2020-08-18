@@ -7,19 +7,10 @@
     <script src="../../layui/layui.js"></script>
     <link rel="stylesheet" href="../../layui/css/layui.css">
 </head>
-<body>
+<body style="background-color: #F0F0F0">
 
 <form class="layui-form" style="margin-top: 20px">
 
-    <div class="layui-form-item layui-form-text" style="padding-right: 50px;width:500px">
-        <label class="layui-form-label">部门</label>
-        <div class="layui-input-block">
-            <select id="department-select" name="department" lay-verify="required">
-                <option value="">请选择部门</option>
-            </select>
-        </div>
-    </div>
-    
     <div class="layui-form-item" style="padding-right: 50px;width:500px" id="product">
         <label class="layui-form-label">型号</label>
         <div class="layui-input-block">
@@ -29,26 +20,36 @@
         </div>
     </div>
 
-    <div class="layui-form-item" name="1">
+    <div class="layui-form-item layui-form-text" style="padding-right: 50px;width:500px">
+        <label class="layui-form-label">部门</label>
+        <div class="layui-input-block">
+            <select id="department-select" name="department" lay-verify="required">
+                <option value="">请选择部门</option>
+            </select>
+        </div>
+    </div>
+
+<!--    这里的代码是下面循环出来的-->
+    <!--<div class="layui-form-item" name="1">
         <div class="layui-inline">
             <label class="layui-form-label">工序号</label>
-            <div class="layui-input-inline">
-                <input  type="text" name="number" placeholder="请输入工序号" autocomplete="off" class="layui-input">
+            <div style="border: black solid"  class="layui-input-inline">
+                <b><input  style="font-size:18px;color:blue;" type="text" name="number" placeholder="" autocomplete="off" class="layui-input"></b>
             </div>
         </div>
         <div class="layui-inline">
             <label class="layui-form-label">名称</label>
-            <div class="layui-input-inline">
-                <input  type="text" name="name" placeholder="请输入工序名称" autocomplete="off" class="layui-input">
+            <div style="border: black solid"  class="layui-input-inline">
+                <b><input style="font-size:18px;color:red;"  type="text" name="name" placeholder="" autocomplete="off" class="layui-input"></b>
             </div>
         </div>
         <div class="layui-inline">
             <label class="layui-form-label">价格</label>
-            <div class="layui-input-inline">
-                <input type="text" name="price" placeholder="请输入工序价格" autocomplete="off" class="layui-input">
+            <div style="border: black solid" class="layui-input-inline">
+                <b><input style="font-size:18px;color:black;;" type="text" name="price" placeholder="" autocomplete="off" class="layui-input"></b>
             </div>
         </div>
-    </div>
+    </div>-->
 
     <button type="button" class="layui-btn" id="add">新增输入框</button>
     <div class="layui-form-item" style="padding-right: 30px; width: 300px; margin: 0 auto; margin-top: 15px">
@@ -163,12 +164,49 @@
 <script>
 
     for (var i=0;i<20;i++){
-        var html="<div class=\"layui-form-item\" name=\"1\">\n        <div class=\"layui-inline\">\n            <label class=\"layui-form-label\">工序号</label>\n            <div class=\"layui-input-inline\">\n                <input  type=\"text\" name=\"number\" placeholder=\"请输入工序号\" autocomplete=\"off\" class=\"layui-input\">\n            </div>\n        </div>\n        <div class=\"layui-inline\">\n            <label class=\"layui-form-label\">名称</label>\n            <div class=\"layui-input-inline\">\n                <input  type=\"text\" name=\"name\" placeholder=\"请输入工序名称\" autocomplete=\"off\" class=\"layui-input\">\n            </div>\n        </div>\n        <div class=\"layui-inline\">\n            <label class=\"layui-form-label\">价格</label>\n            <div class=\"layui-input-inline\">\n                <input type=\"text\" name=\"price\" placeholder=\"请输入工序价格\" autocomplete=\"off\" class=\"layui-input\">\n            </div>\n        </div>\n    </div>";
+        var html= "<div class=\"layui-form-item\" name=\"1\">\n     " +
+            "   <div class=\"layui-inline\">\n           " +
+            " <label class=\"layui-form-label\">工序号</label>\n         " +
+            "   <div  class=\"layui-input-inline\">\n              " +
+            "  <b><input  style=\"font-size:18px;color:black;border:black 1px solid;\" type=\"text\" name=\"number\" placeholder=\"\" autocomplete=\"off\" class=\"layui-input\"></b>\n   " +
+            "         </div>\n        </div>\n       "
+            +
+            " <div class=\"layui-inline\">\n        " +
+            "    <label class=\"layui-form-label\">名称</label>\n        " +
+            "    <div  class=\"layui-input-inline\">\n           " +
+            "     <b><input  style=\"font-size:18px;color:black;border:black 1px solid;\" type=\"text\" name=\"name\" placeholder=\"\" autocomplete=\"off\" class=\"layui-input\">\n</b>     " +
+            "       </div>\n        </div>\n       "
+            +
+            " <div class=\"layui-inline\">\n        " +
+            "    <label class=\"layui-form-label\">价格</label>\n    " +
+            "        <div  class=\"layui-input-inline\">\n             " +
+            "   <b><input style=\"font-size:18px;color:black;border:black 1px solid;\" type=\"text\" name=\"price\" placeholder=\"\" autocomplete=\"off\" class=\"layui-input\">\n</b> " +
+            "           </div>\n        </div>\n   "
+            +
+            " </div>";
         $('#add').before(html);
     }
 
     $('#add').click(function () {
-        var html="<div class=\"layui-form-item\" name=\"1\">\n        <div class=\"layui-inline\">\n            <label class=\"layui-form-label\">工序号</label>\n            <div class=\"layui-input-inline\">\n                <input  type=\"text\" name=\"number\" placeholder=\"请输入工序号\" autocomplete=\"off\" class=\"layui-input\">\n            </div>\n        </div>\n        <div class=\"layui-inline\">\n            <label class=\"layui-form-label\">名称</label>\n            <div class=\"layui-input-inline\">\n                <input  type=\"text\" name=\"name\" placeholder=\"请输入工序名称\" autocomplete=\"off\" class=\"layui-input\">\n            </div>\n        </div>\n        <div class=\"layui-inline\">\n            <label class=\"layui-form-label\">价格</label>\n            <div class=\"layui-input-inline\">\n                <input type=\"text\" name=\"price\" placeholder=\"请输入工序价格\" autocomplete=\"off\" class=\"layui-input\">\n            </div>\n        </div>\n    </div>";
+        var html="<div class=\"layui-form-item\" name=\"1\">\n  " +
+            "      <div class=\"layui-inline\">\n           " +
+            "<label class=\"layui-form-label\">工序号</label>\n            " +
+            "<div class=\"layui-input-inline\">\n               " +
+            " <b><input style=\"font-size:18px;color:red;border:black 1px solid;\"  type=\"text\" name=\"number\" placeholder=\"\" autocomplete=\"off\" class=\"layui-input\"></b>\n     " +
+            "       </div>\n        </div>\n       "
+            +
+            " <div class=\"layui-inline\">\n           " +
+            " <label class=\"layui-form-label\">名称</label>\n         " +
+            "   <div class=\"layui-input-inline\">\n              " +
+            "  <b><input style=\"font-size:18px;color:red;border:black 1px solid;\"  type=\"text\" name=\"name\" placeholder=\"\" autocomplete=\"off\" class=\"layui-input\"></b>\n " +
+            "           </div>\n        </div>\n      "
+            +
+            "  <div class=\"layui-inline\">\n           " +
+            " <label class=\"layui-form-label\">价格</label>\n    " +
+            "        <div class=\"layui-input-inline\">\n            " +
+            "    <b><input style=\"font-size:18px;color:red;border:black 1px solid;\" type=\"text\" name=\"price\" placeholder=\"\" autocomplete=\"off\" class=\"layui-input\"></b>\n " +
+            "           </div>\n        </div>\n  " +
+            "  </div>";
         $('#add').before(html);
     });
 </script>
