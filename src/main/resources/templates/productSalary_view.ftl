@@ -153,9 +153,10 @@
             }
             ,totalRow: true
             ,cols: [[
-                {field:'name', width:120, title: '产品名称',totalRowText: '合计'},
-                {field:'productNumber', width:150, title: '产品型号'},
-                {field:'totalNumber', width:120, title:'总数量'},
+                {field:'departName', width:120, title:'部门',totalRowText: '合计'},
+                {field:'productNumber', width:120, title: '产品型号'},
+                {field:'name', width:120, title: '产品名称'},
+                {field:'totalNumber', width:120, title:'总数量',sort: true},
                 {field:'totalMoney', width:180, title: '计件总额', sort: true, totalRow: true},
                 /*{fixed: 'right', width:150, align:'center', toolbar: '#barTpl'}*/
             ]]
