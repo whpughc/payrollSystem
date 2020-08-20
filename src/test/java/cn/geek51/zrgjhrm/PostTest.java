@@ -6,6 +6,8 @@ import cn.geek51.service.IPostService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class PostTest extends BaseApplicationTest {
@@ -15,6 +17,11 @@ public class PostTest extends BaseApplicationTest {
     public void postDaoTest() {
        // List<Post> list = dao.selectAll();
         //System.out.println(list);
+        LocalDateTime localDateTime = LocalDateTime.now().withDayOfMonth(1).withHour(0).withMinute(0).withSecond(0).withNano(0);
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String format = dateTimeFormatter.format(localDateTime);
+        System.out.println(localDateTime);
+        System.out.println(format);
     }
 
     @Test

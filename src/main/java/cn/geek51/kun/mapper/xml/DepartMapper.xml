@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.geek51.kun.mapper.DepartMapper">
+    <select id="findDepartList" resultType="cn.geek51.kun.entity.Depart">
+        select * from depart where deleted = 0 and depart_uuid in
+        <foreach collection="list" item="item" separator="," index="index" open="(" close=")">
+            #{item}
+        </foreach>
+    </select>
+</mapper>

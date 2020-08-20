@@ -148,7 +148,7 @@
                             '</div>'
                         ].join('');*/
                         return [
-                            '<input style="color: red; margin-left: 20px" type="checkbox" lay-filter="sex_switch" lay-skin="switch" lay-text="男|女" ',
+                            '<input style="color: red; margin-left: 20px" type="checkbox" lay-filter="sex_switch" lay-skin="switch" lay-text="女|男" ',
                             row.sex == true ? "checked />" : " />"
                         ].join('');
                     }},

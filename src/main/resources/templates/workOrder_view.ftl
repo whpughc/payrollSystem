@@ -271,7 +271,10 @@
                 {field:'createAt', width:200, title: '创建时间', sort: true},
                 {fixed: 'right', width:150,title: '操作', align:'center', toolbar: '#barTpl'}
             ]]
-            ,page: true
+            ,page: {
+                limits:[10,20,30,40,100000],
+                limit:10
+            }
         });
 
 

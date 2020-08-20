@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
  * @author wang
  */
 @Configuration
-@MapperScan({"cn.geek51.test.mapper*","cn.geek51.test.mapper"})
+@MapperScan({"cn.geek51.kun.mapper*","cn.geek51.kun.mapper"})
 public class MyBatisPlusConfig {
 
     @Bean

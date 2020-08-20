@@ -1,8 +1,8 @@
 package cn.geek51.zrgjhrm;
 
-import cn.geek51.test.entity.Depart;
-import cn.geek51.test.mapper.DepartMapper;
-import cn.geek51.test.service.DepartService;
+import cn.geek51.kun.entity.Depart;
+import cn.geek51.kun.mapper.DepartMapper;
+import cn.geek51.kun.service.DepartService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

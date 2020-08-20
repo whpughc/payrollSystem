@@ -30,7 +30,7 @@ public class Main {
         autoGenerator.setGlobalConfig(globalConfig);
         //包信息
         PackageConfig packageConfig = new PackageConfig();
-        packageConfig.setParent("cn.geek51.test");
+        packageConfig.setParent("cn.geek51.kun");
         packageConfig.setController("controller");
         packageConfig.setService("service");
         packageConfig.setServiceImpl("service.impl");

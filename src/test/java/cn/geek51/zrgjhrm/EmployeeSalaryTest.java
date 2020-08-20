@@ -1,10 +1,10 @@
 package cn.geek51.zrgjhrm;
 
-import cn.geek51.test.entity.EmployeeSalary;
-import cn.geek51.test.entity.ProductSalary;
-import cn.geek51.test.mapper.WorkOrderMapper;
-import cn.geek51.test.service.EmployeeSalaryService;
-import cn.geek51.test.service.ProductSalaryService;
+import cn.geek51.kun.entity.EmployeeSalary;
+import cn.geek51.kun.entity.ProductSalary;
+import cn.geek51.kun.mapper.WorkOrderMapper;
+import cn.geek51.kun.service.EmployeeSalaryService;
+import cn.geek51.kun.service.ProductSalaryService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * @description:

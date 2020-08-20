@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>首页</title>
+    <title>首页-阿福工资管理系统</title>
     <script src="static/js/jquery-3.4.1.min.js"></script>
     <script src="static/layui/layui.js"></script>
     <link rel="stylesheet" href="static/layui/css/layui.css"  media="all">

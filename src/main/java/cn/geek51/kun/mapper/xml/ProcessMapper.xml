@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.geek51.kun.mapper.ProcessMapper">
+    <insert id="insertBatch">
+        insert into process(process_uuid,depart_uuid,product_uuid,process_number,process_name,price,create_at)
+        values
+        <foreach collection="processDtoList" item="item" separator="," index="index">
+            (#{item.processUuid},#{departUuid},#{productUuid},#{item.processNumber},#{item.processName},#{item.price},now())
+        </foreach>
+    </insert>
+    <select id="findProcess" resultType="cn.geek51.kun.entity.Process">
+        select * from process where depart_uuid = #{departUuid} and product_uuid = #{productUuid} and process_number = #{processNumber} and deleted = 0;
+    </select>
+    <select id="findProcessList" resultType="cn.geek51.kun.entity.Process">
+        select * from process where depart_uuid = #{departUuid} and product_uuid = #{productUuid} and deleted = 0;
+    </select>
+</mapper>
