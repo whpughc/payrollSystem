@@ -6,7 +6,6 @@
     <script src="static/layui/layui.js"></script>
     <link rel="stylesheet" href="static/layui/css/layui.css">
 </head>
-<body  style="background-color: #f0f0f0;">
 
 <script type="text/html" id="dept-insert" style="margin-top: 50px" style="background-color: #f0f0f0">
     <form class="layui-form" method="post">

@@ -6,7 +6,6 @@
     <script src="static/layui/layui.js"></script>
     <link rel="stylesheet" href="static/layui/css/layui.css">
 </head>
-<body style="background-color: #f0f0f0" >
 
 <script type="text/html" id="product-insert" >
     <form class="layui-form" method="post" <#--style="width:100%;height:100%;margin-top:20px;background-color: #f0f0f0" -->>
@@ -72,8 +71,8 @@
 
 <table class="layui-hide" id="product-table" lay-filter="product-table"></table>
 
-<script type="text/html" id="toolbar" style="background-color: #f0f0f0">
-    <div class="layui-btn-container" style="background-color: #f0f0f0" >
+<script type="text/html" id="toolbar">
+    <div class="layui-btn-container">
         <button class="layui-btn layui-btn-sm" lay-event="addProduct">添加产品</button>
     </div>
 </script>
