@@ -3,6 +3,7 @@ package cn.geek51.kun.service.impl;
 import cn.geek51.kun.entity.Depart;
 import cn.geek51.kun.mapper.DepartMapper;
 import cn.geek51.kun.service.DepartService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -29,6 +30,10 @@ public class DepartServiceImpl extends ServiceImpl<DepartMapper, Depart> impleme
     public List<Depart> findList(Integer page, Integer limit) {
 
         IPage<Depart> departIPage = new Page<>(page,limit);
+
+        QueryWrapper<Depart> queryWrapper = new QueryWrapper<>();
+
+        queryWrapper.orderByDesc("create_at");
 
         IPage<Depart> result = departMapper.selectPage(departIPage, null);
 

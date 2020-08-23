@@ -90,5 +90,16 @@ public class ProcessController {
         return ResponseUtil.general_response("success delete department!");
     }
 
+    // 批量删除
+    @DeleteMapping("/processs")
+    public Object deleteProcessBatch(@RequestBody JSONObject params) {
+        JSONArray ids = params.getJSONArray("ids");
+        List<String> idList = ids.toJavaList(String.class);
+        boolean b = processService.removeByIds(idList);
+        if (b)
+            return ResponseUtil.general_response("success delete department!");
+        else
+            return ResponseUtil.general_response(ResponseUtil.CODE_EXCEPTION,"删除失败");
+    }
 }
 

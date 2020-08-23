@@ -1,5 +1,6 @@
 package cn.geek51.kun.service.impl;
 
+import cn.geek51.kun.entity.Depart;
 import cn.geek51.kun.entity.NewEmployee;
 import cn.geek51.kun.mapper.NewEmployeeMapper;
 import cn.geek51.kun.service.NewEmployeeService;
@@ -52,6 +53,8 @@ public class NewEmployeeServiceImpl extends ServiceImpl<NewEmployeeMapper, NewEm
         if (queryMap.get("qdepartUuid") != null){
             queryWrapper.eq("depart_uuid",queryMap.get("qdepartUuid"));
         }
+
+        queryWrapper.orderByDesc("create_at");
 
         IPage<NewEmployee> result = newEmployeeMapper.selectPage(newEmployeeIPage, queryWrapper);
 

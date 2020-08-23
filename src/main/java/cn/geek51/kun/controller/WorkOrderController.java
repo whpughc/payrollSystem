@@ -8,6 +8,8 @@ import cn.geek51.kun.mapper.ProcessMapper;
 import cn.geek51.kun.service.WorkOrderService;
 import cn.geek51.util.ResponseUtil;
 import cn.geek51.util.UuidUtil;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -110,5 +112,16 @@ public class WorkOrderController {
         return ResponseUtil.general_response("success delete department!");
     }
 
+    // 批量删除
+    @DeleteMapping("/workOrders")
+    public Object deleteWorkOrderBatch(@RequestBody JSONObject params) {
+        JSONArray ids = params.getJSONArray("ids");
+        List<String> idList = ids.toJavaList(String.class);
+        boolean b = workOrderService.removeByIds(idList);
+        if (b)
+            return ResponseUtil.general_response("success delete department!");
+        else
+            return ResponseUtil.general_response(ResponseUtil.CODE_EXCEPTION,"删除失败");
+    }
 }
 

@@ -5,6 +5,8 @@ import cn.geek51.kun.entity.Product;
 import cn.geek51.kun.service.ProductService;
 import cn.geek51.util.ResponseUtil;
 import cn.geek51.util.UuidUtil;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * <p>
@@ -78,5 +81,16 @@ public class ProductController {
         return ResponseUtil.general_response("success delete department!");
     }
 
+    // 批量删除
+    @DeleteMapping("/products")
+    public Object deleteProductBatch(@RequestBody JSONObject params) {
+        JSONArray ids = params.getJSONArray("ids");
+        List<String> idList = ids.toJavaList(String.class);
+        boolean b = productService.removeByIds(idList);
+        if (b)
+            return ResponseUtil.general_response("success delete department!");
+        else
+            return ResponseUtil.general_response(ResponseUtil.CODE_EXCEPTION,"删除失败");
+    }
 }
 

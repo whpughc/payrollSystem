@@ -51,6 +51,9 @@
 <script type="text/html" id="toolbar">
     <div class="layui-btn-container">
         <button class="layui-btn layui-btn-sm" lay-event="addEmployee">添加员工</button>
+        <button class="layui-btn layui-btn-sm" lay-event="getCheckData">删除选中行数据</button>
+        <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
+        <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
     </div>
 </script>
 
@@ -137,6 +140,7 @@
                 }
             }
             ,cols: [[
+                {type: 'checkbox', fixed: 'left'},
                 {field:'id', width:30, title: 'ID',hide:true},
                 {field:'employeeUuid', width:30, title: '唯一标识',hide:true},
                 {field:'employeeName', width:120, title: '姓名', edit: true},
@@ -235,6 +239,55 @@
         });
 
         table.on('toolbar(employee-table)', function (obj) {
+
+            var checkStatus = table.checkStatus(obj.config.id);
+            switch(obj.event){
+                case 'getCheckData':
+
+                    //获取选中数量
+                    var selectCount = checkStatus.data.length;
+                    if(selectCount == 0){
+                        layer.msg('批量删除至少选中一项数据',function(){});
+                        return false;
+                    }
+
+                    var ids=[];
+                    var data = checkStatus.data;
+                    $.each(data, function (index, item) {
+                        ids.push(item.id);
+                    });
+                    layer.confirm('确定删除选中的用户？', {skin: 'layui-layer-molv',offset:'c', icon:'0'},function(index){
+                        //向服务端发送删除指令
+                        $.ajax({
+                            url: '/newEmployees',
+                            method: 'delete',
+                            data: JSON.stringify({
+                                ids:ids
+                            }),
+                            contentType: "application/json",
+                            success: function (res) {
+                                console.log(res);
+                                if (res.code == 200) {
+                                    layer.msg('删除产品成功', {icon: 1, skin: 'layui-layer-molv', offset:'c'});
+                                } else {
+                                    layer.msg('删除产品失败', {icon: 2, skin: 'layui-layer-molv', offset:'c'});
+                                }
+                                setTimeout(function(){
+                                    location.reload();//重新加载页面表格
+                                });
+                            }
+                        })
+                    });
+                    break;
+                case 'getCheckLength':
+                    var data = checkStatus.data;
+                    layer.alert('选中了：'+ data.length + ' 个');
+                    break;
+                case 'isAll':
+                    layer.alert(checkStatus.isAll ? '全选': '未全选');
+                    break;
+            }
+
             // 回调函数
             layerCallback= function(callbackData) {
                 // 执行局部刷新, 获取之前的TABLE内容, 再进行填充
@@ -280,6 +333,7 @@
                     });
             }
         });
+
 
         //监听工具条(右侧)
         table.on('tool(employee-table)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"

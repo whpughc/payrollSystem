@@ -74,6 +74,9 @@
 <script type="text/html" id="toolbar">
     <div class="layui-btn-container">
         <button class="layui-btn layui-btn-sm" lay-event="addProduct">添加产品</button>
+        <button class="layui-btn layui-btn-sm" lay-event="getCheckData">删除选中行数据</button>
+        <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
+        <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
     </div>
 </script>
 
@@ -116,6 +119,7 @@
                 }
             }
             ,cols: [[
+                {type: 'checkbox', fixed: 'left'},
                 {field:'id', width:80,align:"center", title: 'ID',hide : true},
                 {field:'productUuid',align:"center", width:80, title: '唯一标识',hide : true},
                 {field:'name', width:150,align:"center", title: '产品名称',edit : true},
@@ -191,6 +195,55 @@
 
         //监听工具条(上方)
         table.on('toolbar(product-table)', function (obj) {
+
+            var checkStatus = table.checkStatus(obj.config.id);
+            switch(obj.event){
+                case 'getCheckData':
+
+                    //获取选中数量
+                    var selectCount = checkStatus.data.length;
+                    if(selectCount == 0){
+                        layer.msg('批量删除至少选中一项数据',function(){});
+                        return false;
+                    }
+
+                    var ids=[];
+                    var data = checkStatus.data;
+                    $.each(data, function (index, item) {
+                        ids.push(item.id);
+                    });
+                    layer.confirm('确定删除选中的用户？', {skin: 'layui-layer-molv',offset:'c', icon:'0'},function(index){
+                        //向服务端发送删除指令
+                        $.ajax({
+                            url: '/products',
+                            method: 'delete',
+                            data: JSON.stringify({
+                                ids:ids
+                            }),
+                            contentType: "application/json",
+                            success: function (res) {
+                                console.log(res);
+                                if (res.code == 200) {
+                                    layer.msg('删除产品成功', {icon: 1, skin: 'layui-layer-molv', offset:'c'});
+                                } else {
+                                    layer.msg('删除产品失败', {icon: 2, skin: 'layui-layer-molv', offset:'c'});
+                                }
+                                setTimeout(function(){
+                                    location.reload();//重新加载页面表格
+                                });
+                            }
+                        })
+                    });
+                    break;
+                case 'getCheckLength':
+                    var data = checkStatus.data;
+                    layer.alert('选中了：'+ data.length + ' 个');
+                    break;
+                case 'isAll':
+                    layer.alert(checkStatus.isAll ? '全选': '未全选');
+                    break;
+            }
+
             var data = obj.data; //获得当前行数据
             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
             var tr = obj.tr; //获得当前行 tr 的DOM对象

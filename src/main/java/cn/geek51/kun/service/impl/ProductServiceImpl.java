@@ -1,5 +1,6 @@
 package cn.geek51.kun.service.impl;
 
+import cn.geek51.kun.entity.Depart;
 import cn.geek51.kun.entity.Product;
 import cn.geek51.kun.mapper.ProductMapper;
 import cn.geek51.kun.service.ProductService;
@@ -40,6 +41,8 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         if (queryMap.get("qname") != null){
             queryWrapper.like("name",queryMap.get("qname"));
         }
+
+        queryWrapper.orderByDesc("create_at");
 
         IPage<Product> result = productMapper.selectPage(productIPage, queryWrapper);
         return result;

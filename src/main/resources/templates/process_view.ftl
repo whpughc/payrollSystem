@@ -57,6 +57,9 @@
 <script type="text/html" id="toolbar">
     <div class="layui-btn-container" style="float: left;">
         <button class="layui-btn layui-btn-sm" lay-event="addProcess" style="float: left;">添加工序</button>
+        <button class="layui-btn layui-btn-sm" lay-event="getCheckData">删除选中行数据</button>
+        <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
+        <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
     </div>
 </script>
 
@@ -194,6 +197,7 @@
                 }
             }
             ,cols: [[
+                {type: 'checkbox', fixed: 'left'},
                 {field:'id', width:30, title: 'ID',hide:true},
                 {field:'processUuid', width:30, title: '唯一标识',hide:true},
                 {field:'departUuid', width:120, title: '部门',templet:'<div>{{sotitle(d.departUuid,departs)}}</div>'},
@@ -245,21 +249,59 @@
         });
 
         table.on('toolbar(process-table)', function (obj) {
+
+            var checkStatus = table.checkStatus(obj.config.id);
+            switch(obj.event){
+                case 'getCheckData':
+
+                    //获取选中数量
+                    var selectCount = checkStatus.data.length;
+                    if(selectCount == 0){
+                        layer.msg('批量删除至少选中一项数据',function(){});
+                        return false;
+                    }
+
+                    var ids=[];
+                    var data = checkStatus.data;
+                    $.each(data, function (index, item) {
+                        ids.push(item.id);
+                    });
+                    layer.confirm('确定删除选中的工序？', {skin: 'layui-layer-molv',offset:'c', icon:'0'},function(index){
+                        //向服务端发送删除指令
+                        $.ajax({
+                            url: '/processs',
+                            method: 'delete',
+                            data: JSON.stringify({
+                                ids:ids
+                            }),
+                            contentType: "application/json",
+                            success: function (res) {
+                                console.log(res);
+                                if (res.code == 200) {
+                                    layer.msg('删除工序成功', {icon: 1, skin: 'layui-layer-molv', offset:'c'});
+                                } else {
+                                    layer.msg('删除工序失败', {icon: 2, skin: 'layui-layer-molv', offset:'c'});
+                                }
+                                setTimeout(function(){
+                                    location.reload();//重新加载页面表格
+                                });
+                            }
+                        })
+                    });
+                    break;
+                case 'getCheckLength':
+                    var data = checkStatus.data;
+                    layer.alert('选中了：'+ data.length + ' 个');
+                    break;
+                case 'isAll':
+                    layer.alert(checkStatus.isAll ? '全选': '未全选');
+                    break;
+            }
+
             // 回调函数
             layerCallback= function() {
-                /*// 执行局部刷新, 获取之前的TABLE内容, 再进行填充
-                var dataBak = [];
-                var tableBak = table.cache.process-table;
-                for (var i = 0; i < tableBak.length; i++) {
-                    dataBak.push(tableBak[i]);      //将之前的数组备份
-                }
-                // 添加到表格缓存
-                dataBak.push(callbackData);
-                //console.log(dataBak);
-                table.reload("process-table",{
-                    data:dataBak   // 将新数据重新载入表格
-                });*/
-                table.render({
+                location.reload();
+                /*table.render({
                     elem: '#process-table',
                     url:'/processs',
                     toolbar: '#toolbar',
@@ -274,6 +316,7 @@
                         }
                     }
                     ,cols: [[
+                        {type: 'checkbox', fixed: 'left'},
                         {field:'id', width:30, title: 'ID',hide:true},
                         {field:'processUuid', width:30, title: '唯一标识',hide:true},
                         {field:'departUuid', width:120, title: '部门',templet:'<div>{{sotitle(d.departUuid,departs)}}</div>'},
@@ -287,9 +330,9 @@
                                     '<input type="checkbox" lay-filter="admin_switch" lay-skin="switch" lay-text="有效|无效" ',
                                     row.status == true ? "checked />" : " />"
                                 ].join('');
-                                /*return [
+                                /!*return [
                                     '<input type="checkbox" name="admin_switch" id="admin_switch" lay-skin="switch" lay-text="是|否"/>'
-                                ].join('');*/
+                                ].join('');*!/
                             }},
                         {field:'createAt', width: 120, title: '创建时间', sort: true},
                         {fixed: 'right', width:150,title: '操作', align:'center', toolbar: '#barTpl'}
@@ -297,8 +340,9 @@
                     ,page: {
                         limits:[10,20,30,40,100000]
                     }
-                });
+                });*/
             };
+
             var data = obj.data; //获得当前行数据
             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
             var tr = obj.tr; //获得当前行 tr 的DOM对象

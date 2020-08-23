@@ -27,11 +27,15 @@
 
 <table class="layui-hide" id="dept-table" lay-filter="dept-table"></table>
 
-<script type="text/html" id="toolbar" style="background-color: #f0f0f0;">
-    <div class="layui-btn-container" style="background-color: #f0f0f0;">
+<script type="text/html" id="toolbar">
+    <div class="layui-btn-container">
         <button class="layui-btn layui-btn-sm" lay-event="addDept">添加部门</button>
+        <button class="layui-btn layui-btn-sm" lay-event="getCheckData">删除选中行数据</button>
+        <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
+        <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
     </div>
 </script>
+
 
 <script type="text/html" id="barTpl">
     <a class="layui-btn layui-btn-xs" lay-event="edit">保存</a>
@@ -56,7 +60,7 @@
                 }
             }
             ,cols: [[
-                /*{type: 'checkbox', fixed: 'left'},*/
+                {type: 'checkbox', fixed: 'left'},
                 {field:'id', width:80, title: 'ID',hide : true},
                 {field:'departUuid', width:80, title: '唯一标识',hide : true},
                 {field:'departName', width:150, title: '部门名称', edit: true},
@@ -87,6 +91,55 @@
 
         //监听工具条(上方)
         table.on('toolbar(dept-table)', function (obj) {
+
+            var checkStatus = table.checkStatus(obj.config.id);
+            switch(obj.event){
+                case 'getCheckData':
+
+                    //获取选中数量
+                    var selectCount = checkStatus.data.length;
+                    if(selectCount == 0){
+                        layer.msg('批量删除至少选中一项数据',function(){});
+                        return false;
+                    }
+
+                    var ids=[];
+                    var data = checkStatus.data;
+                    $.each(data, function (index, item) {
+                        ids.push(item.id);
+                    });
+                    layer.confirm('确定删除选中的部门？', {skin: 'layui-layer-molv',offset:'c', icon:'0'},function(index){
+                        //向服务端发送删除指令
+                        $.ajax({
+                            url: '/departs',
+                            method: 'delete',
+                            data: JSON.stringify({
+                                ids:ids
+                            }),
+                            contentType: "application/json",
+                            success: function (res) {
+                                console.log(res);
+                                if (res.code == 200) {
+                                    layer.msg('删除部门成功', {icon: 1, skin: 'layui-layer-molv', offset:'c'});
+                                } else {
+                                    layer.msg('删除部门失败', {icon: 2, skin: 'layui-layer-molv', offset:'c'});
+                                }
+                                setTimeout(function(){
+                                    location.reload();//重新加载页面表格
+                                });
+                            }
+                        })
+                    });
+                    break;
+                case 'getCheckLength':
+                    var data = checkStatus.data;
+                    layer.alert('选中了：'+ data.length + ' 个');
+                    break;
+                case 'isAll':
+                    layer.alert(checkStatus.isAll ? '全选': '未全选');
+                    break;
+            }
+
             var data = obj.data; //获得当前行数据
             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
             var tr = obj.tr; //获得当前行 tr 的DOM对象
@@ -109,11 +162,6 @@
                                         tipsMore: true
                                     });
                                 }
-                              /*  if (description.length <= 0) {
-                                    layer.tips('部门描述不能为空', '#dept-description', {
-                                        tipsMore: true
-                                    });
-                                }*/
                             } else {
                                 // 调用新建API
                                 var nowDate = new Date();

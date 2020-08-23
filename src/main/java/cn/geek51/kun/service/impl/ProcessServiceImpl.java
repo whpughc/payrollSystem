@@ -47,6 +47,8 @@ public class ProcessServiceImpl extends ServiceImpl<ProcessMapper, Process> impl
             queryWrapper.eq("product_uuid",queryMap.get("qproductUuid"));
         }
 
+        queryWrapper.orderByDesc("create_at");
+
         IPage<Process> result = processMapper.selectPage(processIPage, queryWrapper);
         return result;
     }
