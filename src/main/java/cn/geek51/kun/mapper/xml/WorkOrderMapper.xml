@@ -8,6 +8,9 @@
             (#{item.orderUuid},#{orderNumber},#{departUuid},#{productUuid},#{color},#{skuName},#{number},#{item.processNumber},#{item.employeeNumber},#{item.money},now())
         </foreach>
     </insert>
+	<update id="updateMoney">
+		update work_order set money = number * #{price} where depart_uuid = #{departUuid} and product_uuid = #{productUuid} and process_number = #{processNumber} and deleted = 0
+	</update>
     <select id="employeeSalaryList" parameterType="java.util.Map" resultType="cn.geek51.kun.entity.EmployeeSalary">
         SELECT employee_number,SUM(money) wage FROM work_order
         <where>
@@ -21,53 +24,6 @@
 		</where>
 		GROUP BY employee_number
     </select>
-   <!-- <select id="productSalaryList" parameterType="java.util.Map" resultType="cn.geek51.kunentity.ProductSalary">
-		SELECT
-			t1.product_uuid,
-			t2.totalNumber,
-			SUM( t1.money ) totalMoney
-		FROM
-			work_order t1,
-			(
-			SELECT
-				product_uuid,
-				SUM( t.number ) totalNumber
-			FROM
-				(
-				SELECT
-					GROUP_CONCAT( DISTINCT product_uuid ) AS product_uuid,
-					GROUP_CONCAT( DISTINCT number ) AS number,
-					create_at
-				FROM
-					work_order
-				<where>
-					<if kun="@cn.geek51.util.StringUtils@isNotEmpty(qstartTime)">
-						AND create_at &gt;= STR_TO_DATE(#{qstartTime},'%Y-%m-%d %H:%i:%s')
-					</if>
-					<if kun="@cn.geek51.util.StringUtils@isNotEmpty(qendTime)">
-						AND create_at &lt;= STR_TO_DATE(#{qendTime},'%Y-%m-%d %H:%i:%s')
-					</if>
-					and deleted = 0
-				</where>
-				GROUP BY
-					create_at
-				) t
-			GROUP BY
-				product_uuid
-			) t2
-		<where>
-			t1.product_uuid = t2.product_uuid
-			<if kun="@cn.geek51.util.StringUtils@isNotEmpty(qstartTime)">
-				AND t1.create_at &gt;= STR_TO_DATE(#{qstartTime},'%Y-%m-%d %H:%i:%s')
-			</if>
-			<if kun="@cn.geek51.util.StringUtils@isNotEmpty(qendTime)">
-				AND t1.create_at &lt;= STR_TO_DATE(#{qendTime},'%Y-%m-%d %H:%i:%s')
-			</if>
-			and t1.deleted = 0
-		</where>
-		GROUP BY
-			t1.product_uuid
-    </select>-->
 	<select id="productSalaryList" parameterType="java.util.Map" resultType="cn.geek51.kun.entity.ProductSalary">
 		SELECT
 			t1.depart_uuid,

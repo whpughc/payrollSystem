@@ -1,10 +1,12 @@
 package cn.geek51.kun.mapper;
 
 import cn.geek51.kun.entity.EmployeeSalary;
+import cn.geek51.kun.entity.Process;
 import cn.geek51.kun.entity.ProductSalary;
 import cn.geek51.kun.entity.WorkOrder;
 import cn.geek51.kun.entity.WorkOrderDto;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -25,4 +27,5 @@ public interface WorkOrderMapper extends BaseMapper<WorkOrder> {
 
     List<ProductSalary> productSalaryList(Map<String,Object> map);
 
+    int updateMoney(@Param("departUuid") String departUuid,@Param("productUuid") String productUuid,@Param("processNumber") Integer processNumber,@Param("price") Double price);
 }

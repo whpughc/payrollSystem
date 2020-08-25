@@ -202,9 +202,9 @@
                 {field:'processUuid', width:30, title: '唯一标识',hide:true},
                 {field:'departUuid', width:120, title: '部门',templet:'<div>{{sotitle(d.departUuid,departs)}}</div>'},
                 {field:'productUuid', width:120, title: '产品',templet:'<div>{{sotitle2(d.productUuid,products)}}</div>'},
-                {field:'processNumber', width:120, title: '工序序号'},
+                {field:'processNumber', width:120, title: '工序序号',sort: true},
                 {field:'processName', width:120, title: '工序名称',edit:true},
-                {field:'price', width:120, title: '工序价格',edit:true},
+                {field:'price', width:120, title: '工序价格',edit:true,sort: true},
         /*        {field:'remark', width:150, title: '描述',edit:true},*/
                 {field:'status', width:130, title: '状态', templet:function (row) {
                         return [
@@ -322,9 +322,9 @@
                         {field:'processUuid', width:30, title: '唯一标识',hide:true},
                         {field:'departUuid', width:120, title: '部门',templet:'<div>{{sotitle(d.departUuid,departs)}}</div>'},
                         {field:'productUuid', width:120, title: '产品',templet:'<div>{{sotitle2(d.productUuid,products)}}</div>'},
-                        {field:'processNumber', width:120, title: '工序数'},
+                        {field:'processNumber', width:120, title: '工序序号',sort: true},
                         {field:'processName', width:120, title: '工序名称'},
-                        {field:'price', width:120, title: '工序价格',edit:true},
+                        {field:'price', width:120, title: '工序价格',edit:true,sort: true},
                         {field:'remark', width:150, title: '描述',edit:true},
                         {field:'status', width:130, title: '状态', templet:function (row) {
                                 return [

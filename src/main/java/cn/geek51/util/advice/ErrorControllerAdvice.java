@@ -19,6 +19,6 @@ public class ErrorControllerAdvice {
         String exClassName = exClass.getName();
         /*return ResponseUtil.general_response( ResponseUtil.CODE_EXCEPTION,
                 "ExMessage: "+ exMessage + " ExMethod: " + exMeethodName + " ExClass: " + exClassName);*/
-        return ResponseUtil.general_response("系统错误，请稍后再试");
+        return ResponseUtil.general_response(ResponseUtil.CODE_EXCEPTION,"系统错误，请稍后再试");
     }
 }

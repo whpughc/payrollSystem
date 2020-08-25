@@ -268,10 +268,10 @@
                 {field:'productUuid', width:100, title: '产品',templet:'<div>{{sotitle2(d.productUuid,products)}}</div>'},
                 {field:'color', width:150, title: '颜色',hide:true},
                 {field:'skuName', width:100, title: '尺码',hide:true},
-                {field:'number', width:100, title: '数量'},
-                {field:'processNumber', width:100, title: '工序号'},
+                {field:'number', width:100, title: '数量',sort: true},
+                {field:'processNumber', width:100, title: '工序号',sort: true},
                 {field:'employeeNumber', width:100, title: '员工',edit:true},
-                {field:'money', width:100, title: '金额'},
+                {field:'money', width:100, title: '金额',sort: true},
                 {field:'createAt', width:200, title: '创建时间', sort: true},
                 {fixed: 'right', width:150,title: '操作', align:'center', toolbar: '#barTpl'}
             ]]
@@ -503,10 +503,10 @@
                         {field:'productUuid', width:100, title: '产品',templet:'<div>{{sotitle2(d.productUuid,products)}}</div>'},
                         {field:'color', width:100, title: '颜色',hide:true},
                         {field:'skuName', width:100, title: '尺码',hide:true},
-                        {field:'number', width:100, title: '数量'},
-                        {field:'processNumber', width:100, title: '工序数'},
+                        {field:'number', width:100, title: '数量',sort: true},
+                        {field:'processNumber', width:100, title: '工序数',sort: true},
                         {field:'employeeNumber', width:100, title: '员工',edit: true},
-                        {field:'money', width:100, title: '金额'},
+                        {field:'money', width:100, title: '金额',sort: true},
                         {field:'createAt', width:200, title: '创建时间', sort: true},
                         {fixed: 'right', width:150,title: '操作', align:'center', toolbar: '#barTpl'}
                     ]]

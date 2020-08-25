@@ -3,7 +3,9 @@ package cn.geek51.kun.controller;
 
 import cn.geek51.kun.entity.Process;
 import cn.geek51.kun.entity.ProcessDto;
+import cn.geek51.kun.entity.WorkOrder;
 import cn.geek51.kun.mapper.ProcessMapper;
+import cn.geek51.kun.mapper.WorkOrderMapper;
 import cn.geek51.kun.service.ProcessService;
 import cn.geek51.util.ResponseUtil;
 import cn.geek51.util.UuidUtil;
@@ -12,6 +14,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -33,6 +36,9 @@ public class ProcessController {
 
     @Autowired
     private ProcessMapper processMapper;
+
+    @Autowired
+    private WorkOrderMapper workOrderMapper;
 
     //查询
     @GetMapping("/processs")
@@ -74,8 +80,15 @@ public class ProcessController {
 
     // 更改
     @PutMapping("/processs")
+    @Transactional
     public Object updateProcess(@RequestBody Process process) {
-        System.out.println(process);
+
+        Process tempProcess = processMapper.selectById(process.getId());
+
+        if (!process.getPrice().equals(tempProcess.getPrice())){
+            int i = workOrderMapper.updateMoney(tempProcess.getDepartUuid(),tempProcess.getProductUuid(),tempProcess.getProcessNumber(),process.getPrice());
+        }
+
         boolean b = processService.updateById(process);
         if (b)
             return ResponseUtil.general_response("success update department!");

@@ -20,6 +20,7 @@ import javax.xml.crypto.Data;
 import java.sql.Connection;
 
 @SpringBootApplication
+@MapperScan("cn.geek51.kun.mapper")
 public class Application extends WebMvcConfigurationSupport {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
