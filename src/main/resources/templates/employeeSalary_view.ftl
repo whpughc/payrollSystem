@@ -163,8 +163,8 @@
                 /*{fixed: 'right', width:150, align:'center', toolbar: '#barTpl'}*/
             ]]
             ,page: {
-                limits:[10,20,30,40,100000],
-                limit:10
+                limits:[10,20,30,40,1000000],
+                limit:1000000
             }
         });
 

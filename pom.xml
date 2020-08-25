@@ -11,7 +11,7 @@
     <groupId>cn.geek51</groupId>
     <artifactId>zrgj-hrm</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
+<!--    springboot打成war包的配置-->
 <!--    <packaging>war</packaging>-->
     <name>zrgj-hrm</name>
     <description>Demo project for Spring Boot</description>
@@ -22,12 +22,36 @@
     </properties>
 
     <dependencies>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!--因配置外部TOMCAT而配置,排除springboot自带tomcat-->
+<!--        搞不好的方式-->
+       <!-- <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            &lt;!&ndash; 移除嵌入式tomcat插件 &ndash;&gt;
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>-->
+
+<!--
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
+        </dependency>
+-->
+
+        <!--因配置外部TOMCAT而配置,排除springboot自己内嵌的tomcat-->
      <!--   <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
@@ -56,7 +80,6 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-
 <!--            <version>6.0.4</version>-->
         </dependency>
 
