@@ -479,8 +479,8 @@
             // 回调函数
             layerCallback= function() {
 
-                location.reload();
-                /*table.render({
+                //location.reload();
+                table.render({
                     elem: '#workOrder-table',
                     url:'/workOrders',
                     toolbar: '#toolbar',
@@ -495,6 +495,7 @@
                         }
                     }
                     ,cols: [[
+                        {type: 'checkbox', fixed: 'left'},
                         {field:'id', width:30, title: 'ID',hide:true},
                         {field:'orderUuid', width:30, title: '唯一标识',hide:true},
                         {field:'orderNumber', width:100, title: '计件单号'},
@@ -510,9 +511,10 @@
                         {fixed: 'right', width:150,title: '操作', align:'center', toolbar: '#barTpl'}
                     ]]
                     ,page: {
-                        limits:[10,20,30,40,100000]
+                        limits:[10,20,30,40,100000],
+                        limit:10
                     }
-                });*/
+                });
             };
             var data = obj.data; //获得当前行数据
             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）

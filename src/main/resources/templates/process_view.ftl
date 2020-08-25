@@ -300,8 +300,9 @@
 
             // 回调函数
             layerCallback= function() {
-                location.reload();
-                /*table.render({
+                //location.reload();
+
+                table.render({
                     elem: '#process-table',
                     url:'/processs',
                     toolbar: '#toolbar',
@@ -330,17 +331,18 @@
                                     '<input type="checkbox" lay-filter="admin_switch" lay-skin="switch" lay-text="有效|无效" ',
                                     row.status == true ? "checked />" : " />"
                                 ].join('');
-                                /!*return [
+                                /*return [
                                     '<input type="checkbox" name="admin_switch" id="admin_switch" lay-skin="switch" lay-text="是|否"/>'
-                                ].join('');*!/
+                                ].join('');*/
                             }},
                         {field:'createAt', width: 120, title: '创建时间', sort: true},
                         {fixed: 'right', width:150,title: '操作', align:'center', toolbar: '#barTpl'}
                     ]]
                     ,page: {
-                        limits:[10,20,30,40,100000]
+                        limits:[10,20,30,40,100000],
+                        limit:10
                     }
-                });*/
+                });
             };
 
             var data = obj.data; //获得当前行数据
