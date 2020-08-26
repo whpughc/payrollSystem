@@ -90,10 +90,11 @@ public class ProcessController {
         }
 
         boolean b = processService.updateById(process);
-        if (b)
+        if (b) {
             return ResponseUtil.general_response("success update department!");
-        else
+        } else {
             return ResponseUtil.general_response(ResponseUtil.CODE_EXCEPTION,"更新失败");
+        }
     }
 
     // 删除
@@ -109,10 +110,11 @@ public class ProcessController {
         JSONArray ids = params.getJSONArray("ids");
         List<String> idList = ids.toJavaList(String.class);
         boolean b = processService.removeByIds(idList);
-        if (b)
+        if (b) {
             return ResponseUtil.general_response("success delete department!");
-        else
+        } else {
             return ResponseUtil.general_response(ResponseUtil.CODE_EXCEPTION,"删除失败");
+        }
     }
 }
 
