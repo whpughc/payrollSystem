@@ -76,7 +76,7 @@ public class WorkOrderController {
         //设置Uuid和金额
         for (Order order : orderList) {
             QueryWrapper<NewEmployee> queryWrapper = new QueryWrapper<>();
-            queryWrapper.like("employee_number",order.getEmployeeNumber());
+            queryWrapper.eq("employee_number",order.getEmployeeNumber());
             NewEmployee newEmployee = newEmployeeMapper.selectOne(queryWrapper);
             if (newEmployee == null){
                 return ResponseUtil.general_response(400,"员工不存在，无法添加");
