@@ -157,7 +157,7 @@
                         ].join('');
                     }},
                 {field:'phone', width: 120, title:'电话', edit: true},
-                {field:'idCard', width:200, title:'身份证', edit: true},
+                {field:'idCard', width:200, title:'身份证', align:'center',edit: true},
                 {field:'departId', width: 120, title:'部门', templet: '#departTpl'},
                 {field:'status',width:120,align:"center", title: '状态', templet:function (row) {
                         return [
@@ -181,11 +181,10 @@
                 $(".laytable-cell-1-0-5 span").css("padding", "0 10px")
                 $(".laytable-cell-1-0-7 span").css("padding", "0 10px")
                 $(".laytable-cell-1-0-8 span").css("padding", "0 10px")
-
                 $("td").css("padding", "0px")
             }
         });
-        form.render('select');
+        /*form.render('select');*/
 
         function search(){
             // 用来传递到后台的查询参数MAP

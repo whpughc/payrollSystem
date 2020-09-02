@@ -142,14 +142,13 @@
                 // 支持表格内嵌下拉框
                 $(".layui-table-body, .layui-table-box, .layui-table-cell").css('overflow', 'visible')
                 // 下拉框CSS重写 (覆盖父容器的CSS - padding)
-                $(".laytable-cell-1-0-4").css("padding-bottom", "30px")
-                $(".laytable-cell-1-0-7").css("padding", "0px")
-                $(".laytable-cell-1-0-8").css("padding", "0px")
+                $(".laytable-cell-1-0-2").css("padding", "0px")
+                $(".laytable-cell-1-0-5").css("padding", "0px")
+                $(".laytable-cell-1-0-6").css("padding", "0px")
+                $(".laytable-cell-1-0-2 span").css("padding", "0 10px")
                 $(".laytable-cell-1-0-5 span").css("padding", "0 10px")
-                $(".laytable-cell-1-0-7 span").css("padding", "0 10px")
-                $(".laytable-cell-1-0-8 span").css("padding", "0 10px")
-
-                $("td").css("padding-top", "10px")
+                $(".laytable-cell-1-0-6 span").css("padding", "0 10px")
+                $("td").css("padding-bottom", "8px")
             }
         });
 
