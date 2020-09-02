@@ -25,10 +25,10 @@
             <label class="layui-form-label">季节</label>
             <div class="layui-input-block">
                 <select id="season" lay-filter="season">
-                    <option value="1" selected>春款</option>
-                    <option value="2">夏款</option>
-                    <option value="3">秋款</option>
-                    <option value="4">冬款</option>
+                    <option value="0" selected>春款</option>
+                    <option value="1">夏款</option>
+                    <option value="2">秋款</option>
+                    <option value="3">冬款</option>
                 </select>
             </div>
         </div>
